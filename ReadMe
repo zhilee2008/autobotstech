@@ -1,0 +1,1 @@
+openssl x509 -in 214103136930595.pem -out android.crt

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_titlebar"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:background="@color/titleblue" >
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ellipsize="marquee"
+        android:gravity="center_horizontal|center"
+        android:text="@string/title_check"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/button_backward"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:background="#4169E1"
+        android:drawableLeft="@drawable/back_arrow"
+        android:drawablePadding="6dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:text="返回"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:visibility="invisible"
+        />
+
+    <Button
+        android:id="@+id/button_forward"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="#4169E1"
+        android:drawablePadding="6dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:visibility="invisible" />
+
+</RelativeLayout>  

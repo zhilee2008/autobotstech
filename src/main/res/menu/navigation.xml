@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_check"
+        android:icon="@drawable/ic_me_normal"
+        android:title="@string/title_check" />
+
+    <item
+        android:id="@+id/navigation_info"
+        android:icon="@drawable/ic_message_normal"
+        android:title="@string/title_info" />
+    <item
+        android:id="@+id/navigation_auditorium"
+        android:icon="@drawable/ic_publish_normal"
+        android:title="@string/title_auditorium" />
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@drawable/ic_publish_normal"
+        android:title="@string/title_mine" />
+</menu>

@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Autobotstech</string>
+
+    <string name="title_check">查验</string>
+    <string name="title_info">资讯</string>
+    <string name="title_auditorium">大讲堂</string>
+    <string name="title_mine">我的</string>
+
+    <string name="register">注册登记</string>
+    <string name="change">变更登记</string>
+    <string name="change_color">改变车身颜色</string>
+    <string name="change_use">改变使用性质</string>
+    <string name="change_body">更换车身或车架</string>
+    <string name="change_engine">更换发动机</string>
+    <string name="change_all">因质量问题更换整车</string>
+    <string name="change_out">迁出</string>
+    <string name="change_in">转入</string>
+    <string name="change_finished">返回</string>
+
+    <string name="business">业务</string>
+
+    <string name="transfer">转移登记</string>
+    <string name="record">变更备案</string>
+    <string name="cancel">注销登记</string>
+    <string name="schoolbus">校车业务</string>
+
+    <string name="law">法规</string>
+    <string name="ask">咨询</string>
+    <string name="notice">通知</string>
+
+    <string name="tmpenter">临时入境机动车号牌、行驶证业务</string>
+    <string name="replacement">申请补领机动车登记证书</string>
+
+    <string name="structure">结构</string>
+    <string name="structure_1">普通客车</string>
+    <string name="structure_2">双层客车</string>
+    <string name="structure_3">卧铺客车</string>
+    <string name="structure_4">铰接客车</string>
+    <string name="structure_5">轿车</string>
+    <string name="structure_6">面包车</string>
+    <string name="structure_7">专用轿车</string>
+    <string name="structure_8">专用客车</string>
+    <string name="structure_9">越野客车</string>
+    <string name="structure_10">普通货车</string>
+    <string name="structure_11">厢式货车</string>
+    <string name="structure_12">仓栅式货车</string>
+    <string name="structure_13">封闭货车</string>
+    <string name="structure_14">罐式货车</string>
+    <string name="structure_15">平板货车</string>
+    <string name="structure_16">集装货车</string>
+    <string name="structure_17">车辆运输车</string>
+    <string name="structure_18">特殊结构</string>
+    <string name="structure_19">自卸</string>
+    <string name="structure_20">结构</string>
+    <string name="structure_21">结构</string>
+    <string name="structure_22">结构</string>
+    <string name="structure_23">结构</string>
+    <string name="structure_24">结构</string>
+    <string name="structure_25">结构</string>
+    <string name="structure_26">结构</string>
+    <string name="structure_27">结构</string>
+    <string name="structure_28">结构</string>
+    <string name="structure_29">结构</string>
+    <string name="structure_30">结构</string>
+    <string name="structure_31">结构</string>
+    <string name="structure_32">结构</string>
+    <string name="structure_33">结构</string>
+    <string name="structure_34">结构</string>
+    <string name="structure_35">结构</string>
+    <string name="structure_36">结构</string>
+    <string name="structure_37">结构</string>
+    <string name="structure_38">结构</string>
+    <string name="structure_39">结构</string>
+    <string name="structure_40">结构</string>
+    <string name="structure_41">结构</string>
+    <string name="structure_42">结构</string>
+    <string name="structure_43">结构</string>
+    <string name="structure_44">结构</string>
+    <string name="structure_45">结构</string>
+    <string name="structure_46">结构</string>
+    <string name="structure_47">结构</string>
+    <string name="structure_48">结构</string>
+    <string name="structure_49">结构</string>
+    <string name="structure_50">结构</string>
+    <string name="structure_51">结构</string>
+
+</resources>
