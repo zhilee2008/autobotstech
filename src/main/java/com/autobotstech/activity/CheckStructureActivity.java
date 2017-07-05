@@ -62,7 +62,7 @@ public class CheckStructureActivity extends Fragment {
         backbutton.setText(R.string.business);
         backbutton.setVisibility(View.VISIBLE);
 
-        View view = inflater.inflate(R.layout.stickygrid, container, false);
+        View view = inflater.inflate(R.layout.activity_check_structure, container, false);
 
         GridView mGridView = (GridView) view.findViewById(R.id.sgv);
 
