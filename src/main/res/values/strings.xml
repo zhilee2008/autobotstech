@@ -6,23 +6,35 @@
     <string name="title_auditorium">大讲堂</string>
     <string name="title_mine">我的</string>
 
+    <string name="logout">退出</string>
+
+    <string name="business">业务</string>
+
     <string name="register">注册登记</string>
+
     <string name="change">变更登记</string>
     <string name="change_color">改变车身颜色</string>
     <string name="change_use">改变使用性质</string>
     <string name="change_body">更换车身或车架</string>
     <string name="change_engine">更换发动机</string>
     <string name="change_all">因质量问题更换整车</string>
-    <string name="change_out">迁出</string>
     <string name="change_in">转入</string>
+    <string name="change_out">变更迁出</string>
     <string name="change_finished">返回</string>
 
-    <string name="business">业务</string>
-
     <string name="transfer">转移登记</string>
+
     <string name="record">变更备案</string>
+    <string name="record_1">重新打刻车辆识别代号</string>
+    <string name="record_2">重新打刻发动机号</string>
+    <string name="record_3">办理加装或拆除肢体残疾人操纵辅助装置</string>
+
     <string name="cancel">注销登记</string>
+
     <string name="schoolbus">校车业务</string>
+    <string name="schoolbus_1">校车标牌核发</string>
+    <string name="schoolbus_2">更换校车或变更校车备案信息</string>
+    <string name="schoolbus_3">不再作为校车使用</string>
 
     <string name="law">法规</string>
     <string name="ask">咨询</string>
@@ -31,7 +43,19 @@
     <string name="tmpenter">临时入境机动车号牌、行驶证业务</string>
     <string name="replacement">申请补领机动车登记证书</string>
 
+    <string name="flow">查验流程</string>
+    <string name="flowdetail">详情</string>
+
+    <string name="flowlist">列表</string>
+    <string name="flowchart">流程图</string>
+
+    <string name="method">方法</string>
+    <string name="measure">标准</string>
+    <string name="gist">依据</string>
+
     <string name="structure">结构</string>
+
+    <string name="structure_car">载客汽车</string>
     <string name="structure_1">普通客车</string>
     <string name="structure_2">双层客车</string>
     <string name="structure_3">卧铺客车</string>
@@ -41,6 +65,8 @@
     <string name="structure_7">专用轿车</string>
     <string name="structure_8">专用客车</string>
     <string name="structure_9">越野客车</string>
+
+    <string name="structure_truck">载货汽车</string>
     <string name="structure_10">普通货车</string>
     <string name="structure_11">厢式货车</string>
     <string name="structure_12">仓栅式货车</string>
@@ -51,37 +77,87 @@
     <string name="structure_17">车辆运输车</string>
     <string name="structure_18">特殊结构</string>
     <string name="structure_19">自卸</string>
-    <string name="structure_20">结构</string>
-    <string name="structure_21">结构</string>
-    <string name="structure_22">结构</string>
-    <string name="structure_23">结构</string>
-    <string name="structure_24">结构</string>
-    <string name="structure_25">结构</string>
-    <string name="structure_26">结构</string>
-    <string name="structure_27">结构</string>
-    <string name="structure_28">结构</string>
-    <string name="structure_29">结构</string>
-    <string name="structure_30">结构</string>
-    <string name="structure_31">结构</string>
-    <string name="structure_32">结构</string>
-    <string name="structure_33">结构</string>
-    <string name="structure_34">结构</string>
-    <string name="structure_35">结构</string>
-    <string name="structure_36">结构</string>
-    <string name="structure_37">结构</string>
-    <string name="structure_38">结构</string>
-    <string name="structure_39">结构</string>
-    <string name="structure_40">结构</string>
-    <string name="structure_41">结构</string>
-    <string name="structure_42">结构</string>
-    <string name="structure_43">结构</string>
-    <string name="structure_44">结构</string>
-    <string name="structure_45">结构</string>
-    <string name="structure_46">结构</string>
-    <string name="structure_47">结构</string>
-    <string name="structure_48">结构</string>
-    <string name="structure_49">结构</string>
-    <string name="structure_50">结构</string>
-    <string name="structure_51">结构</string>
+    <string name="structure_20">半挂牵引车</string>
+    <string name="structure_21">全挂牵引车</string>
+    <string name="structure_specialjob">专项作业车</string>
+    <string name="structure_22">非载货专项作业车</string>
+    <string name="structure_23">载货专项作业车</string>
+    <string name="structure_allhang">全挂车</string>
+    <string name="structure_24">普通全挂车</string>
+    <string name="structure_25">厢式全挂车</string>
+    <string name="structure_26">仓栅式全挂车</string>
+    <string name="structure_27">罐式全挂车</string>
+    <string name="structure_28">平板全挂车</string>
+    <string name="structure_29">集装箱全挂车</string>
+    <string name="structure_30">自卸全挂车</string>
+    <string name="structure_31">旅居全挂车</string>
+    <string name="structure_32">专项作业全挂车</string>
+    <string name="structure_halfhang">半挂车</string>
+    <string name="structure_33">普通半挂车</string>
+    <string name="structure_34">厢式半挂车</string>
+    <string name="structure_35">仓栅式半挂车</string>
+    <string name="structure_36">罐式半挂车</string>
+    <string name="structure_37">平板半挂车</string>
+    <string name="structure_38">集装箱半挂车</string>
+    <string name="structure_39">自卸半挂车</string>
+    <string name="structure_40">低平板半挂车</string>
+    <string name="structure_41">车辆运输半挂车</string>
+    <string name="structure_42">特殊结构半挂车</string>
+    <string name="structure_43">旅居半挂车</string>
+    <string name="structure_44">专项作业半挂车</string>
+    <string name="structure_middlehang">中置轴挂车</string>
+    <string name="structure_45">中置轴旅居挂车</string>
+    <string name="structure_46">中置轴车辆运输车挂车</string>
+    <string name="structure_47">中置轴普通挂车</string>
+    <string name="structure_motor">摩托车</string>
+    <string name="structure_48">二轮摩托车</string>
+    <string name="structure_49">正三轮载客摩托车</string>
+    <string name="structure_50">正三轮载货摩托车</string>
+    <string name="structure_51">侧三轮摩托车</string>
+
+    <string name="standar">规格</string>
+    <string name="standar_1">大型</string>
+    <string name="standar_2">中型</string>
+    <string name="standar_3">小型</string>
+    <string name="standar_4">微型</string>
+    <string name="standar_5">重型</string>
+    <string name="standar_6">轻型</string>
+    <string name="standar_7">微型</string>
+    <string name="standar_8">低速</string>
+    <string name="standar_9">三轮</string>
+
+    <string name="usage">使用性质</string>
+    <string name="usage_1">公路客运</string>
+    <string name="usage_2">公交客运</string>
+    <string name="usage_3">出租客运</string>
+    <string name="usage_4">旅游客运</string>
+    <string name="usage_5">租赁</string>
+    <string name="usage_6">教练</string>
+    <string name="usage_7">货运</string>
+    <string name="usage_8">危化品运输</string>
+    <string name="usage_9">警用</string>
+    <string name="usage_10">消防</string>
+    <string name="usage_11">救护</string>
+    <string name="usage_12">工程救险</string>
+    <string name="usage_13">营转非</string>
+    <string name="usage_14">出租车转非</string>
+    <string name="usage_15">非营运</string>
+    <string name="usage_16">运送幼儿</string>
+    <string name="usage_17">运送小学生</string>
+    <string name="usage_18">运送中小学生</string>
+    <string name="usage_19">运送初中生</string>
+    <string name="usage_20">非专用校车</string>
+    <string name="title_activity_login">登录</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_mobile">用户名</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="error_invalid_mobile">用户名错误</string>
+    <string name="error_invalid_password">密码太短</string>
+    <string name="error_incorrect_password">密码不正确</string>
+    <string name="error_field_required">请输入用户名和密码</string>
+    <string name="permission_rationale">通讯录需要访问权限</string>
 
 </resources>

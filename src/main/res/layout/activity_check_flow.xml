@@ -4,11 +4,8 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/titlebar" />
-
     <RadioGroup
-        android:id="@+id/radiogroup"
+        android:id="@+id/flowradiogroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -20,26 +17,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="@string/law" />
+            android:text="@string/flowlist" />
 
         <RadioButton
             android:id="@+id/rb_evaluation"
             style="@style/style_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ask" />
+            android:text="@string/flowchart" />
 
-        <RadioButton
-            android:id="@+id/rb_merchant"
-            style="@style/style_radiobutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/notice" />
     </RadioGroup>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+        android:id="@+id/flowviewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/radiogroup"></android.support.v4.view.ViewPager>
+        android:layout_below="@id/flowradiogroup"></android.support.v4.view.ViewPager>
 </LinearLayout>

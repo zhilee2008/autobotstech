@@ -37,48 +37,14 @@ import javax.net.ssl.TrustManagerFactory;
 public class CheckActivity extends Fragment {
 
 
-    private static final String TYPE = "X.509";
-    private final String httpsUrl = "https://www.autobotstech.com:9443/";
-    private static final String PROTOCOL = "TLS";
+
 
     protected Context mContext;
     protected static FragmentManager fm;
     private RollPagerView mRollViewPager;
 
 
-    /**
-     * HttpUrlConnection 方式，支持指定load-der.crt证书验证，此种方式Android官方建议
-     */
-    public String runWithHttpsUrlConnection(Context context) throws CertificateException, IOException, KeyStoreException,
-            NoSuchAlgorithmException, KeyManagementException {
-        CertificateFactory cf = CertificateFactory.getInstance(TYPE);
-        InputStream in = context.getAssets().open("android.crt");
-        Certificate cartificate = cf.generateCertificate(in);
 
-        KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-        keystore.load(null, null);
-        keystore.setCertificateEntry("trust", cartificate);
-
-        TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-        trustManagerFactory.init(keystore);
-
-        SSLContext sslContext = SSLContext.getInstance(PROTOCOL);
-        sslContext.init(null, trustManagerFactory.getTrustManagers(), null);
-
-        URL url = new URL(httpsUrl);
-        HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-        urlConnection.setSSLSocketFactory(sslContext.getSocketFactory());
-
-        InputStream input = urlConnection.getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        while ((line = reader.readLine()) != null) {
-            result.append(line);
-        }
-
-        return result.toString();
-    }
 
 
     @Override
@@ -106,15 +72,16 @@ public class CheckActivity extends Fragment {
 //		} catch (KeyManagementException e) {
 //			e.printStackTrace();
 //		}
-        ViewGroup vg = (ViewGroup)container.getParent();
-        vg.findViewById(R.id.button_backward).setVisibility(View.INVISIBLE);
 
         fm = getFragmentManager();
         mContext = getContext();
         View view = inflater.inflate(R.layout.activity_check, container, false);
 
-
         initFragment(R.id.checkmenucontainer, new CheckMenuActivity());
+
+        ViewGroup vg = (ViewGroup)container.getParent();
+        vg.findViewById(R.id.button_backward).setVisibility(View.INVISIBLE);
+
 
         mRollViewPager = (RollPagerView) view.findViewById(R.id.roll_view_pager);
 

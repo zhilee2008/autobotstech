@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.autobotstech.activity.MainActivity;
 import com.autobotstech.activity.R;
 
 
@@ -81,7 +82,7 @@ public abstract class BaseFragement extends Fragment {
         changeFragment(fragemnt,f, false);
     }
     // 初始化Fragment(FragmentActivity中呼叫) 不在在于栈中
-    public static void initFragment(int fragment,Fragment f){
+    public static void initFragment(int fragment, Fragment f){
         changeFragment(fragment,f, true);
     }
     protected static void changeFragment(int fragment,Fragment f, boolean init){

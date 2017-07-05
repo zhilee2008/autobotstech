@@ -1,1 +1,12 @@
 openssl x509 -in 214103136930595.pem -out android.crt
+
+
+
+http://www.cnblogs.com/zhwl/p/3370426.html
+
+http://www.jianshu.com/p/71a83731035a
+
+http://blog.csdn.net/lnniyunlong99/article/details/50519946
+
+http://www.jianshu.com/p/cc0c6e1af4e0
+

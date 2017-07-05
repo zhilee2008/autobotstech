@@ -22,7 +22,7 @@
                 android:background="#ffeaeaea" />
 
             <LinearLayout
-                android:id="@+id/B2"
+                android:id="@+id/usage_1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -46,7 +46,7 @@
                         android:layout_weight="1"
                         android:elevation="8dp"
                         android:gravity="center_vertical"
-                        android:text="@string/change_color" />
+                        android:text="@string/usage_1" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -61,7 +61,6 @@
                 android:background="#ffeaeaea" />
 
             <LinearLayout
-                android:id="@+id/B3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -84,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="@string/change_use" />
+                        android:text="@string/usage_2" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -99,7 +98,6 @@
                 android:background="#ffeaeaea" />
 
             <LinearLayout
-                android:id="@+id/B4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -122,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="@string/change_body" />
+                        android:text="@string/usage_3" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -137,7 +135,6 @@
                 android:background="#ffeaeaea" />
 
             <LinearLayout
-                android:id="@+id/B5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -160,7 +157,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="@string/change_engine" />
+                        android:text="@string/usage_4" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -175,7 +172,6 @@
                 android:background="#ffeaeaea" />
 
             <LinearLayout
-                android:id="@+id/B6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -198,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="@string/change_all" />
+                        android:text="@string/usage_5" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -212,9 +208,7 @@
                 android:layout_height="1.0dip"
                 android:background="#ffeaeaea" />
 
-
             <LinearLayout
-                android:id="@+id/B7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -237,7 +231,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="@string/change_in" />
+                        android:text="@string/usage_6" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -252,7 +246,6 @@
                 android:background="#ffeaeaea" />
 
             <LinearLayout
-                android:id="@+id/B8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -275,7 +268,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="@string/change_out" />
+                        android:text="@string/usage_7" />
 
                     <ImageView
                         android:layout_width="wrap_content"
