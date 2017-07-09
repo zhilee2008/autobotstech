@@ -121,10 +121,11 @@
     <string name="standar_3">小型</string>
     <string name="standar_4">微型</string>
     <string name="standar_5">重型</string>
-    <string name="standar_6">轻型</string>
-    <string name="standar_7">微型</string>
-    <string name="standar_8">低速</string>
-    <string name="standar_9">三轮</string>
+    <string name="standar_6">中型</string>
+    <string name="standar_7">轻型</string>
+    <string name="standar_8">微型</string>
+    <string name="standar_9">低速</string>
+    <string name="standar_10">三轮</string>
 
     <string name="usage">使用性质</string>
     <string name="usage_1">公路客运</string>
@@ -147,6 +148,7 @@
     <string name="usage_18">运送中小学生</string>
     <string name="usage_19">运送初中生</string>
     <string name="usage_20">非专用校车</string>
+
     <string name="title_activity_login">登录</string>
 
     <!-- Strings related to login -->
@@ -159,5 +161,6 @@
     <string name="error_incorrect_password">密码不正确</string>
     <string name="error_field_required">请输入用户名和密码</string>
     <string name="permission_rationale">通讯录需要访问权限</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 </resources>

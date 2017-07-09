@@ -12,5 +12,7 @@ public class Constants {
     public static String URL_PREFIX="https://www.autobotstech.com:9443";
 
     public static String LOGIN = "/users/login";
+
+    //?businessType=1&vehicleType=J2&carStandard=G1&useProperty=S1
     public static String CHECK_FLOW = "/inspects/querybycondition";
 }

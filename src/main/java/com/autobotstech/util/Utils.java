@@ -2,7 +2,6 @@ package com.autobotstech.util;
 
 import android.content.Context;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -14,10 +13,10 @@ import java.io.InputStreamReader;
 
 public class Utils {
 
-    public static JSONObject readJSONFromFile(Context context) {
+    public static JSONObject readJSONFromFile(Context context,String fileName) {
         JSONObject jsonOBJ=new JSONObject();
         try {
-            InputStreamReader isr = new InputStreamReader(context.getAssets().open("structure.json"), "UTF-8");
+            InputStreamReader isr = new InputStreamReader(context.getAssets().open(fileName), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
             String line;
             StringBuilder builder = new StringBuilder();

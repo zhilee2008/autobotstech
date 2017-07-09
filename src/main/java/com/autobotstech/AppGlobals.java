@@ -13,6 +13,9 @@ public class AppGlobals extends Application {
     public String carStandard;
     public String useProperty;
 
+
+    public static boolean isChildFragment=true;
+
     public String getBusinessType() {
         return businessType;
     }

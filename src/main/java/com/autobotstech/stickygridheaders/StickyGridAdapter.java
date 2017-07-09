@@ -1,6 +1,7 @@
 package com.autobotstech.stickygridheaders;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,18 +9,14 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.autobotstech.AppGlobals;
 import com.autobotstech.activity.CheckActivity;
 import com.autobotstech.activity.CheckStandarActivity;
-import com.autobotstech.activity.CheckUsageActivity;
-import com.autobotstech.activity.GridItem;
 import com.autobotstech.activity.R;
+import com.autobotstech.model.StructureGridItem;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 
 /**
  * Created by zhi on 04/07/2017.
@@ -30,12 +27,14 @@ import java.util.Map;
 public class StickyGridAdapter extends BaseAdapter implements
         StickyGridHeadersSimpleAdapter {
 
-    private List<GridItem> hasHeaderIdList;
+    private List<StructureGridItem> hasHeaderIdList;
     private LayoutInflater mInflater;
     private GridView mGridView;
+    private AppGlobals appGlobals;
 
-    public StickyGridAdapter(Context context, List<GridItem> hasHeaderIdList,
-                             GridView mGridView) {
+    public StickyGridAdapter(Context context, List<StructureGridItem> hasHeaderIdList,
+                             GridView mGridView, AppGlobals appGlobals) {
+        this.appGlobals = appGlobals;
         mInflater = LayoutInflater.from(context);
         this.mGridView = mGridView;
         this.hasHeaderIdList = hasHeaderIdList;
@@ -58,7 +57,7 @@ public class StickyGridAdapter extends BaseAdapter implements
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         convertView = mInflater.inflate(R.layout.stickygrid_items, parent, false);
         //TODO add click
         ImageView iv = (ImageView)convertView.findViewById(R.id.stickyitemimage);
@@ -69,7 +68,13 @@ public class StickyGridAdapter extends BaseAdapter implements
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckActivity.changeFragment(R.id.checkmainpage, new CheckStandarActivity());
+                appGlobals.setVehicleType(hasHeaderIdList.get(position).getId());
+
+                CheckStandarActivity checkStandarActivityFragment = new CheckStandarActivity();
+                Bundle bundle = new Bundle();
+                bundle.putString("standar", hasHeaderIdList.get(position).getStandar().toString());
+                checkStandarActivityFragment.setArguments(bundle);
+                CheckActivity.changeFragment(R.id.checkmainpage, checkStandarActivityFragment);
             }
         });
 

@@ -16,14 +16,6 @@
 
 package com.autobotstech.stickygridheaders;
 
-import com.autobotstech.stickygridheaders.StickyGridHeadersBaseAdapterWrapper.HeaderFillerView;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
@@ -48,6 +40,14 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.ListAdapter;
+
+import com.autobotstech.stickygridheaders.StickyGridHeadersBaseAdapterWrapper.HeaderFillerView;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * GridView that displays items in sections with headers that stick to the top

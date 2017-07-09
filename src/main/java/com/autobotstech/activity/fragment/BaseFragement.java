@@ -10,9 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.autobotstech.activity.MainActivity;
-import com.autobotstech.activity.R;
-
 
 public abstract class BaseFragement extends Fragment {
 

@@ -10,28 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.autobotstech.activity.fragment.BaseFragement;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
 
 
 public class CheckActivity extends Fragment {
@@ -81,6 +64,9 @@ public class CheckActivity extends Fragment {
 
         ViewGroup vg = (ViewGroup)container.getParent();
         vg.findViewById(R.id.button_backward).setVisibility(View.INVISIBLE);
+
+        TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
+        titlebar.setText(R.string.title_check);
 
 
         mRollViewPager = (RollPagerView) view.findViewById(R.id.roll_view_pager);

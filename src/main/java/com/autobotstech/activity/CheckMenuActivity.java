@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 
 import com.autobotstech.AppGlobals;
 
-import static com.autobotstech.activity.CheckActivity.initFragment;
-
 
 public class CheckMenuActivity extends Fragment {
 
@@ -20,7 +18,7 @@ public class CheckMenuActivity extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_check_menu, container, false);
 
-        appGlobals = new AppGlobals();
+        appGlobals = (AppGlobals)getActivity().getApplication();
 
         view.findViewById(R.id.B1).setOnClickListener(new View.OnClickListener() {
             @Override

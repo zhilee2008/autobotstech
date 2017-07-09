@@ -12,7 +12,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/rb_order"
+            android:id="@+id/rb_flowlist"
             style="@style/style_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
             android:text="@string/flowlist" />
 
         <RadioButton
-            android:id="@+id/rb_evaluation"
+            android:id="@+id/rb_flowimage"
             style="@style/style_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

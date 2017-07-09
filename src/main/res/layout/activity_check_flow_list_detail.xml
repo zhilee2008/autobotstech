@@ -12,26 +12,26 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/rb_order"
+            android:id="@+id/rb_method"
             style="@style/style_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="@string/law" />
+            android:text="@string/method" />
 
         <RadioButton
-            android:id="@+id/rb_evaluation"
+            android:id="@+id/rb_measure"
             style="@style/style_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ask" />
+            android:text="@string/measure" />
 
         <RadioButton
-            android:id="@+id/rb_merchant"
+            android:id="@+id/rb_gist"
             style="@style/style_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/notice" />
+            android:text="@string/gist" />
     </RadioGroup>
 
     <android.support.v4.view.ViewPager

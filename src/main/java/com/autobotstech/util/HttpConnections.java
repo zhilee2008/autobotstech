@@ -2,18 +2,12 @@ package com.autobotstech.util;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
-
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.KeyManagementException;
@@ -28,8 +22,6 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
-
-import static org.apache.http.conn.ssl.SSLSocketFactory.getSocketFactory;
 
 /**
  * Created by zhi on 28/06/2017.

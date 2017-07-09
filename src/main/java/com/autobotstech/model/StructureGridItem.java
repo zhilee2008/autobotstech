@@ -1,7 +1,9 @@
-package com.autobotstech.activity;
+package com.autobotstech.model;
 
 
-public class GridItem {
+import org.json.JSONArray;
+
+public class StructureGridItem {
 
     private String id;
 
@@ -13,13 +15,24 @@ public class GridItem {
 
     private int headerId;
 
-    public GridItem(String id,String name, int image,String parent,int headerId) {
+    public JSONArray getStandar() {
+        return standar;
+    }
+
+    public void setStandar(JSONArray standar) {
+        this.standar = standar;
+    }
+
+    private JSONArray standar;
+
+    public StructureGridItem(String id, String name, int image, String parent,JSONArray standar, int headerId) {
         super();
         this.id = id;
         this.name = name;
         this.image = image;
         this.parent = parent;
         this.headerId = headerId;
+        this.standar = standar;
     }
 
     public String getId() {
