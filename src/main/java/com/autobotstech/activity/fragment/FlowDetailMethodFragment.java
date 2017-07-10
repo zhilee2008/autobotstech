@@ -6,7 +6,7 @@ import com.autobotstech.activity.R;
 import com.autobotstech.activity.fragment.framefragment.BaseFragement;
 
 
-public class FlowImageFragment extends BaseFragement {
+public class FlowDetailMethodFragment extends BaseFragement {
 
     @Override
     protected void initView() {

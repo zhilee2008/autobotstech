@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.autobotstech.AppGlobals;
 import com.autobotstech.model.StructureGridItem;
-import com.autobotstech.stickygridheaders.StickyGridAdapter;
+import com.autobotstech.adapter.stickygridheaders.StickyGridAdapter;
 import com.autobotstech.util.Utils;
 
 import org.json.JSONArray;

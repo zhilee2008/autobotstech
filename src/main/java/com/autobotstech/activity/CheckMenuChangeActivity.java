@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.autobotstech.AppGlobals;
-import com.autobotstech.activity.fragment.BaseFragement;
+import com.autobotstech.activity.fragment.framefragment.BaseFragement;
 
 
 public class CheckMenuChangeActivity extends Fragment {

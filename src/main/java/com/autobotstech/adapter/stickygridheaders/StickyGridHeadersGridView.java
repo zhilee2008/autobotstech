@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-package com.autobotstech.stickygridheaders;
+package com.autobotstech.adapter.stickygridheaders;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -41,7 +41,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 
-import com.autobotstech.stickygridheaders.StickyGridHeadersBaseAdapterWrapper.HeaderFillerView;
+import com.autobotstech.adapter.stickygridheaders.StickyGridHeadersBaseAdapterWrapper.HeaderFillerView;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

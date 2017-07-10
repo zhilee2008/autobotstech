@@ -1,22 +1,15 @@
-package com.autobotstech.model;
+package com.autobotstech.adapter;
 
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.autobotstech.AppGlobals;
 import com.autobotstech.activity.CheckActivity;
-import com.autobotstech.activity.CheckFlowActivity;
 import com.autobotstech.activity.CheckFlowDetailActivity;
-import com.autobotstech.activity.CheckStandarActivity;
-import com.autobotstech.activity.CheckUsageActivity;
 import com.autobotstech.activity.R;
+import com.autobotstech.model.RecyclerItem;
 
 import java.util.List;
 

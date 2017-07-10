@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.autobotstech.AppGlobals;
 import com.autobotstech.model.RecyclerItem;
-import com.autobotstech.model.RecyclerStandarAdapter;
+import com.autobotstech.adapter.RecyclerStandarAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

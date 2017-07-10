@@ -9,10 +9,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <com.autobotstech.stickygridheaders.StickyGridHeadersGridView
+    <com.autobotstech.adapter.stickygridheaders.StickyGridHeadersGridView
         android:id="@+id/sgv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="3"></com.autobotstech.stickygridheaders.StickyGridHeadersGridView>
+        android:numColumns="3"></com.autobotstech.adapter.stickygridheaders.StickyGridHeadersGridView>
 
 </RelativeLayout>

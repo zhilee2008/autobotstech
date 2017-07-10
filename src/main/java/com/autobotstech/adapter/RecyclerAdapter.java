@@ -1,15 +1,14 @@
-package com.autobotstech.model;
+package com.autobotstech.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.autobotstech.AppGlobals;
 import com.autobotstech.activity.R;
+import com.autobotstech.model.RecyclerItem;
 
 import java.util.List;
 

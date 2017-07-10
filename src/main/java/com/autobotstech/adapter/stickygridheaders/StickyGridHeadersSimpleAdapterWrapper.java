@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-package com.autobotstech.stickygridheaders;
+package com.autobotstech.adapter.stickygridheaders;
 
 import android.database.DataSetObserver;
 import android.view.View;

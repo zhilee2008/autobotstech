@@ -1,4 +1,4 @@
-package com.autobotstech.stickygridheaders;
+package com.autobotstech.adapter.stickygridheaders;
 
 import android.content.Context;
 import android.os.Bundle;

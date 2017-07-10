@@ -35,7 +35,6 @@ public class CheckFlowActivity extends Fragment{
     SharedPreferences sp;
     private String token;
 
-    private AppGlobals appGlobals;
 
     private void initView(View view){
         viewPager=(ViewPager) view.findViewById(R.id.flowviewpager);
@@ -65,12 +64,6 @@ public class CheckFlowActivity extends Fragment{
         alFragment.add(flowImageFragment);
 
         FragmentManager fragmentManager= getChildFragmentManager();;
-//        if(appGlobals.isChildFragment){
-//            fragmentManager = getChildFragmentManager();
-//        }else{
-//            fragmentManager =getFragmentManager();
-//            appGlobals.isChildFragment=true;
-//        }
 
         FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(fragmentManager) {
             @Override
@@ -92,8 +85,6 @@ public class CheckFlowActivity extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
-
-        appGlobals = (AppGlobals)getActivity().getApplication();
 
         View view = inflater.inflate(R.layout.activity_check_flow, container, false);
         ViewGroup vg=(ViewGroup) container.getParent();

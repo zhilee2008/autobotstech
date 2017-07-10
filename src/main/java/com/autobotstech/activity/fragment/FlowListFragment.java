@@ -5,13 +5,12 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.autobotstech.AppGlobals;
 import com.autobotstech.activity.R;
-import com.autobotstech.model.RecyclerFlowListAdapter;
+import com.autobotstech.activity.fragment.framefragment.BaseFragement;
+import com.autobotstech.adapter.RecyclerFlowListAdapter;
 import com.autobotstech.model.RecyclerItem;
-import com.autobotstech.model.RecyclerUsageAdapter;
 import com.autobotstech.util.Constants;
 import com.autobotstech.util.HttpConnections;
 
@@ -28,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FlowListFragment extends BaseFragement{
+public class FlowListFragment extends BaseFragement {
     private AppGlobals appGlobals;
 
     SharedPreferences sp;
@@ -46,6 +45,13 @@ public class FlowListFragment extends BaseFragement{
         recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewflow);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        appGlobals = (AppGlobals) getActivity().getApplication();
+
+        mCheckFlowListTask = new CheckFlowListTask(token);
+        mCheckFlowListTask.execute((Void) null);
+//        Toast.makeText(mContext, "MessageFragment页面请求数据了", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -55,31 +61,7 @@ public class FlowListFragment extends BaseFragement{
 
     @Override
     protected void getDataFromServer() {
-        appGlobals = (AppGlobals) getActivity().getApplication();
 
-        mCheckFlowListTask = new CheckFlowListTask(token);
-        mCheckFlowListTask.execute((Void) null);
-        Toast.makeText(mContext, "MessageFragment页面请求数据了", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * 当前页面是否展示
-     * @param isVisibleToUser 显示为true， 不显示为false
-     */
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        this.isVisibleToUser = isVisibleToUser;
-        prepareGetData();
-    }
-
-    /**
-     * 如果只想第一次进入该页面请求数据，return prepareGetData(false)
-     * 如果想每次进入该页面就请求数据，return prepareGetData(true)
-     * @return
-     */
-    private boolean prepareGetData(){
-        return prepareGetData(true);
     }
 
 
