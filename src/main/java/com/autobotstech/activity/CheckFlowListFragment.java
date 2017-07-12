@@ -1,4 +1,4 @@
-package com.autobotstech.activity.fragment;
+package com.autobotstech.activity;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -7,12 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.autobotstech.AppGlobals;
-import com.autobotstech.activity.R;
-import com.autobotstech.activity.fragment.framefragment.BaseFragement;
+import com.autobotstech.activity.fragment.BaseFragement;
 import com.autobotstech.adapter.RecyclerFlowListAdapter;
 import com.autobotstech.model.RecyclerItem;
 import com.autobotstech.util.Constants;
 import com.autobotstech.util.HttpConnections;
+import com.autobotstech.util.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FlowListFragment extends BaseFragement {
+public class CheckFlowListFragment extends BaseFragement {
     private AppGlobals appGlobals;
 
     SharedPreferences sp;
@@ -80,11 +80,23 @@ public class FlowListFragment extends BaseFragement {
         @Override
         protected List doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+//            LitePal.initialize(getContext().getApplicationContext());
+//            LitePal.getDatabase();
             JSONObject obj = new JSONObject();
             checkFlowList = new ArrayList<RecyclerItem>();
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.CHECK_FLOW,mToken);
+                List<String> conditionslist = new ArrayList<String>();
+                conditionslist.add("businessType="+appGlobals.getBusinessType());
+                conditionslist.add("vehicleType="+appGlobals.getVehicleType());
+                conditionslist.add("carStandard="+appGlobals.getCarStandard());
+                conditionslist.add("useProperty="+appGlobals.getUseProperty());
+
+                String conditionString ="";
+                if(conditionslist.size()>0){
+                    conditionString = "?"+ Utils.join("&",conditionslist);
+                }
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.CHECK_FLOW+conditionString,mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -94,6 +106,21 @@ public class FlowListFragment extends BaseFragement {
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("inspectItem"));
                             recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
                             checkFlowList.add(recyclerItem);
+
+//                            CheckFlowDetail checkFlowDetail = new CheckFlowDetail();
+//                            checkFlowDetail.setFlowid(flowArr.getJSONObject(i).getString("_id"));
+//                            checkFlowDetail.setBusinessType(flowArr.getJSONObject(i).getString("businessType"));
+//                            checkFlowDetail.setVehicleType(flowArr.getJSONObject(i).getString("vehicleType"));
+//                            checkFlowDetail.setCarStandard(flowArr.getJSONObject(i).getString("carStandard"));
+//                            checkFlowDetail.setUseProperty(flowArr.getJSONObject(i).getString("useProperty"));
+//                            checkFlowDetail.setMethod(flowArr.getJSONObject(i).getString("method"));
+//                            checkFlowDetail.setMeasure(flowArr.getJSONObject(i).getString("standard"));
+//                            checkFlowDetail.setGist(flowArr.getJSONObject(i).getString("gist"));
+//                            checkFlowDetail.setStep(flowArr.getJSONObject(i).getInt("step"));
+//                            checkFlowDetail.setInspectItem(flowArr.getJSONObject(i).getString("inspectItem"));
+//                            //判断是否存在 如果存在 且不同 则更新或不操作 不存在添加
+//                            checkFlowDetail.save();
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

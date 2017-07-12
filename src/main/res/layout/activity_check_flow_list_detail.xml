@@ -34,9 +34,9 @@
             android:text="@string/gist" />
     </RadioGroup>
 
-    <android.support.v4.view.ViewPager
+    <com.autobotstech.activity.widget.NoSlidingViewPaper
         android:id="@+id/flowdetailviewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/detailradiogroup"></android.support.v4.view.ViewPager>
+        android:layout_below="@id/detailradiogroup"></com.autobotstech.activity.widget.NoSlidingViewPaper>
 </LinearLayout>

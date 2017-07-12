@@ -1,11 +1,11 @@
-package com.autobotstech.activity.fragment.framefragment;
+package com.autobotstech.activity;
 
 import android.widget.Toast;
 
-import com.autobotstech.activity.R;
+import com.autobotstech.activity.fragment.BaseFragement;
 
 
-public class InfoFragment extends BaseFragement{
+public class CheckFlowImageFragment extends BaseFragement {
 
     @Override
     protected void initView() {

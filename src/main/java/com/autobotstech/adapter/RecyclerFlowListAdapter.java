@@ -1,5 +1,6 @@
 package com.autobotstech.adapter;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,7 +8,7 @@ import android.widget.LinearLayout;
 
 import com.autobotstech.AppGlobals;
 import com.autobotstech.activity.CheckActivity;
-import com.autobotstech.activity.CheckFlowDetailActivity;
+import com.autobotstech.activity.CheckFlowListDetailActivity;
 import com.autobotstech.activity.R;
 import com.autobotstech.model.RecyclerItem;
 
@@ -33,10 +34,11 @@ public class RecyclerFlowListAdapter extends RecyclerAdapter {
         recycleritem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                CheckFlowDetailActivity checkFlowDetailActivity = new CheckFlowDetailActivity();
+                CheckFlowListDetailActivity checkFlowDetailActivity = new CheckFlowListDetailActivity();
 //                Bundle bundle = new Bundle();
 //                bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
 //                checkFlowDetailActivity.setArguments(bundle);
+                appGlobals.setCurrentFlowId(mRecyclerList.get(holder.getAdapterPosition()).getId());
                 CheckActivity.changeFragment(R.id.checkmainpage, checkFlowDetailActivity);
             }
         });

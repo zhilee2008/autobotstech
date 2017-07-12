@@ -1,11 +1,11 @@
-package com.autobotstech.activity.fragment.framefragment;
+package com.autobotstech.activity.fragment;
 
 import android.widget.Toast;
 
 import com.autobotstech.activity.R;
 
 
-public class AuditoriumFragment extends BaseFragement{
+public class AuditoriumFragment extends BaseFragement {
 
     @Override
     protected void initView() {

@@ -5,6 +5,12 @@
     <string name="title_info">资讯</string>
     <string name="title_auditorium">大讲堂</string>
     <string name="title_mine">我的</string>
+    <string name="changeportrait">修改头像</string>
+
+    <string name="changeportrait_chose">选择本地照片</string>
+    <string name="changeportrait_photo">拍照</string>
+    <string name="changeportrait_title">设置头像</string>
+    <string name="changeportrait_cancel">取消</string>
 
     <string name="logout">退出</string>
 

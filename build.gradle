@@ -34,4 +34,5 @@ dependencies {
     compile 'com.jude:rollviewpager:1.2.9'
     compile 'com.google.code.gson:gson:2.8.1'
     testCompile 'junit:junit:4.12'
+    compile 'org.litepal.android:core:1.5.1'
 }

@@ -17,6 +17,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -168,9 +170,13 @@ public class HttpConnections {
 
     public JSONObject httpsGet(String httpsUrl,String token){
 
+
+
         JSONObject obj =new JSONObject();
         try {
-            httpsUrl="https://autobotstech.com:9443/inspects/querybycondition?businessType=1&carStandard=G1&useProperty=S1&vehicleType=J1";
+            //?businessType=1&carStandard=G1&useProperty=S1&vehicleType=J1
+//            httpsUrl="https://autobotstech.com:9443/inspects/querybycondition"+conditionString;
+//            httpsUrl=Constants.HTTPS_PREFIX+Constants.CHECK_FLOW+conditionString;
             URL url = new URL(httpsUrl);
             HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
 

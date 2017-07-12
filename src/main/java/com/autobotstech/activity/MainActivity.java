@@ -8,10 +8,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.autobotstech.activity.fragment.framefragment.AuditoriumFragment;
-import com.autobotstech.activity.fragment.framefragment.CheckFragment;
-import com.autobotstech.activity.fragment.framefragment.InfoFragment;
-import com.autobotstech.activity.fragment.framefragment.MineFragment;
+import com.autobotstech.activity.fragment.AuditoriumFragment;
+import com.autobotstech.activity.fragment.CheckFragment;
+import com.autobotstech.activity.fragment.InfoFragment;
+import com.autobotstech.activity.fragment.MineFragment;
 import com.autobotstech.activity.widget.NoSlidingViewPaper;
 
 import java.util.ArrayList;

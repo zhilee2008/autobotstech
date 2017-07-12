@@ -1,4 +1,4 @@
-package com.autobotstech.activity.fragment.framefragment;
+package com.autobotstech.activity.fragment;
 
 import android.content.Context;
 import android.os.Bundle;

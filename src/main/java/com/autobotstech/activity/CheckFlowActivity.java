@@ -18,10 +18,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.autobotstech.AppGlobals;
-import com.autobotstech.activity.fragment.FlowImageFragment;
-import com.autobotstech.activity.fragment.FlowListFragment;
-
 import java.util.ArrayList;
 
 
@@ -57,8 +53,8 @@ public class CheckFlowActivity extends Fragment{
     }
 
     private void initViewPager(){
-        FlowListFragment flowListFragment=new FlowListFragment();
-        FlowImageFragment flowImageFragment=new FlowImageFragment();
+        CheckFlowListFragment flowListFragment=new CheckFlowListFragment();
+        CheckFlowImageFragment flowImageFragment=new CheckFlowImageFragment();
         alFragment=new ArrayList<>();
         alFragment.add(flowListFragment);
         alFragment.add(flowImageFragment);

@@ -11,26 +11,19 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.autobotstech.AppGlobals;
-import com.autobotstech.activity.fragment.FlowDetailGistFragment;
-import com.autobotstech.activity.fragment.FlowDetailMeasureFragment;
-import com.autobotstech.activity.fragment.FlowDetailMethodFragment;
-import com.autobotstech.activity.fragment.FlowImageFragment;
-import com.autobotstech.activity.fragment.FlowListFragment;
 
 import java.util.ArrayList;
 
 
-public class CheckFlowDetailActivity extends Fragment {
+public class CheckFlowListDetailActivity extends Fragment {
 
-    private AppGlobals appGlobals;
+
 
     private ViewPager viewPager;
     private RadioGroup radioGroup;
@@ -69,11 +62,6 @@ public class CheckFlowDetailActivity extends Fragment {
         initView(view);
         initViewPager();
 
-
-//        WebView webView = (WebView) view.findViewById(R.id.checkflowdetail);
-//
-//        webView.loadDataWithBaseURL(null,sb.toString(), "text/html", "utf-8", null);
-
         return view;
     }
 
@@ -102,9 +90,9 @@ public class CheckFlowDetailActivity extends Fragment {
     }
 
     private void initViewPager(){
-        FlowDetailMethodFragment flowDetailMethodFragment=new FlowDetailMethodFragment();
-        FlowDetailMeasureFragment flowDetailMeasureFragment=new FlowDetailMeasureFragment();
-        FlowDetailGistFragment flowDetailGistFragment=new FlowDetailGistFragment();
+        CheckFlowListDetailMethodFragment flowDetailMethodFragment=new CheckFlowListDetailMethodFragment();
+        CheckFlowListDetailMeasureFragment flowDetailMeasureFragment=new CheckFlowListDetailMeasureFragment();
+        CheckFlowListDetailGistFragment flowDetailGistFragment=new CheckFlowListDetailGistFragment();
         alFragment=new ArrayList<>();
         alFragment.add(flowDetailMethodFragment);
         alFragment.add(flowDetailMeasureFragment);

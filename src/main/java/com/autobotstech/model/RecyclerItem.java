@@ -33,6 +33,4 @@ public class RecyclerItem {
 
     private String name;
     private String id;
-
-
 }

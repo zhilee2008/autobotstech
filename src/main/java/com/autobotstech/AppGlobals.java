@@ -13,6 +13,16 @@ public class AppGlobals extends Application {
     public String carStandard;
     public String useProperty;
 
+    public String getCurrentFlowId() {
+        return currentFlowId;
+    }
+
+    public void setCurrentFlowId(String currentFlowId) {
+        this.currentFlowId = currentFlowId;
+    }
+
+    public String currentFlowId;
+
 
     public String getBusinessType() {
         return businessType;

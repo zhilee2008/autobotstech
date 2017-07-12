@@ -1,4 +1,4 @@
-package com.autobotstech.activity.fragment.framefragment;
+package com.autobotstech.activity.fragment;
 
 
 import com.autobotstech.activity.CheckActivity;

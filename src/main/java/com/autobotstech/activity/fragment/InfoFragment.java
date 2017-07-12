@@ -3,10 +3,9 @@ package com.autobotstech.activity.fragment;
 import android.widget.Toast;
 
 import com.autobotstech.activity.R;
-import com.autobotstech.activity.fragment.framefragment.BaseFragement;
 
 
-public class FlowDetailMeasureFragment extends BaseFragement {
+public class InfoFragment extends BaseFragement{
 
     @Override
     protected void initView() {
