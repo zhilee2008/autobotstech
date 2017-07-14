@@ -28,9 +28,9 @@
 
     </RadioGroup>
 
-    <com.autobotstech.activity.widget.NoSlidingViewPaper
+    <com.autobotstech.cyzk.activity.widget.NoSlidingViewPaper
         android:id="@+id/flowviewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/flowradiogroup"></com.autobotstech.activity.widget.NoSlidingViewPaper>
+        android:layout_below="@id/flowradiogroup"></com.autobotstech.cyzk.activity.widget.NoSlidingViewPaper>
 </LinearLayout>
