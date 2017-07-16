@@ -18,4 +18,6 @@ public class Constants {
     public static String CHECK_FLOW_BY_ID = "/inspects/query";
 
     public static String CHECK_FLOW_CHART = "/flowcharts/query";
+
+    public static String LECTUREHALL = "/leturehalls/all";
 }

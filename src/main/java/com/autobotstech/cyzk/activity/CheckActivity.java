@@ -20,42 +20,13 @@ import com.jude.rollviewpager.hintview.ColorPointHintView;
 
 public class CheckActivity extends Fragment {
 
-
-
-
     protected Context mContext;
     protected static FragmentManager fm;
     private RollPagerView mRollViewPager;
 
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-//				.detectDiskReads().detectDiskWrites().detectNetwork()
-//				.penaltyLog().build());
-//		StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-//				.detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
-//				.penaltyLog().penaltyDeath().build());
-//
-
-//
-//		try {
-//			String s=runWithHttpsUrlConnection(getContext());
-//			Toast.makeText(v.getContext(), s, Toast.LENGTH_SHORT).show();
-//		} catch (CertificateException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} catch (KeyStoreException e) {
-//			e.printStackTrace();
-//		} catch (NoSuchAlgorithmException e) {
-//			e.printStackTrace();
-//		} catch (KeyManagementException e) {
-//			e.printStackTrace();
-//		}
 
         fm = getFragmentManager();
         mContext = getContext();

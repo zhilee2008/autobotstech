@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.LoginActivity;
@@ -49,6 +50,9 @@ public class MineFragment extends BaseFragement {
     @Override
     protected void initView() {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        TextView titlebar = (TextView) mView.findViewById(R.id.text_title);
+        titlebar.setText(R.string.title_mine);
 
         LinearLayout logout = (LinearLayout) mView.findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {

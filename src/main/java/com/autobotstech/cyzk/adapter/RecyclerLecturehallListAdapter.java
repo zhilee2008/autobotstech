@@ -17,16 +17,16 @@ import java.util.List;
  * Created by zhi on 06/07/2017.
  */
 
-public class RecyclerFlowListAdapter extends RecyclerAdapter {
+public class RecyclerLecturehallListAdapter extends RecyclerAdapter {
 
 
-    public RecyclerFlowListAdapter(List<RecyclerItem> flowList, AppGlobals appGlobals) {
-        super(flowList, appGlobals);
+    public RecyclerLecturehallListAdapter(List<RecyclerItem> lecturehallList, AppGlobals appGlobals) {
+        super(lecturehallList, appGlobals);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_check_flow_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_lecturehall_list_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
 
         LinearLayout recycleritem = (LinearLayout) view.findViewById(R.id.recycleritemtag);
@@ -37,8 +37,8 @@ public class RecyclerFlowListAdapter extends RecyclerAdapter {
 //                Bundle bundle = new Bundle();
 //                bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
 //                checkFlowDetailActivity.setArguments(bundle);
-                appGlobals.setCurrentFlowId(mRecyclerList.get(holder.getAdapterPosition()).getId());
-                CheckActivity.changeFragment(R.id.checkmainpage, checkFlowDetailActivity);
+//                appGlobals.setCurrentFlowId(mRecyclerList.get(holder.getAdapterPosition()).getId());
+//                CheckActivity.changeFragment(R.id.checkmainpage, checkFlowDetailActivity);
             }
         });
 

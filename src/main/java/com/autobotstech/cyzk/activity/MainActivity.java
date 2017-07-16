@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.fragment.AuditoriumFragment;
+import com.autobotstech.cyzk.activity.fragment.LecturehallFragment;
 import com.autobotstech.cyzk.activity.fragment.CheckFragment;
 import com.autobotstech.cyzk.activity.fragment.InfoFragment;
 import com.autobotstech.cyzk.activity.fragment.MineFragment;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<Fragment> fgLists = new ArrayList<>(4);
         fgLists.add(new CheckFragment());
         fgLists.add(new InfoFragment());
-        fgLists.add(new AuditoriumFragment());
+        fgLists.add(new LecturehallFragment());
         fgLists.add(new MineFragment());
         FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
