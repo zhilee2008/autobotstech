@@ -1,5 +1,6 @@
 package com.autobotstech.cyzk.adapter;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,9 @@ import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.CheckActivity;
 import com.autobotstech.cyzk.activity.CheckFlowListDetailActivity;
+import com.autobotstech.cyzk.activity.LecturehallDetailFragment;
+import com.autobotstech.cyzk.activity.fragment.BaseFragement;
+import com.autobotstech.cyzk.activity.fragment.LecturehallFragment;
 import com.autobotstech.cyzk.model.RecyclerItem;
 
 import java.util.List;
@@ -33,12 +37,11 @@ public class RecyclerLecturehallListAdapter extends RecyclerAdapter {
         recycleritem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                CheckFlowListDetailActivity checkFlowDetailActivity = new CheckFlowListDetailActivity();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
-//                checkFlowDetailActivity.setArguments(bundle);
-//                appGlobals.setCurrentFlowId(mRecyclerList.get(holder.getAdapterPosition()).getId());
-//                CheckActivity.changeFragment(R.id.checkmainpage, checkFlowDetailActivity);
+                LecturehallDetailFragment lecturehallDetailFragment = new LecturehallDetailFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
+                lecturehallDetailFragment.setArguments(bundle);
+                CheckActivity.changeFragment(R.id.lecturehallmainpage, lecturehallDetailFragment);
             }
         });
 

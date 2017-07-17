@@ -9,6 +9,7 @@ public class InfoFragment extends BaseFragement{
 
     @Override
     protected void initView() {
+
     }
 
     @Override

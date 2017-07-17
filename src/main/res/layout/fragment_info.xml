@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/titlebar" />
+        layout="@layout/titlebar" android:id="@+id/infobar" />
 
     <RadioGroup
         android:id="@+id/radiogroup"

@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
+import com.autobotstech.cyzk.activity.CheckActivity;
 import com.autobotstech.cyzk.activity.CheckFlowListFragment;
+import com.autobotstech.cyzk.activity.LecturehallListFragment;
 import com.autobotstech.cyzk.adapter.RecyclerFlowListAdapter;
 import com.autobotstech.cyzk.adapter.RecyclerLecturehallListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
@@ -42,26 +44,14 @@ public class LecturehallFragment extends BaseFragement {
 
     SharedPreferences sp;
     private String token;
-    private CheckLecturehallListTask mTask = null;
 
-    private List<RecyclerItem> lecturehallList;
-    RecyclerLecturehallListAdapter recyclerAdapter;
-    RecyclerView recyclerView;
 
     @Override
     protected void initView() {
-        sp = PreferenceManager.getDefaultSharedPreferences(getContext());
-        token = sp.getString("token", "");
 
-        TextView titlebar = (TextView) mView.findViewById(R.id.text_title);
-        titlebar.setText(R.string.title_auditorium);
-
-        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewlecturehall);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        mTask = new CheckLecturehallListTask(token);
-        mTask.execute((Void) null);
+//        TextView titlebar = (TextView) mView.findViewById(R.id.text_title);
+//        titlebar.setText(R.string.title_auditorium);
+        initFragment(R.id.lecturehallmainpage,new LecturehallListFragment());
 
     }
 
@@ -76,77 +66,5 @@ public class LecturehallFragment extends BaseFragement {
     }
 
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class CheckLecturehallListTask extends AsyncTask<Void, Void, List> {
 
-        private final String mToken;
-
-        CheckLecturehallListTask(String token) {
-            mToken = token;
-        }
-
-        @Override
-        protected List doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-//            LitePal.initialize(getContext().getApplicationContext());
-//            LitePal.getDatabase();
-            JSONObject obj = new JSONObject();
-            lecturehallList = new ArrayList<RecyclerItem>();
-            try {
-                HttpConnections httpConnections = new HttpConnections(getContext());
-
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.LECTUREHALL,mToken);
-                if (obj != null) {
-                    try {
-                        JSONArray flowArr = obj.getJSONArray("detail");
-                        for (int i = 0; i < flowArr.length(); i++) {
-                            RecyclerItem recyclerItem = new RecyclerItem();
-                            recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
-                            recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
-                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
-                            lecturehallList.add(recyclerItem);
-
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            } catch (CertificateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (KeyStoreException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (KeyManagementException e) {
-                e.printStackTrace();
-            }
-
-            return lecturehallList;
-        }
-
-        @Override
-        protected void onPostExecute(final List result) {
-            mTask = null;
-
-            if (result!=null) {
-                recyclerAdapter = new RecyclerLecturehallListAdapter(result,appGlobals);
-                recyclerView.setAdapter(recyclerAdapter);
-
-            } else {
-
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mTask = null;
-//            showProgress(false);
-        }
-    }
 }

@@ -93,6 +93,6 @@ public abstract class BaseFragement extends Fragment {
 
         if(!init)
             ft.addToBackStack(null);
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 }

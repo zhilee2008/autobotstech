@@ -3,12 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include layout="@layout/titlebar" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewlecturehall"
+    <include layout="@layout/titlebar" android:id="@+id/lecturehallbar" />
+    <FrameLayout
+        android:id="@+id/lecturehallmainpage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" />
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
 
 </LinearLayout>

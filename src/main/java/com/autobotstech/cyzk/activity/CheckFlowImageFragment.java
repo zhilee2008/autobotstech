@@ -3,6 +3,7 @@ package com.autobotstech.cyzk.activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.autobotstech.cyzk.AppGlobals;
@@ -51,8 +52,6 @@ public class CheckFlowImageFragment extends BaseFragement {
         webView = (WebView) mView.findViewById(R.id.flowimage);
 
 
-
-
         mTask = new CheckFlowChartTask(token);
         mTask.execute((Void) null);
     }
@@ -67,7 +66,7 @@ public class CheckFlowImageFragment extends BaseFragement {
 //        Toast.makeText(mContext, "MessageFragment页面请求数据了", Toast.LENGTH_SHORT).show();
     }
 
-    public class CheckFlowChartTask extends AsyncTask<Void, Void, JSONObject> {
+    public class CheckFlowChartTask extends AsyncTask<Void, Void, JSONArray> {
 
         private final String mToken;
 
@@ -76,24 +75,25 @@ public class CheckFlowImageFragment extends BaseFragement {
         }
 
         @Override
-        protected JSONObject doInBackground(Void... params) {
+        protected JSONArray doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             JSONObject obj = new JSONObject();
+            JSONArray array = new JSONArray();
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
                 List<String> conditionslist = new ArrayList<String>();
-                conditionslist.add("businessType="+appGlobals.getBusinessType());
-                conditionslist.add("vehicleType="+appGlobals.getVehicleType());
-                conditionslist.add("carStandard="+appGlobals.getCarStandard());
-                conditionslist.add("useProperty="+appGlobals.getUseProperty());
+                conditionslist.add("businessType=" + appGlobals.getBusinessType());
+                conditionslist.add("vehicleType=" + appGlobals.getVehicleType());
+                conditionslist.add("carStandard=" + appGlobals.getCarStandard());
+                conditionslist.add("useProperty=" + appGlobals.getUseProperty());
 
-                String conditionString ="";
-                if(conditionslist.size()>0){
-                    conditionString = "?"+ Utils.join("&",conditionslist);
+                String conditionString = "";
+                if (conditionslist.size() > 0) {
+                    conditionString = "?" + Utils.join("&", conditionslist);
                 }
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.CHECK_FLOW_CHART+conditionString,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.CHECK_FLOW_CHART + conditionString, mToken);
                 if (obj != null) {
-                    obj = obj.getJSONObject("detail");
+                    array = obj.getJSONArray("detail");
 
                 }
 
@@ -111,27 +111,26 @@ public class CheckFlowImageFragment extends BaseFragement {
                 e.printStackTrace();
             }
 
-            return obj;
+            return array;
         }
 
         @Override
-        protected void onPostExecute(final JSONObject result) {
+        protected void onPostExecute(final JSONArray result) {
             mTask = null;
             List<String> imageSrcList = new ArrayList<String>();
+            List<String> imageHtmlList = new ArrayList<String>();
             if (result != null) {
                 try {
-                    JSONArray d=result.getJSONArray("detail");
-                    for(int j=0;j<d.length();j++){
-                        JSONArray imageArray = d.getJSONObject(j).getJSONArray("chart");
-                        for(int i=0;i<imageArray.length();i++){
+                    for (int j = 0; j < result.length(); j++) {
+                        JSONArray imageArray = result.getJSONObject(j).getJSONArray("chart");
+                        for (int i = 0; i < imageArray.length(); i++) {
                             imageSrcList.add(imageArray.getJSONObject(i).getString("url"));
+                            imageHtmlList.add("<img src=\"" + imageArray.getJSONObject(i).getString("url") + "\" />");
                         }
+
                     }
 
-                    htmlbody = "<div class=\"contentbox\"><div class=\"article-title article-title-share\">title</div>\n" +
-
-                            "<div class=\"article-content\"><img src=\"https://www.autobotstech.com:9443/20170713/0ee49cc0-67be-11e7-abcc-a1e7c2f6a35f_750_450.png\" img_width=\"500\" img_height=\"360\" \">" +
-                            "</div></div>";
+                    htmlbody = Utils.join("<br/>",imageHtmlList);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -141,10 +140,14 @@ public class CheckFlowImageFragment extends BaseFragement {
                 webView.getSettings().setDatabaseEnabled(true);
                 webView.getSettings().setDomStorageEnabled(true);
 
+                webView.getSettings().setUseWideViewPort(true);
+                webView.getSettings().setLoadWithOverviewMode(true);
+                webView.getSettings().setTextSize(WebSettings.TextSize.LARGEST);
+
 //              webView.loadUrl("http://a.mp.uc.cn/article.html?uc_param_str=frdnsnpfvecpntnwprdssskt&client=ucweb&wm_aid=c51bcf6c1553481885da371a16e33dbe&wm_id=482efebe15ed4922a1f24dc42ab654e6&pagetype=share&btifl=100");
                 webView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
 //                webView.addJavascriptInterface(new MJavascriptInterface(getActivity(),imageSrcList.toArray(new String[imageSrcList.size()])), "imagelistener");
-                webView.addJavascriptInterface(new MJavascriptInterface(getActivity(),imageUrls), "imagelistener");
+                webView.addJavascriptInterface(new MJavascriptInterface(getActivity(), imageUrls), "imagelistener");
                 webView.setWebViewClient(new MyWebViewClient());
             } else {
 
