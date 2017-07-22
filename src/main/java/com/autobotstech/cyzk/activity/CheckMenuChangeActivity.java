@@ -26,7 +26,7 @@ public class CheckMenuChangeActivity extends Fragment {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                BaseFragement.initFragment(R.id.checkmenucontainer, new CheckActivity());
+                CheckActivity.changeFragment(R.id.checkmenucontainer, new CheckMenuActivity());
 
             }
         });

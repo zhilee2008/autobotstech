@@ -61,7 +61,7 @@ public class CheckFlowActivity extends Fragment{
         alFragment.add(flowListFragment);
         alFragment.add(flowImageFragment);
 
-        FragmentManager fragmentManager= getChildFragmentManager();;
+        FragmentManager fragmentManager= getChildFragmentManager();
 
         FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(fragmentManager) {
             @Override

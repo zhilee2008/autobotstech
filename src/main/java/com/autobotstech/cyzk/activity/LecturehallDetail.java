@@ -144,9 +144,9 @@ public class LecturehallDetail extends Fragment {
             mTask = null;
             if (result != null) {
                 try {
-                    String title = result.getString("title");
-                    String keyword = result.getString("keyword");
-                    String description = result.getString("description");
+                    String title = "<div>"+result.getString("title")+"</div>";
+                    String keyword = "<div>"+result.getString("keyword")+"</div>";
+                    String description = "<div>"+result.getString("description")+"</div>";
                     String video = result.getString("video");
                     String videoHtml = "<video width=\"305\" height=\"305\" controls=\"controls\" preload=\"none\"  >" +
                             "<source src=\"" + video + "\" type=\"video/mp4\">" +
@@ -165,10 +165,10 @@ public class LecturehallDetail extends Fragment {
                 webView.getSettings().setPluginState(WebSettings.PluginState.ON);
                 webView.getSettings().setUseWideViewPort(true);
 
-//                WebSettings settings = webView.getSettings();
-//                settings.setUseWideViewPort(true);
-//                settings.setLoadWithOverviewMode(true);
-//                settings.setTextSize(WebSettings.TextSize.LARGEST);
+                WebSettings settings = webView.getSettings();
+                settings.setUseWideViewPort(true);
+                settings.setLoadWithOverviewMode(true);
+                settings.setTextSize(WebSettings.TextSize.LARGEST);
                 webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
                 webView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);

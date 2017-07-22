@@ -13,6 +13,7 @@ import com.autobotstech.cyzk.activity.fragment.LecturehallFragment;
 import com.autobotstech.cyzk.activity.fragment.CheckFragment;
 import com.autobotstech.cyzk.activity.fragment.InfoFragment;
 import com.autobotstech.cyzk.activity.fragment.MineFragment;
+import com.autobotstech.cyzk.activity.widget.BottomNavigationViewHelper;
 import com.autobotstech.cyzk.activity.widget.NoSlidingViewPaper;
 
 import java.util.ArrayList;
@@ -74,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(3); //预加载剩下两页
 
+        //取消位移动画
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationViewHelper.disableShiftMode(navigation);
+//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         /*给底部导航栏菜单项添加点击事件*/
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
