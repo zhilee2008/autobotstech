@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.CheckActivity;
-import com.autobotstech.cyzk.activity.LecturehallDetail;
+import com.autobotstech.cyzk.activity.InfoSpecialDetail;
 import com.autobotstech.cyzk.model.RecyclerItem;
 
 import java.util.List;
@@ -18,10 +18,10 @@ import java.util.List;
  * Created by zhi on 06/07/2017.
  */
 
-public class RecyclerLecturehallListAdapter extends RecyclerAdapter {
+public class RecyclerSpecialListAdapter extends RecyclerAdapter {
 
 
-    public RecyclerLecturehallListAdapter(List<RecyclerItem> lecturehallList, AppGlobals appGlobals) {
+    public RecyclerSpecialListAdapter(List<RecyclerItem> lecturehallList, AppGlobals appGlobals) {
         super(lecturehallList, appGlobals);
     }
 
@@ -34,11 +34,11 @@ public class RecyclerLecturehallListAdapter extends RecyclerAdapter {
         recycleritem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                LecturehallDetail lecturehallDetailFragment = new LecturehallDetail();
+                InfoSpecialDetail infoSpecialDetailFragment = new InfoSpecialDetail();
                 Bundle bundle = new Bundle();
                 bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
-                lecturehallDetailFragment.setArguments(bundle);
-                CheckActivity.changeFragment(R.id.lecturehallmainpage, lecturehallDetailFragment);
+                infoSpecialDetailFragment.setArguments(bundle);
+                CheckActivity.changeFragment(R.id.infomainpage, infoSpecialDetailFragment);
             }
         });
 

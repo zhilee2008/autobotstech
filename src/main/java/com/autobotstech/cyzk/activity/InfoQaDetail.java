@@ -15,20 +15,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.fragment.BaseFragement;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
-import com.autobotstech.cyzk.util.MJavascriptInterface;
-import com.autobotstech.cyzk.util.MyWebViewClient;
-import com.autobotstech.cyzk.util.StringUtils;
-import com.autobotstech.cyzk.util.Utils;
-import com.bumptech.glide.Glide;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,11 +29,9 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class LecturehallDetailFragment extends Fragment {
+public class InfoQaDetail extends Fragment {
     private AppGlobals appGlobals;
 
     SharedPreferences sp;
@@ -86,7 +76,7 @@ public class LecturehallDetailFragment extends Fragment {
         backbutton.setVisibility(View.VISIBLE);
 
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
-        titlebar.setText(R.string.title_auditorium);
+        titlebar.setText(R.string.qalist);
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
         WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);

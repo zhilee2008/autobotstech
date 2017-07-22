@@ -28,6 +28,10 @@
     <string name="change_out">变更迁出</string>
     <string name="change_finished">返回</string>
 
+    <string name="specialtopiclist">专题信息</string>
+    <string name="qalist">在线问答</string>
+    <string name="downloadlist">文件下载</string>
+
     <string name="transfer">转移登记</string>
 
     <string name="record">变更备案</string>

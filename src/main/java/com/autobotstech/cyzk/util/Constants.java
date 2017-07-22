@@ -23,4 +23,9 @@ public class Constants {
 
     public static String LECTUREHALL_DETAIL = "/leturehalls/queryOneById/";
 
+    public static String FORUMS = "/forums/all";
+
+    public static String SPECIALTOPICS = "/specialtopics/queryAll";
+    public static String SPECIALTOPICS_DETAIL = "/specialtopics/queryOneById/";
+
 }
