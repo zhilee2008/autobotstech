@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.activity.CheckActivity;
+import com.autobotstech.cyzk.activity.CheckActivityContainer;
 import com.autobotstech.cyzk.activity.CheckStandarActivity;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.model.StructureGridItem;
@@ -74,7 +75,7 @@ public class StickyGridAdapter extends BaseAdapter implements
                 Bundle bundle = new Bundle();
                 bundle.putString("standar", hasHeaderIdList.get(position).getStandar().toString());
                 checkStandarActivityFragment.setArguments(bundle);
-                CheckActivity.changeFragment(R.id.checkmainpage, checkStandarActivityFragment);
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, checkStandarActivityFragment);
             }
         });
 

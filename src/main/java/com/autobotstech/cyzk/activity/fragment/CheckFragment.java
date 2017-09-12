@@ -3,6 +3,7 @@ package com.autobotstech.cyzk.activity.fragment;
 
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.CheckActivity;
+import com.autobotstech.cyzk.activity.CheckActivityContainer;
 
 
 public class CheckFragment extends BaseFragement{
@@ -11,7 +12,7 @@ public class CheckFragment extends BaseFragement{
     @Override
     protected void initView() {
 
-        initFragment(R.id.checkmainpage,new CheckActivity());
+        initFragment(R.id.checkmainpage,new CheckActivityContainer());
 
     }
     @Override

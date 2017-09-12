@@ -29,7 +29,7 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:text="预约时间" />
+                    android:text="" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:text="预约地点" />
+                    android:text="" />
 
                 <TextView
                     android:layout_width="wrap_content"

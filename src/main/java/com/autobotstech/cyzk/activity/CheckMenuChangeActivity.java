@@ -26,7 +26,7 @@ public class CheckMenuChangeActivity extends Fragment {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                CheckActivity.changeFragment(R.id.checkmenucontainer, new CheckMenuActivity());
+                CheckActivityContainer.changeFragment(R.id.checkmenucontainer, new CheckMenuActivity());
 
             }
         });
@@ -35,7 +35,7 @@ public class CheckMenuChangeActivity extends Fragment {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 appGlobals.setBusinessType("2");
-                CheckActivity.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
 
             }
         });
@@ -44,7 +44,7 @@ public class CheckMenuChangeActivity extends Fragment {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 appGlobals.setBusinessType("3");
-                CheckActivity.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
 
             }
         });
@@ -53,7 +53,7 @@ public class CheckMenuChangeActivity extends Fragment {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 appGlobals.setBusinessType("4");
-                CheckActivity.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
 
             }
         });
@@ -62,7 +62,7 @@ public class CheckMenuChangeActivity extends Fragment {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 appGlobals.setBusinessType("5");
-                CheckActivity.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
 
             }
         });
@@ -71,7 +71,7 @@ public class CheckMenuChangeActivity extends Fragment {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 appGlobals.setBusinessType("6");
-                CheckActivity.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
 
             }
         });
@@ -80,7 +80,7 @@ public class CheckMenuChangeActivity extends Fragment {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 appGlobals.setBusinessType("7");
-                CheckActivity.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
 
             }
         });
@@ -89,7 +89,7 @@ public class CheckMenuChangeActivity extends Fragment {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 appGlobals.setBusinessType("8");
-                CheckActivity.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, new CheckStructureActivity());
 
             }
         });

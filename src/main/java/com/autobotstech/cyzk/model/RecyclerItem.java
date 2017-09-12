@@ -33,4 +33,14 @@ public class RecyclerItem {
 
     private String name;
     private String id;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    private String createTime;
 }

@@ -32,13 +32,9 @@ public class CheckActivity extends Fragment {
         mContext = getContext();
         View view = inflater.inflate(R.layout.activity_check, container, false);
 
-        initFragment(R.id.checkmenucontainer, new CheckMenuActivity());
+        CheckActivityContainer.initFragment(R.id.checkmenucontainer, new CheckMenuActivity());
 
-        ViewGroup vg = (ViewGroup)container.getParent();
-        vg.findViewById(R.id.button_backward).setVisibility(View.INVISIBLE);
 
-        TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
-        titlebar.setText(R.string.title_check);
 
 
         mRollViewPager = (RollPagerView) view.findViewById(R.id.roll_view_pager);
@@ -91,26 +87,6 @@ public class CheckActivity extends Fragment {
         }
     }
 
-    // 切換Fragment 存在于栈中
-    public static void changeFragment(int fragemnt,Fragment f){
-        changeFragment(fragemnt,f, false);
-    }
-    // 初始化Fragment(FragmentActivity中呼叫) 不在在于栈中
-    public static void initFragment(int fragment,Fragment f){
-        changeFragment(fragment,f, true);
-    }
-    protected static void changeFragment(int fragment,Fragment f, boolean init){
-        FragmentTransaction ft = fm.beginTransaction().setCustomAnimations(R.anim.fragment_slide_left_enter,
-                R.anim.fragment_slide_left_exit,
-                R.anim.fragment_slide_right_enter,
-                R.anim.fragment_slide_right_exit);
-
-        ft.replace(fragment, f);
-
-        if(!init)
-            ft.addToBackStack(null);
-        ft.commitAllowingStateLoss();
-    }
 
 
 }

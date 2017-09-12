@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.activity.CheckActivity;
+import com.autobotstech.cyzk.activity.CheckActivityContainer;
 import com.autobotstech.cyzk.activity.CheckUsageActivity;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.model.RecyclerItem;
@@ -34,7 +35,7 @@ public class RecyclerStandarAdapter extends RecyclerAdapter {
             public void onClick(View arg0) {
                 String standarId = mRecyclerList.get(holder.getAdapterPosition()).getId();
                 appGlobals.setCarStandard(standarId);
-                CheckActivity.changeFragment(R.id.checkmainpage, new CheckUsageActivity());
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, new CheckUsageActivity());
 
             }
         });

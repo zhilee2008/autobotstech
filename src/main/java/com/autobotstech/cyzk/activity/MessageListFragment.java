@@ -12,21 +12,15 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.fragment.BaseFragement;
-import com.autobotstech.cyzk.adapter.RecyclerLecturehallListAdapter;
+import com.autobotstech.cyzk.adapter.RecyclerMessageListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
-import com.autobotstech.cyzk.util.MJavascriptInterface;
-import com.autobotstech.cyzk.util.MyWebViewClient;
-import com.autobotstech.cyzk.util.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,19 +31,24 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+import java.sql.Timestamp;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
-public class LecturehallListFragment extends Fragment {
+public class MessageListFragment extends Fragment {
     private AppGlobals appGlobals;
 
     SharedPreferences sp;
     private String token;
-    private CheckLecturehallListTask mTask = null;
+    private CheckMessageListTask mTask = null;
 
-    private List<RecyclerItem> lecturehallList;
-    RecyclerLecturehallListAdapter recyclerAdapter;
+    private List<RecyclerItem> messageList;
+    RecyclerMessageListAdapter recyclerAdapter;
     RecyclerView recyclerView;
     View view;
 
@@ -58,20 +57,37 @@ public class LecturehallListFragment extends Fragment {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
 
-        view = inflater.inflate(R.layout.activity_lecturehall_list, container, false);
+        view = inflater.inflate(R.layout.activity_message_list, container, false);
         ViewGroup vg=(ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                new Thread() {
+                    public void run() {
+                        try {
+                            Instrumentation inst = new Instrumentation();
+                            inst.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
 
-        backbutton.setVisibility(View.INVISIBLE);
+            }
+        });
+        backbutton.setText(R.string.change_finished);
+        backbutton.setVisibility(View.VISIBLE);
 
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
-        titlebar.setText(R.string.title_auditorium);
+        titlebar.setText(R.string.messageList);
 
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewlecturehall);
+        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewmessage);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        mTask = new CheckLecturehallListTask(token);
+        mTask = new CheckMessageListTask(token);
         mTask.execute((Void) null);
         return view;
     }
@@ -81,11 +97,11 @@ public class LecturehallListFragment extends Fragment {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class CheckLecturehallListTask extends AsyncTask<Void, Void, List> {
+    public class CheckMessageListTask extends AsyncTask<Void, Void, List> {
 
         private final String mToken;
 
-        CheckLecturehallListTask(String token) {
+        CheckMessageListTask(String token) {
             mToken = token;
         }
 
@@ -94,11 +110,11 @@ public class LecturehallListFragment extends Fragment {
             // TODO: attempt authentication against a network service.
 
             JSONObject obj = new JSONObject();
-            lecturehallList = new ArrayList<RecyclerItem>();
+            messageList = new ArrayList<RecyclerItem>();
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.LECTUREHALL,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.EXPERIENCES,mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -106,8 +122,21 @@ public class LecturehallListFragment extends Fragment {
                             RecyclerItem recyclerItem = new RecyclerItem();
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
-                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
-                            lecturehallList.add(recyclerItem);
+                            String createTimeString = flowArr.getJSONObject(i).getString("createTime");
+                            Format f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            Date date=null;
+                            String dateString="";
+                            try{
+                                date = (Date) f.parseObject(createTimeString);
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                dateString = sdf.format(date);
+                            }catch (ParseException e){
+                                e.printStackTrace();
+                            }
+
+                            recyclerItem.setCreateTime(dateString);
+//                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+                            messageList.add(recyclerItem);
 
                         }
                     } catch (JSONException e) {
@@ -127,7 +156,7 @@ public class LecturehallListFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            return lecturehallList;
+            return messageList;
         }
 
         @Override
@@ -135,7 +164,7 @@ public class LecturehallListFragment extends Fragment {
             mTask = null;
 
             if (result!=null) {
-                recyclerAdapter = new RecyclerLecturehallListAdapter(result,appGlobals);
+                recyclerAdapter = new RecyclerMessageListAdapter(result,appGlobals);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {

@@ -15,6 +15,10 @@
         android:icon="@drawable/ic_publish_normal"
         android:title="@string/title_auditorium" />
     <item
+        android:id="@+id/navigation_training"
+        android:icon="@drawable/ic_publish_normal"
+        android:title="@string/title_training" />
+    <item
         android:id="@+id/navigation_mine"
         android:icon="@drawable/ic_publish_normal"
         android:title="@string/title_mine" />

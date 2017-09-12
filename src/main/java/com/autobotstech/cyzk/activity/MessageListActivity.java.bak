@@ -1,0 +1,138 @@
+package com.autobotstech.cyzk.activity;
+
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+
+import com.autobotstech.cyzk.AppGlobals;
+import com.autobotstech.cyzk.R;
+import com.autobotstech.cyzk.adapter.RecyclerLecturehallListAdapter;
+import com.autobotstech.cyzk.model.RecyclerItem;
+import com.autobotstech.cyzk.util.Constants;
+import com.autobotstech.cyzk.util.HttpConnections;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class MessageListActivity extends AppCompatActivity {
+
+    private AppGlobals appGlobals;
+
+    SharedPreferences sp;
+    private String token;
+
+    private MessageListTask mTask = null;
+
+    private List<RecyclerItem> messageList;
+    RecyclerLecturehallListAdapter recyclerAdapter;
+    RecyclerView recyclerView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        token = sp.getString("token", "");
+
+        setContentView(R.layout.activity_message_list);
+
+        recyclerView = (RecyclerView)findViewById(R.id.message_list);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        mTask = new MessageListTask(token);
+        mTask.execute((Void) null);
+    }
+
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
+    public class MessageListTask extends AsyncTask<Void, Void, List> {
+
+        private final String mToken;
+
+        MessageListTask(String token) {
+            mToken = token;
+        }
+
+        @Override
+        protected List doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+
+            JSONObject obj = new JSONObject();
+            messageList = new ArrayList<RecyclerItem>();
+            try {
+                HttpConnections httpConnections = new HttpConnections(MessageListActivity.this.getApplicationContext());
+
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.LECTUREHALL,mToken);
+                if (obj != null) {
+                    try {
+                        JSONArray flowArr = obj.getJSONArray("detail");
+                        for (int i = 0; i < flowArr.length(); i++) {
+                            RecyclerItem recyclerItem = new RecyclerItem();
+                            recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
+                            recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
+                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+                            messageList.add(recyclerItem);
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            } catch (CertificateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            }
+
+            return messageList;
+        }
+
+        @Override
+        protected void onPostExecute(final List result) {
+            mTask = null;
+
+            if (result!=null) {
+                recyclerAdapter = new RecyclerLecturehallListAdapter(result,appGlobals);
+                recyclerView.setAdapter(recyclerAdapter);
+
+            } else {
+
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mTask = null;
+//            showProgress(false);
+        }
+    }
+
+
+}

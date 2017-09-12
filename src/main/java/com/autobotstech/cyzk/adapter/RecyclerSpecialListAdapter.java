@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.CheckActivity;
+import com.autobotstech.cyzk.activity.CheckActivityContainer;
 import com.autobotstech.cyzk.activity.InfoSpecialDetail;
 import com.autobotstech.cyzk.model.RecyclerItem;
 
@@ -38,7 +39,7 @@ public class RecyclerSpecialListAdapter extends RecyclerAdapter {
                 Bundle bundle = new Bundle();
                 bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
                 infoSpecialDetailFragment.setArguments(bundle);
-                CheckActivity.changeFragment(R.id.infomainpage, infoSpecialDetailFragment);
+                CheckActivityContainer.changeFragment(R.id.infomainpage, infoSpecialDetailFragment);
             }
         });
 

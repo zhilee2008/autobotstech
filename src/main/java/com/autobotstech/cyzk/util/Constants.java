@@ -28,4 +28,7 @@ public class Constants {
     public static String SPECIALTOPICS = "/specialtopics/queryAll";
     public static String SPECIALTOPICS_DETAIL = "/specialtopics/queryOneById/";
 
+    public static String EXPERIENCES = "/experiences/queryAll?notification=true";
+
+
 }

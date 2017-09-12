@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.CheckActivity;
+import com.autobotstech.cyzk.activity.CheckActivityContainer;
 import com.autobotstech.cyzk.activity.CheckFlowListDetailActivity;
 import com.autobotstech.cyzk.model.RecyclerItem;
 
@@ -38,7 +39,7 @@ public class RecyclerFlowListAdapter extends RecyclerAdapter {
 //                bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
 //                checkFlowDetailActivity.setArguments(bundle);
                 appGlobals.setCurrentFlowId(mRecyclerList.get(holder.getAdapterPosition()).getId());
-                CheckActivity.changeFragment(R.id.checkmainpage, checkFlowDetailActivity);
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, checkFlowDetailActivity);
             }
         });
 

@@ -32,9 +32,22 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapt
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         RecyclerItem recyclerItem = mRecyclerList.get(position);
-        holder.image.setImageResource(recyclerItem.getImage());
-        holder.name.setText(recyclerItem.getName());
-        holder.tag.setTag(recyclerItem.getId());
+        if(holder.image!=null){
+            holder.image.setImageResource(recyclerItem.getImage());
+        }
+
+        if(holder.name!=null){
+            holder.name.setText(recyclerItem.getName());
+        }
+
+        if(holder.tag!=null){
+            holder.tag.setTag(recyclerItem.getId());
+        }
+
+        if(holder.createTime!=null){
+            holder.createTime.setText(recyclerItem.getCreateTime());
+        }
+
     }
 
     @Override
@@ -46,12 +59,26 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapt
         ImageView image;
         TextView name;
         LinearLayout tag;
+        TextView createTime;
 
         public ViewHolder(View view) {
             super(view);
-            image = (ImageView)view.findViewById(R.id.recycleritemimageview);
-            name = (TextView)view.findViewById(R.id.recycleritemtextview);
-            tag=(LinearLayout)view.findViewById(R.id.recycleritemtag);
+            if(null!=view.findViewById(R.id.recycleritemimageview)){
+                image = (ImageView)view.findViewById(R.id.recycleritemimageview);
+            }
+
+            if(null!=view.findViewById(R.id.recycleritemtextview)){
+                name = (TextView)view.findViewById(R.id.recycleritemtextview);
+            }
+
+            if(null!=view.findViewById(R.id.recycleritemtag)){
+                tag=(LinearLayout)view.findViewById(R.id.recycleritemtag);
+            }
+
+            if(null!=view.findViewById(R.id.recycleritemcreatetime)){
+                createTime=(TextView)view.findViewById(R.id.recycleritemcreatetime);
+            }
+
         }
     }
 
