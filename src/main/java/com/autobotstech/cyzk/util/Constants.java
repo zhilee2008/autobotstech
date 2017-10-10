@@ -30,5 +30,9 @@ public class Constants {
 
     public static String EXPERIENCES = "/experiences/queryAll?notification=true";
 
+    public static String EXPERIENCES_DETAIL = "/experiences/queryOneById/";
+
+    public static String TECHSUPPORTS = "/techsupports/all";
+
 
 }

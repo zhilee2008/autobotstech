@@ -11,6 +11,7 @@
     <string name="changeportrait">修改头像</string>
     <string name="message">我的消息</string>
     <string name="messageList">消息列表</string>
+    <string name="messageDetail">消息详情</string>
 
 
     <string name="changeportrait_chose">选择本地照片</string>

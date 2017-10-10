@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.fragment.BaseFragement;
+import com.autobotstech.cyzk.adapter.RecyclerDownloadListAdapter;
 import com.autobotstech.cyzk.adapter.RecyclerFlowListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
@@ -33,31 +34,31 @@ public class InfoDownloadListFragment extends BaseFragement {
 
     SharedPreferences sp;
     private String token;
-    private CheckFlowListTask mCheckFlowListTask = null;
+    private DownloadListTask mTask = null;
 
-    private List<RecyclerItem> checkFlowList;
-    RecyclerFlowListAdapter recyclerAdapter;
+    private List<RecyclerItem> downloadList;
+    RecyclerDownloadListAdapter recyclerAdapter;
     RecyclerView recyclerView;
 
     @Override
     protected void initView() {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
-        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewinfo);
+        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewdownload);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         appGlobals = (AppGlobals) getActivity().getApplication();
 
-        mCheckFlowListTask = new CheckFlowListTask(token);
-        mCheckFlowListTask.execute((Void) null);
+        mTask = new DownloadListTask(token);
+        mTask.execute((Void) null);
 //        Toast.makeText(mContext, "MessageFragment页面请求数据了", Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_info_list;
+        return R.layout.activity_download_list;
     }
 
     @Override
@@ -70,36 +71,36 @@ public class InfoDownloadListFragment extends BaseFragement {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class CheckFlowListTask extends AsyncTask<Void, Void, List> {
+    public class DownloadListTask extends AsyncTask<Void, Void, List> {
 
         private final String mToken;
 
-        CheckFlowListTask(String token) {
+        DownloadListTask(String token) {
             mToken = token;
         }
 
         @Override
         protected List doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-//            LitePal.initialize(getContext().getApplicationContext());
-//            LitePal.getDatabase();
+
             JSONObject obj = new JSONObject();
-            checkFlowList = new ArrayList<RecyclerItem>();
+            downloadList = new ArrayList<RecyclerItem>();
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
                 List<String> conditionslist = new ArrayList<String>();
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.CHECK_FLOW,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.TECHSUPPORTS,mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
                         for (int i = 0; i < flowArr.length(); i++) {
                             RecyclerItem recyclerItem = new RecyclerItem();
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
-                            recyclerItem.setName(flowArr.getJSONObject(i).getString("inspectItem"));
+                            recyclerItem.setName(flowArr.getJSONObject(i).getString("originalFileName"));
+                            recyclerItem.setFilePath(flowArr.getJSONObject(i).getString("file"));
+//                            recyclerItem.setName(flowArr.getJSONObject(i).getString("file"));
                             recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
-                            checkFlowList.add(recyclerItem);
-
+                            downloadList.add(recyclerItem);
 
                         }
                     } catch (JSONException e) {
@@ -119,15 +120,15 @@ public class InfoDownloadListFragment extends BaseFragement {
                 e.printStackTrace();
             }
 
-            return checkFlowList;
+            return downloadList;
         }
 
         @Override
         protected void onPostExecute(final List result) {
-            mCheckFlowListTask = null;
+            mTask = null;
 
             if (result!=null) {
-                recyclerAdapter = new RecyclerFlowListAdapter(result,appGlobals);
+                recyclerAdapter = new RecyclerDownloadListAdapter(result,appGlobals);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {
@@ -137,7 +138,7 @@ public class InfoDownloadListFragment extends BaseFragement {
 
         @Override
         protected void onCancelled() {
-            mCheckFlowListTask = null;
+            mTask = null;
 //            showProgress(false);
         }
     }

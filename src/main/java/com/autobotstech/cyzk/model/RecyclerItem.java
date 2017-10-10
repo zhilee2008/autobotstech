@@ -43,4 +43,15 @@ public class RecyclerItem {
     }
 
     private String createTime;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String filePath;
+
 }

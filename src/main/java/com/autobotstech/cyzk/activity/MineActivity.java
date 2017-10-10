@@ -119,18 +119,15 @@ public class MineActivity extends Fragment{
 
 
 
-        LinearLayout messageListActivity = (LinearLayout) view.findViewById(R.id.message);
-        messageListActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-
-//                Intent intent = new Intent();
-//                intent.setClass(getContext(), MessageListActivity.class);
-//                getActivity().startActivity(intent);
-                CheckActivityContainer.changeFragment(R.id.minemainpage, new MessageListFragment());
-
-            }
-        });
+//        LinearLayout messageListActivity = (LinearLayout) view.findViewById(R.id.message);
+//        messageListActivity.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View arg0) {
+//
+//                CheckActivityContainer.changeFragment(R.id.minemainpage, new MessageListFragment());
+//
+//            }
+//        });
 
 
         return view;

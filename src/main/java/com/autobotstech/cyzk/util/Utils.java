@@ -186,5 +186,11 @@ public class Utils {
                     requestCode);
         }
     }
+
+
+    public static int  getImageID(Context context,String imageName){
+        int resId = context.getResources().getIdentifier(imageName, "raw", context.getPackageName());
+        return resId;
+    }
 }
 

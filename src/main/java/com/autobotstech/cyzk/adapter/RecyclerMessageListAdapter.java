@@ -40,7 +40,7 @@ public class RecyclerMessageListAdapter extends RecyclerAdapter {
                 Bundle bundle = new Bundle();
                 bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
                 messageDetailFragment.setArguments(bundle);
-                CheckActivityContainer.changeFragment(R.id.minemainpage, messageDetailFragment);
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, messageDetailFragment);
             }
         });
 

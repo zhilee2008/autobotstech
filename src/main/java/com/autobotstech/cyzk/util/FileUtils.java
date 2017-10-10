@@ -11,6 +11,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -71,4 +75,54 @@ public class FileUtils {
 
         void onSavedFailed();
     }
+
+
+    public static void downloadFile(final Context context,final String urlStr, final String fileName, final SaveResultCallback saveResultCallback) {
+        final File sdDir = getSDPath();
+        if (sdDir == null) {
+            Toast.makeText(context,"设备自带的存储不可用",Toast.LENGTH_LONG).show();
+            return;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                InputStream input =null;
+                try {
+                    URL url = new URL(urlStr);
+                    HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
+                    input = urlConn.getInputStream();
+                }catch(IOException e){
+                    saveResultCallback.onSavedFailed();
+                    e.printStackTrace();
+                }
+                OutputStream output = null;
+                File appDir = new File(sdDir, "download");
+                if (!appDir.exists()) {
+                    appDir.mkdir();
+                }
+                File file = new File(appDir, fileName);
+                try {
+                    output = new FileOutputStream(file);
+                    byte [] buffer = new byte[4 * 1024];
+                    while(input.read(buffer) != -1){
+                        output.write(buffer);
+                        output.flush();
+                    }
+                    saveResultCallback.onSavedSuccess();
+                } catch (FileNotFoundException e) {
+                    saveResultCallback.onSavedFailed();
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    saveResultCallback.onSavedFailed();
+                    e.printStackTrace();
+                }
+
+                //保存图片后发送广播通知更新数据库
+                Uri uri = Uri.fromFile(file);
+                context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+            }
+        }).start();
+    }
+
+
 }

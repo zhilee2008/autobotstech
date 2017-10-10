@@ -1,6 +1,7 @@
 package com.autobotstech.cyzk.activity;
 
 import android.app.Instrumentation;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -91,6 +92,7 @@ public class CheckUsageActivity extends Fragment {
 
         return view;
     }
+
 
 
 }
