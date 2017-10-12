@@ -1,39 +1,98 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:fillViewport="true"
     android:orientation="vertical">
 
-    <WebView
-        android:id="@+id/qadetail"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"></WebView>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="10.0dip"
-        android:background="#ffeaeaea" />
-    <LinearLayout
-        android:id="@+id/answercount"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <WebView
+                android:id="@+id/qadetail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"></WebView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="10.0dip"
+                android:background="#ffeaeaea" />
+
+            <LinearLayout
+                android:id="@+id/answercount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="fill_vertical"
+                    android:text="@string/answer" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:background="#ffeaeaea" />
+
+            <WebView
+                android:id="@+id/answersdetail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            </WebView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="fill_vertical"
-            android:text="@string/answer" />
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="1.0dip"
-        android:background="#ffeaeaea" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:background="#ffeaeaea" />
 
-    <WebView
-        android:id="@+id/answersdetail"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"></WebView>
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:weightSum="10"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_weight="2"
+                    android:hint="输入回复:"
+                    android:inputType="text"
+                    android:text="" />
+
+                <TextView
+                    android:layout_weight="8"
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="回复" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
