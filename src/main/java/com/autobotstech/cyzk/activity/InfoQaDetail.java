@@ -21,6 +21,7 @@ import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,23 +37,25 @@ public class InfoQaDetail extends Fragment {
 
     SharedPreferences sp;
     private String token;
-    private LecturehallDetailTask mTask = null;
+    private InfoQaDetailTask mTask = null;
 
-    private WebView webView;
+    private WebView qawebView;
+    private WebView answerswebView;
     private String htmlbody = "";
+    private String answerhtmlbody = "";
 
     private String[] imageUrls;
 
-    private String lecturehallId;
+    private String qaId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
 
-        lecturehallId = getArguments().getString("detail");
+        qaId = getArguments().getString("detail");
 
-        View view = inflater.inflate(R.layout.activity_lecturehall_detail, container, false);
+        View view = inflater.inflate(R.layout.activity_qa_detail, container, false);
         ViewGroup vg = (ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
         backbutton.setOnClickListener(new View.OnClickListener() {
@@ -76,26 +79,27 @@ public class InfoQaDetail extends Fragment {
         backbutton.setVisibility(View.VISIBLE);
 
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
-        titlebar.setText(R.string.qalist);
+        titlebar.setText(R.string.title_check_1);
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
         WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
 
 
-        webView = (WebView) view.findViewById(R.id.lecturehalldetail);
+        qawebView = (WebView) view.findViewById(R.id.qadetail);
+        answerswebView = (WebView) view.findViewById(R.id.answersdetail);
 
-        mTask = new LecturehallDetailTask(token);
+        mTask = new InfoQaDetailTask(token);
         mTask.execute((Void) null);
 
         return view;
     }
 
 
-    public class LecturehallDetailTask extends AsyncTask<Void, Void, JSONObject> {
+    public class InfoQaDetailTask extends AsyncTask<Void, Void, JSONObject> {
 
         private final String mToken;
 
-        LecturehallDetailTask(String token) {
+        InfoQaDetailTask(String token) {
             mToken = token;
         }
 
@@ -106,9 +110,9 @@ public class InfoQaDetail extends Fragment {
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.LECTUREHALL_DETAIL + lecturehallId, mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.FORUMS_DETAIL + qaId, mToken);
                 if (obj != null) {
-                    obj = obj.getJSONObject("detail");
+                    obj = obj.getJSONObject("forum");
 
                 }
 
@@ -134,34 +138,39 @@ public class InfoQaDetail extends Fragment {
             mTask = null;
             if (result != null) {
                 try {
-                    String title = result.getString("title");
-                    String keyword = result.getString("keyword");
-                    String description = result.getString("description");
-                    String video = result.getString("video");
-                    String videoHtml = "<video width=\"305\" height=\"305\" controls=\"controls\" preload=\"none\"  >" +
-                            "<source src=\"" + video + "\" type=\"video/mp4\">" +
-                            "</video>";
+                    String title = "<div><h2>"+result.getString("title")+"</h2></div>";
+                    String description = "<div>"+result.getString("question")+"</div>";
 
-                    htmlbody = title+keyword+description+videoHtml;
+                    JSONArray answerArray = result.getJSONArray("answer");
+                    if(answerArray.length()>0){
+                        String answerperson = "<div>"+result.getString("question")+"</div>";
+                        String answerContent = "<div>"+result.getString("question")+"</div>";
+                    }
+
+                    htmlbody = title+description;
+                    answerhtmlbody ="test";
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.getSettings().setAppCacheEnabled(true);
-                webView.getSettings().setDatabaseEnabled(true);
-                webView.getSettings().setDomStorageEnabled(true);
+//                webView.getSettings().setJavaScriptEnabled(true);
+//                webView.getSettings().setAppCacheEnabled(true);
+//                webView.getSettings().setDatabaseEnabled(true);
+//                webView.getSettings().setDomStorageEnabled(true);
+//
+//                webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+//                webView.getSettings().setUseWideViewPort(true);
+//
+////                WebSettings settings = webView.getSettings();
+////                settings.setUseWideViewPort(true);
+////                settings.setLoadWithOverviewMode(true);
+////                settings.setTextSize(WebSettings.TextSize.LARGEST);
+//                webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
-                webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-                webView.getSettings().setUseWideViewPort(true);
+                qawebView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
+                answerswebView.loadDataWithBaseURL(null, answerhtmlbody, "text/html", "utf-8", null);
 
-//                WebSettings settings = webView.getSettings();
-//                settings.setUseWideViewPort(true);
-//                settings.setLoadWithOverviewMode(true);
-//                settings.setTextSize(WebSettings.TextSize.LARGEST);
-                webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-
-                webView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
             } else {
 
             }

@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <WebView
+        android:id="@+id/qadetail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"></WebView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="10.0dip"
+        android:background="#ffeaeaea" />
+    <LinearLayout
+        android:id="@+id/answercount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="fill_vertical"
+            android:text="@string/answer" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:background="#ffeaeaea" />
+
+    <WebView
+        android:id="@+id/answersdetail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"></WebView>
+</LinearLayout>

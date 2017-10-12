@@ -15,6 +15,7 @@ public class Constants {
 
     //?businessType=1&vehicleType=J2&carStandard=G1&useProperty=S1
     public static String CHECK_FLOW = "/inspects/querybycondition";
+
     public static String CHECK_FLOW_BY_ID = "/inspects/query";
 
     public static String CHECK_FLOW_CHART = "/flowcharts/query";
@@ -25,7 +26,12 @@ public class Constants {
 
     public static String FORUMS = "/forums/all";
 
+    public static String FORUMS_DETAIL = "/forums/queryOneById/";
+
+    public static String FORUMS_DETAIL_ANSWERS = "/forums/queryAnswerById/";
+
     public static String SPECIALTOPICS = "/specialtopics/queryAll";
+
     public static String SPECIALTOPICS_DETAIL = "/specialtopics/queryOneById/";
 
     public static String EXPERIENCES = "/experiences/queryAll?notification=true";

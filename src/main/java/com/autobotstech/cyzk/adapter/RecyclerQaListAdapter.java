@@ -39,7 +39,7 @@ public class RecyclerQaListAdapter extends RecyclerAdapter {
                 Bundle bundle = new Bundle();
                 bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
                 infoQaDetailFragment.setArguments(bundle);
-                CheckActivityContainer.changeFragment(R.id.infomainpage, infoQaDetailFragment);
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, infoQaDetailFragment);
             }
         });
 

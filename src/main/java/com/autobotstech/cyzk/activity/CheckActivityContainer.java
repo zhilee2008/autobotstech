@@ -91,12 +91,12 @@ public class CheckActivityContainer extends Fragment {
 
     private void initViewPager(){
         CheckActivity checkActivity=new CheckActivity();
-        InfoQaList flowListFragment=new InfoQaList();
-        InfoDownloadListFragment flowImageFragment=new InfoDownloadListFragment();
+        InfoQaList infoQaList=new InfoQaList();
+        InfoDownloadListFragment infoDownloadListFragment=new InfoDownloadListFragment();
         alFragment=new ArrayList<>();
         alFragment.add(checkActivity);
-        alFragment.add(flowListFragment);
-        alFragment.add(flowImageFragment);
+        alFragment.add(infoQaList);
+        alFragment.add(infoDownloadListFragment);
 
         FragmentManager fragmentManager= getChildFragmentManager();;
 

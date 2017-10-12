@@ -98,7 +98,6 @@ public class InfoQaList extends BaseFragement {
                             recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
                             checkFlowList.add(recyclerItem);
 
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
