@@ -189,7 +189,7 @@ public class Utils {
 
 
     public static int  getImageID(Context context,String imageName){
-        int resId = context.getResources().getIdentifier(imageName, "raw", context.getPackageName());
+        int resId = context.getResources().getIdentifier(imageName, "mipmap", context.getPackageName());
         return resId;
     }
 }

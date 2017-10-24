@@ -5,11 +5,17 @@
     <string name="title_check_1">疑例解析</string>
     <string name="title_check_2">技术支持</string>
     <string name="title_info">资讯</string>
+    <!--在资讯中不同的资讯类型获取-->
+    <string name="title_info1">车管动态</string>
+    <string name="title_info2">专题跟踪</string>
+    <string name="title_info3">专家解读</string>
     <string name="title_auditorium">论坛</string>
+    <!--培训对应业务大讲堂-->
     <string name="title_training">培训</string>
     <string name="title_mine">我的</string>
     <string name="changeportrait">修改头像</string>
     <string name="message">我的消息</string>
+    <string name="myqa">我的问答</string>
     <string name="messageList">消息列表</string>
     <string name="messageDetail">消息详情</string>
     <string name="answer">评论 200</string>

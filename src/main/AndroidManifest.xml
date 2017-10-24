@@ -64,7 +64,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.widget.PhotoBrowserActivity" />
-        <activity android:name=".activity.MessageListActivity"></activity>
+        <!--<activity android:name=".activity.MessageListActivity"></activity>-->
+        <activity android:name=".activity.InfoQaDetail"></activity>
+
 
         <!-- jpushdemo -->
 

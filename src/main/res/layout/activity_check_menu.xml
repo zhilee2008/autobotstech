@@ -21,9 +21,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/star_big_on" />
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                app:srcCompat="@drawable/zhuce" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,9 +48,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/star_big_on" />
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                app:srcCompat="@drawable/biangengdengji" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,9 +75,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/star_big_on" />
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                app:srcCompat="@drawable/zhuanyi" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,9 +109,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/star_big_on" />
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                app:srcCompat="@drawable/biangengbeian" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -136,9 +136,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/star_big_on" />
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                app:srcCompat="@drawable/zhuxiao" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -163,9 +163,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/star_big_on" />
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                app:srcCompat="@drawable/xiaoche" />
 
             <TextView
                 android:layout_width="wrap_content"

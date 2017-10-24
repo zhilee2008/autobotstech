@@ -1,17 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:fillViewport="true"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/linearLayout2">
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -63,40 +57,42 @@
 
         </LinearLayout>
 
-
-    </ScrollView>
-</LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout2">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:background="@color/white"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editText2"
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:background="#ffeaeaea" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:ems="10"
-                android:hint="输入回复:"
-                android:inputType="text"
-                android:text="" />
+                android:background="@color/white"
+                android:weightSum="10"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:text="回复" />
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_weight="2"
+                    android:hint="输入回复:"
+                    android:inputType="text"
+                    android:text="" />
+
+                <TextView
+                    android:layout_weight="8"
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="回复" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

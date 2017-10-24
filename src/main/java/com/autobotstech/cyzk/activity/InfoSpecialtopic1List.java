@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class InfoSpecialtopicList extends BaseFragement {
+public class InfoSpecialtopic1List extends BaseFragement {
     private AppGlobals appGlobals;
 
     SharedPreferences sp;
@@ -87,7 +87,7 @@ public class InfoSpecialtopicList extends BaseFragement {
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.SPECIALTOPICS,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.SPECIALTOPICS_INFOTYPE1,mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -97,7 +97,6 @@ public class InfoSpecialtopicList extends BaseFragement {
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
                             recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
                             checkFlowList.add(recyclerItem);
-
 
                         }
                     } catch (JSONException e) {

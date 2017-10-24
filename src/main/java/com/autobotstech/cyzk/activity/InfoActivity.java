@@ -54,13 +54,13 @@ public class InfoActivity extends Fragment{
     }
 
     private void initViewPager(){
-        InfoSpecialtopicList specialtopicListFragment=new InfoSpecialtopicList();
-        InfoQaList flowListFragment=new InfoQaList();
-        InfoDownloadListFragment flowImageFragment=new InfoDownloadListFragment();
+        InfoSpecialtopic1List specialtopic1ListFragment=new InfoSpecialtopic1List();
+        InfoSpecialtopic2List specialtopic2ListFragment=new InfoSpecialtopic2List();
+        InfoSpecialtopic3List specialtopic3ListFragment=new InfoSpecialtopic3List();
         alFragment=new ArrayList<>();
-        alFragment.add(specialtopicListFragment);
-        alFragment.add(flowListFragment);
-        alFragment.add(flowImageFragment);
+        alFragment.add(specialtopic1ListFragment);
+        alFragment.add(specialtopic2ListFragment);
+        alFragment.add(specialtopic3ListFragment);
 
         FragmentManager fragmentManager= getChildFragmentManager();;
 

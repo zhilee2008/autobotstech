@@ -51,40 +51,6 @@ public class HttpConnections {
         sslSocketFactory = sslContext.getSocketFactory();
     }
 
-    /**
-     * HttpUrlConnection 方式，支持指定load-der.crt证书验证，此种方式Android官方建议
-     */
-    /**
-    public String HttpsUrlConnectionTest(Context context,String httpsUrl) throws CertificateException, IOException, KeyStoreException,
-            NoSuchAlgorithmException, KeyManagementException {
-        CertificateFactory cf = CertificateFactory.getInstance(TYPE);
-        InputStream in = context.getAssets().open("android.crt");
-        Certificate cartificate = cf.generateCertificate(in);
-
-        KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-        keystore.load(null, null);
-        keystore.setCertificateEntry("trust", cartificate);
-
-        TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-        trustManagerFactory.init(keystore);
-
-        SSLContext sslContext = SSLContext.getInstance(PROTOCOL);
-        sslContext.init(null, trustManagerFactory.getTrustManagers(), null);
-
-        URL url = new URL(httpsUrl);
-        HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-        urlConnection.setSSLSocketFactory(sslContext.getSocketFactory());
-
-        InputStream input = urlConnection.getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        while ((line = reader.readLine()) != null) {
-            result.append(line);
-        }
-
-        return result.toString();
-    }*/
 
     public static HttpsURLConnection httpsUrlConnection(Context context,String httpsUrl) throws CertificateException, IOException, KeyStoreException,
             NoSuchAlgorithmException, KeyManagementException {
@@ -94,13 +60,6 @@ public class HttpConnections {
         urlConnection.setSSLSocketFactory(sslContext.getSocketFactory());
 
         return urlConnection;
-    }
-
-    //http://blog.csdn.net/allen_zhao_2012/article/details/7817382
-    public HttpsURLConnection httpsGet(){
-        HttpsURLConnection connections=null;
-
-        return connections;
     }
 
 

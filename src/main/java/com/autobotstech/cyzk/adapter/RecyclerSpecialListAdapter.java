@@ -8,9 +8,8 @@ import android.widget.LinearLayout;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.CheckActivity;
 import com.autobotstech.cyzk.activity.CheckActivityContainer;
-import com.autobotstech.cyzk.activity.InfoSpecialDetail;
+import com.autobotstech.cyzk.activity.InfoSpecial1Detail;
 import com.autobotstech.cyzk.model.RecyclerItem;
 
 import java.util.List;
@@ -35,11 +34,12 @@ public class RecyclerSpecialListAdapter extends RecyclerAdapter {
         recycleritem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                InfoSpecialDetail infoSpecialDetailFragment = new InfoSpecialDetail();
+                InfoSpecial1Detail infoSpecialDetailFragment = new InfoSpecial1Detail();
                 Bundle bundle = new Bundle();
                 bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
                 infoSpecialDetailFragment.setArguments(bundle);
                 CheckActivityContainer.changeFragment(R.id.infomainpage, infoSpecialDetailFragment);
+
             }
         });
 

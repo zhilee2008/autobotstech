@@ -1,5 +1,7 @@
 package com.autobotstech.cyzk.adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +30,7 @@ public class RecyclerQaListAdapter extends RecyclerAdapter {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_lecturehall_list_item, parent, false);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_lecturehall_list_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
 
         LinearLayout recycleritem = (LinearLayout) view.findViewById(R.id.recycleritemtag);
@@ -38,8 +40,12 @@ public class RecyclerQaListAdapter extends RecyclerAdapter {
                 InfoQaDetail infoQaDetailFragment = new InfoQaDetail();
                 Bundle bundle = new Bundle();
                 bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
-                infoQaDetailFragment.setArguments(bundle);
-                CheckActivityContainer.changeFragment(R.id.checkmainpage, infoQaDetailFragment);
+                Intent intent = new Intent();
+                intent.setClass(view.getContext(), InfoQaDetail.class);
+                intent.putExtras(bundle);
+                view.getContext().startActivity(intent);
+//                infoQaDetailFragment.setArguments(bundle);
+//                CheckActivityContainer.changeFragment(R.id.checkmainpage, infoQaDetailFragment);
             }
         });
 

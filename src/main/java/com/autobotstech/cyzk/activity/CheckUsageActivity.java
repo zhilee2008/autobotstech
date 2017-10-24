@@ -78,7 +78,7 @@ public class CheckUsageActivity extends Fragment {
                     RecyclerItem recyclerItem = new RecyclerItem();
                     recyclerItem.setId(usageArr.getJSONObject(i).getString("id"));
                     recyclerItem.setName(usageArr.getJSONObject(i).getString("name"));
-                    recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+                    recyclerItem.setImage(Utils.getImageID(getContext(),usageArr.getJSONObject(i).getString("img")));
                     usageList.add(recyclerItem);
                 }
             } catch (JSONException e) {

@@ -7,9 +7,11 @@ package com.autobotstech.cyzk.util;
 public class Constants {
 
 
-//    public static String HTTP_PREFIX="https://www.autobotstech.com:9443";
+    //    public static String HTTP_PREFIX="https://www.autobotstech.com:9443";
 //    public static String HTTPS_PREFIX="https://www.autobotstech.com:5000";
-    public static String URL_PREFIX="https://www.autobotstech.com:9443";
+//    public static String URL_PREFIX="https://www.autobotstech.com:9443";
+    public static String URL_PREFIX = "https://www.autobotstech.com:9443";
+//    public static String URL_PREFIX_HTTP="https://www.autobotstech.com:9443";
 
     public static String LOGIN = "/users/login";
 
@@ -31,6 +33,10 @@ public class Constants {
     public static String FORUMS_DETAIL_ANSWERS = "/forums/queryAnswerById/";
 
     public static String SPECIALTOPICS = "/specialtopics/queryAll";
+
+    public static String SPECIALTOPICS_INFOTYPE1 = "/specialtopics/queryAllByConsultType/车管动态";
+    public static String SPECIALTOPICS_INFOTYPE2 = "/specialtopics/queryAllByConsultType/专题跟踪";
+    public static String SPECIALTOPICS_INFOTYPE3 = "/specialtopics/queryAllByConsultType/专家解读";
 
     public static String SPECIALTOPICS_DETAIL = "/specialtopics/queryOneById/";
 

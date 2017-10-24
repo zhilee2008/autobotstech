@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/recycleritemimageview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
             app:srcCompat="@android:drawable/star_big_on" />
 
         <TextView

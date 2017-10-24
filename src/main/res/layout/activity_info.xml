@@ -17,21 +17,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="@string/specialtopiclist" />
+            android:text="@string/title_info1" />
 
         <RadioButton
             android:id="@+id/rb_qalist"
             style="@style/style_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/qalist" />
+            android:text="@string/title_info2" />
 
         <RadioButton
             android:id="@+id/rb_downloadlist"
             style="@style/style_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/downloadlist" />
+            android:text="@string/title_info3" />
 
 
     </RadioGroup>
