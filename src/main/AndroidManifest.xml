@@ -66,6 +66,8 @@
         <activity android:name=".activity.widget.PhotoBrowserActivity" />
         <!--<activity android:name=".activity.MessageListActivity"></activity>-->
         <activity android:name=".activity.InfoQaDetail"></activity>
+        <activity android:name=".activity.PreviewOfficeOnline"></activity>
+
 
 
         <!-- jpushdemo -->

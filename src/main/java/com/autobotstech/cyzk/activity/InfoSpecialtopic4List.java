@@ -1,32 +1,18 @@
 package com.autobotstech.cyzk.activity;
 
-import android.app.Instrumentation;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.fragment.BaseFragement;
-import com.autobotstech.cyzk.adapter.RecyclerLecturehallListAdapter;
+import com.autobotstech.cyzk.adapter.RecyclerSpecialListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
-import com.autobotstech.cyzk.util.MJavascriptInterface;
-import com.autobotstech.cyzk.util.MyWebViewClient;
-import com.autobotstech.cyzk.util.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,39 +27,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LecturehallListFragment extends Fragment {
+public class InfoSpecialtopic4List extends BaseFragement {
     private AppGlobals appGlobals;
 
     SharedPreferences sp;
     private String token;
-    private CheckLecturehallListTask mTask = null;
+    private CheckFlowListTask mCheckFlowListTask = null;
 
-    private List<RecyclerItem> lecturehallList;
-    RecyclerLecturehallListAdapter recyclerAdapter;
+    private List<RecyclerItem> checkFlowList;
+    RecyclerSpecialListAdapter recyclerAdapter;
     RecyclerView recyclerView;
-    View view;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected void initView() {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
-
-        view = inflater.inflate(R.layout.activity_lecturehall_list, container, false);
-        ViewGroup vg=(ViewGroup) container.getParent();
-        Button backbutton = (Button) vg.findViewById(R.id.button_backward);
-
-        backbutton.setVisibility(View.INVISIBLE);
-
-        TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
-        titlebar.setText(R.string.title_training);
-
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewlecturehall);
+        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewinfo);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        mTask = new CheckLecturehallListTask(token);
-        mTask.execute((Void) null);
-        return view;
+        appGlobals = (AppGlobals) getActivity().getApplication();
+
+        mCheckFlowListTask = new CheckFlowListTask(token);
+        mCheckFlowListTask.execute((Void) null);
+//        Toast.makeText(mContext, "MessageFragment页面请求数据了", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_info_list;
+    }
+
+    @Override
+    protected void getDataFromServer() {
+
     }
 
 
@@ -81,24 +69,23 @@ public class LecturehallListFragment extends Fragment {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class CheckLecturehallListTask extends AsyncTask<Void, Void, List> {
+    public class CheckFlowListTask extends AsyncTask<Void, Void, List> {
 
         private final String mToken;
 
-        CheckLecturehallListTask(String token) {
+        CheckFlowListTask(String token) {
             mToken = token;
         }
 
         @Override
         protected List doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
             JSONObject obj = new JSONObject();
-            lecturehallList = new ArrayList<RecyclerItem>();
+            checkFlowList = new ArrayList<RecyclerItem>();
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.LECTUREHALL,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.SPECIALTOPICS_INFOTYPE4,mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -107,7 +94,7 @@ public class LecturehallListFragment extends Fragment {
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
                             recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
-                            lecturehallList.add(recyclerItem);
+                            checkFlowList.add(recyclerItem);
 
                         }
                     } catch (JSONException e) {
@@ -127,15 +114,15 @@ public class LecturehallListFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            return lecturehallList;
+            return checkFlowList;
         }
 
         @Override
         protected void onPostExecute(final List result) {
-            mTask = null;
+            mCheckFlowListTask = null;
 
             if (result!=null) {
-                recyclerAdapter = new RecyclerLecturehallListAdapter(result,appGlobals);
+                recyclerAdapter = new RecyclerSpecialListAdapter(result,appGlobals);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {
@@ -145,9 +132,8 @@ public class LecturehallListFragment extends Fragment {
 
         @Override
         protected void onCancelled() {
-            mTask = null;
+            mCheckFlowListTask = null;
 //            showProgress(false);
         }
     }
-
 }

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.autobotstech.cyzk.R;
+import com.autobotstech.cyzk.activity.fragment.ForumFragment;
 import com.autobotstech.cyzk.activity.fragment.LecturehallFragment;
 import com.autobotstech.cyzk.activity.fragment.CheckFragment;
 import com.autobotstech.cyzk.activity.fragment.InfoFragment;
@@ -34,11 +35,14 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_info:
                     mViewPager.setCurrentItem(1);
                     return true;
-                case R.id.navigation_auditorium:
+                case R.id.navigation_forum:
                     mViewPager.setCurrentItem(2);
                     return true;
-                case R.id.navigation_mine:
+                case R.id.navigation_training:
                     mViewPager.setCurrentItem(3);
+                    return true;
+                case R.id.navigation_mine:
+                    mViewPager.setCurrentItem(4);
                     return true;
             }
             return false;
@@ -56,9 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
         /*初始化显示内容*/
         mViewPager = (NoSlidingViewPaper) findViewById(R.id.vp_main_container);
-        final ArrayList<Fragment> fgLists = new ArrayList<>(4);
+        final ArrayList<Fragment> fgLists = new ArrayList<>(5);
         fgLists.add(new CheckFragment());
         fgLists.add(new InfoFragment());
+        fgLists.add(new ForumFragment());
         fgLists.add(new LecturehallFragment());
         fgLists.add(new MineFragment());
         FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {

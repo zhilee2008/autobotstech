@@ -11,7 +11,7 @@
         android:icon="@drawable/ic_message_normal"
         android:title="@string/title_info" />
     <item
-        android:id="@+id/navigation_auditorium"
+        android:id="@+id/navigation_forum"
         android:icon="@drawable/ic_publish_normal"
         android:title="@string/title_auditorium" />
     <item

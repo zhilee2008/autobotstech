@@ -1,6 +1,7 @@
 package com.autobotstech.cyzk.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.CheckActivityContainer;
 import com.autobotstech.cyzk.activity.CheckFlowListDetailActivity;
 import com.autobotstech.cyzk.activity.InfoDownloadListFragment;
+import com.autobotstech.cyzk.activity.PreviewOfficeOnline;
 import com.autobotstech.cyzk.activity.widget.PhotoBrowserActivity;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.FileUtils;
@@ -72,6 +74,20 @@ public class RecyclerDownloadListAdapter extends RecyclerAdapter {
                         });
                     }
                 });
+            }
+        });
+
+        ImageView previewbutton = (ImageView) view.findViewById(R.id.previewbutton);
+
+        previewbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                String fileName = mRecyclerList.get(holder.getAdapterPosition()).getName();
+                String filePath = mRecyclerList.get(holder.getAdapterPosition()).getFilePath();
+                Intent intent = new Intent(view.getContext() , PreviewOfficeOnline.class);
+                intent.putExtra("documentURL", filePath);
+                view.getContext().startActivity(intent);
+
             }
         });
 

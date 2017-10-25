@@ -93,9 +93,10 @@ public class CheckActivityContainer extends Fragment {
         CheckActivity checkActivity=new CheckActivity();
         InfoQaList infoQaList=new InfoQaList();
         InfoDownloadListFragment infoDownloadListFragment=new InfoDownloadListFragment();
+        InfoSpecialtopic4List nfoSpecialtopic4List=new InfoSpecialtopic4List();
         alFragment=new ArrayList<>();
         alFragment.add(checkActivity);
-        alFragment.add(infoQaList);
+        alFragment.add(nfoSpecialtopic4List);
         alFragment.add(infoDownloadListFragment);
 
         FragmentManager fragmentManager= getChildFragmentManager();;

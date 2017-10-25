@@ -37,6 +37,7 @@ public class Constants {
     public static String SPECIALTOPICS_INFOTYPE1 = "/specialtopics/queryAllByConsultType/车管动态";
     public static String SPECIALTOPICS_INFOTYPE2 = "/specialtopics/queryAllByConsultType/专题跟踪";
     public static String SPECIALTOPICS_INFOTYPE3 = "/specialtopics/queryAllByConsultType/专家解读";
+    public static String SPECIALTOPICS_INFOTYPE4 = "/specialtopics/queryAllByConsultType/疑例解析";
 
     public static String SPECIALTOPICS_DETAIL = "/specialtopics/queryOneById/";
 
