@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -11,61 +12,91 @@
         android:orientation="vertical"
         android:layout_alignParentTop="true"
         android:layout_above="@+id/linearLayout2">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical">
 
-            <WebView
-                android:id="@+id/qadetail"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"></WebView>
-
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="10.0dip"
-                android:background="#ffeaeaea" />
-
-            <LinearLayout
-                android:id="@+id/answercount"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="15dp">
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
 
-                <TextView
+                <WebView
+                    android:id="@+id/qadetail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"></WebView>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="10.0dip"
+                    android:background="#ffeaeaea" />
+
+                <LinearLayout
+                    android:id="@+id/answercount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="fill_vertical"
-                    android:text="@string/answer" />
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="fill_vertical"
+                        android:text="@string/answer" />
+
+                </LinearLayout>
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="1dip"-->
+                    <!--android:background="#ffeaeaea" />-->
+
+                <LinearLayout
+                    android:id="@+id/huifucontainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="5dp"
+                    android:weightSum="1">
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:paddingBottom="20dp"-->
+                        <!--android:text="作者"-->
+                        <!--android:textColor="@color/black" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="这是一条评论"-->
+                        <!--android:textColor="@color/black" />-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="2.0dip"
+                    android:background="#ffeaeaea" />
+
+                <WebView
+                    android:id="@+id/answersdetail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                </WebView>
+
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="1.0dip"
-                android:background="#ffeaeaea" />
 
-            <WebView
-                android:id="@+id/answersdetail"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-            </WebView>
-
-
-        </LinearLayout>
-
-
-    </ScrollView>
-</LinearLayout>
+        </ScrollView>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,7 +113,7 @@
             android:weightSum="10">
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/huifucontent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -91,12 +122,14 @@
                 android:inputType="text"
                 android:text="" />
 
-            <TextView
-                android:id="@+id/textView"
+            <Button
+                android:id="@+id/huifu"
+                android:layout_weight="8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="8"
                 android:text="回复" />
+
+
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

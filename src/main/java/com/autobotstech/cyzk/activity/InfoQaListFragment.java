@@ -1,6 +1,7 @@
 package com.autobotstech.cyzk.activity;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -59,6 +60,18 @@ public class InfoQaListFragment extends Fragment {
 
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
         titlebar.setText(R.string.title_auditorium);
+
+        Button messageButton = (Button) vg.findViewById(R.id.button_message);
+        messageButton.setVisibility(View.VISIBLE);
+        Drawable drawable =getResources().getDrawable(R.drawable.ic_add_message);
+        drawable.setBounds(0, 0,100, 100);
+        messageButton.setCompoundDrawables(null,null,drawable,null);
+        messageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+//                changeFragment(R.id.checkmainpage,new MessageListFragment());
+            }
+        });
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewinfo);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
