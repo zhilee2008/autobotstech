@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -20,7 +21,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -29,8 +34,8 @@ import java.util.List;
 
 public class Utils {
 
-    public static JSONObject readJSONFromFile(Context context,String fileName) {
-        JSONObject jsonOBJ=new JSONObject();
+    public static JSONObject readJSONFromFile(Context context, String fileName) {
+        JSONObject jsonOBJ = new JSONObject();
         try {
             InputStreamReader isr = new InputStreamReader(context.getAssets().open(fileName), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
@@ -48,12 +53,12 @@ public class Utils {
         return jsonOBJ;
     }
 
-    public static String join(String join,List<String> strAry){
-        StringBuffer sb=new StringBuffer();
-        for(int i=0;i<strAry.size();i++){
-            if(i==(strAry.size()-1)){
+    public static String join(String join, List<String> strAry) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < strAry.size(); i++) {
+            if (i == (strAry.size() - 1)) {
                 sb.append(strAry.get(i).toString());
-            }else{
+            } else {
                 sb.append(strAry.get(i).toString()).append(join);
             }
         }
@@ -115,8 +120,7 @@ public class Utils {
     /**
      * 转换图片成圆形
      *
-     * @param bitmap
-     *            传入Bitmap对象
+     * @param bitmap  传入Bitmap对象
      * @param tempUri
      * @return
      */
@@ -178,7 +182,7 @@ public class Utils {
     }
 
 
-    public static void verifyStoragePermissions(Activity activity,int permission,String [] permissions,int requestCode) {
+    public static void verifyStoragePermissions(Activity activity, int permission, String[] permissions, int requestCode) {
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
             // We don't have permission so prompt the user
@@ -188,9 +192,32 @@ public class Utils {
     }
 
 
-    public static int  getImageID(Context context,String imageName){
+    public static int getImageID(Context context, String imageName) {
         int resId = context.getResources().getIdentifier(imageName, "mipmap", context.getPackageName());
         return resId;
     }
+
+    public Bitmap returnBitMap(String url){
+        URL myFileUrl = null;
+        Bitmap bitmap = null;
+        try {
+            myFileUrl = new URL(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            HttpURLConnection conn = (HttpURLConnection) myFileUrl
+                    .openConnection();
+            conn.setDoInput(true);
+            conn.connect();
+            InputStream is = conn.getInputStream();
+            bitmap = BitmapFactory.decodeStream(is);
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
 }
 

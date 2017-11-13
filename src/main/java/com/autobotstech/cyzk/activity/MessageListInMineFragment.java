@@ -1,8 +1,12 @@
 package com.autobotstech.cyzk.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Instrumentation;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -13,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
@@ -39,7 +44,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class MessageListFragment extends Fragment {
+public class MessageListInMineFragment extends Fragment {
     private AppGlobals appGlobals;
 
     SharedPreferences sp;
@@ -50,6 +55,8 @@ public class MessageListFragment extends Fragment {
     RecyclerMessageListAdapter recyclerAdapter;
     RecyclerView recyclerView;
     View view;
+
+    private View mProgressView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,6 +85,8 @@ public class MessageListFragment extends Fragment {
         });
         backbutton.setText(R.string.change_finished);
         backbutton.setVisibility(View.VISIBLE);
+        Button messageButton = (Button) vg.findViewById(R.id.button_message);
+        messageButton.setVisibility(View.INVISIBLE);
 
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
         titlebar.setText(R.string.messageList);
@@ -85,6 +94,8 @@ public class MessageListFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewmessage);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+        mProgressView = (ProgressBar)view.findViewById(R.id.progressbar);
+        showProgress(true);
 
         mTask = new CheckMessageListTask(token);
         mTask.execute((Void) null);
@@ -163,18 +174,45 @@ public class MessageListFragment extends Fragment {
             mTask = null;
 
             if (result != null) {
-                recyclerAdapter = new RecyclerMessageListAdapter(result, appGlobals);
+                recyclerAdapter = new RecyclerMessageListAdapter(result, appGlobals,true);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {
 
             }
+            showProgress(false);
         }
 
         @Override
         protected void onCancelled() {
             mTask = null;
 //            showProgress(false);
+        }
+    }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
         }
     }
 

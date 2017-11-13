@@ -1,4 +1,3 @@
-
 package com.autobotstech.cyzk.adapter.stickygridheaders;
 
 import android.database.DataSetObserver;

@@ -9,10 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.fragment.ForumFragment;
-import com.autobotstech.cyzk.activity.fragment.LecturehallFragment;
 import com.autobotstech.cyzk.activity.fragment.CheckFragment;
+import com.autobotstech.cyzk.activity.fragment.ForumFragment;
 import com.autobotstech.cyzk.activity.fragment.InfoFragment;
+import com.autobotstech.cyzk.activity.fragment.LecturehallFragment;
 import com.autobotstech.cyzk.activity.fragment.MineFragment;
 import com.autobotstech.cyzk.activity.widget.BottomNavigationViewHelper;
 import com.autobotstech.cyzk.activity.widget.NoSlidingViewPaper;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 

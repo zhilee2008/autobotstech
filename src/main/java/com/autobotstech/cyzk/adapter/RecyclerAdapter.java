@@ -21,7 +21,7 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapt
     protected List<RecyclerItem> mRecyclerList;
     protected AppGlobals appGlobals;
 
-    public RecyclerAdapter(List<RecyclerItem> usageList,AppGlobals appGlobals){
+    public RecyclerAdapter(List<RecyclerItem> usageList, AppGlobals appGlobals) {
         this.appGlobals = appGlobals;
         mRecyclerList = usageList;
 
@@ -32,19 +32,19 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapt
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         RecyclerItem recyclerItem = mRecyclerList.get(position);
-        if(holder.image!=null){
+        if (holder.image != null) {
             holder.image.setImageResource(recyclerItem.getImage());
         }
 
-        if(holder.name!=null){
+        if (holder.name != null) {
             holder.name.setText(recyclerItem.getName());
         }
 
-        if(holder.tag!=null){
+        if (holder.tag != null) {
             holder.tag.setTag(recyclerItem.getId());
         }
 
-        if(holder.createTime!=null){
+        if (holder.createTime != null) {
             holder.createTime.setText(recyclerItem.getCreateTime());
         }
 
@@ -63,20 +63,20 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapt
 
         public ViewHolder(View view) {
             super(view);
-            if(null!=view.findViewById(R.id.recycleritemimageview)){
-                image = (ImageView)view.findViewById(R.id.recycleritemimageview);
+            if (null != view.findViewById(R.id.recycleritemimageview)) {
+                image = (ImageView) view.findViewById(R.id.recycleritemimageview);
             }
 
-            if(null!=view.findViewById(R.id.recycleritemtextview)){
-                name = (TextView)view.findViewById(R.id.recycleritemtextview);
+            if (null != view.findViewById(R.id.recycleritemtextview)) {
+                name = (TextView) view.findViewById(R.id.recycleritemtextview);
             }
 
-            if(null!=view.findViewById(R.id.recycleritemtag)){
-                tag=(LinearLayout)view.findViewById(R.id.recycleritemtag);
+            if (null != view.findViewById(R.id.recycleritemtag)) {
+                tag = (LinearLayout) view.findViewById(R.id.recycleritemtag);
             }
 
-            if(null!=view.findViewById(R.id.recycleritemcreatetime)){
-                createTime=(TextView)view.findViewById(R.id.recycleritemcreatetime);
+            if (null != view.findViewById(R.id.recycleritemcreatetime)) {
+                createTime = (TextView) view.findViewById(R.id.recycleritemcreatetime);
             }
 
         }

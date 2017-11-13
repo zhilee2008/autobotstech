@@ -3,7 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <include layout="@layout/titlebar" android:id="@+id/structurebar" />
+
+    <include
+        layout="@layout/titlebar"
+        android:id="@+id/structurebar" />
+
     <FrameLayout
         android:id="@+id/checkmainpage"
         android:layout_width="match_parent"

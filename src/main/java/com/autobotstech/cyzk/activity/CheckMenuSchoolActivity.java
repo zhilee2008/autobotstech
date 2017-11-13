@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.fragment.BaseFragement;
 
 
 public class CheckMenuSchoolActivity extends Fragment {
@@ -20,7 +19,7 @@ public class CheckMenuSchoolActivity extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_checkmenu_schoolbus, container, false);
 
-        appGlobals = (AppGlobals)getActivity().getApplication();
+        appGlobals = (AppGlobals) getActivity().getApplication();
 
         view.findViewById(R.id.change_finished).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +60,6 @@ public class CheckMenuSchoolActivity extends Fragment {
 
         return view;
     }
-
 
 
 }

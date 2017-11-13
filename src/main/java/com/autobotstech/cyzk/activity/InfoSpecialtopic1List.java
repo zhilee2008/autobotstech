@@ -9,8 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.fragment.BaseFragement;
-import com.autobotstech.cyzk.adapter.RecyclerFlowListAdapter;
-import com.autobotstech.cyzk.adapter.RecyclerQaListAdapter;
 import com.autobotstech.cyzk.adapter.RecyclerSpecialListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
@@ -44,7 +42,7 @@ public class InfoSpecialtopic1List extends BaseFragement {
     protected void initView() {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
-        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewinfo);
+        recyclerView = (RecyclerView) mView.findViewById(R.id.recyclerviewinfo);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -87,7 +85,7 @@ public class InfoSpecialtopic1List extends BaseFragement {
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.SPECIALTOPICS_INFOTYPE1,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.SPECIALTOPICS_INFOTYPE1, mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -123,8 +121,8 @@ public class InfoSpecialtopic1List extends BaseFragement {
         protected void onPostExecute(final List result) {
             mCheckFlowListTask = null;
 
-            if (result!=null) {
-                recyclerAdapter = new RecyclerSpecialListAdapter(result,appGlobals);
+            if (result != null) {
+                recyclerAdapter = new RecyclerSpecialListAdapter(result, appGlobals);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {

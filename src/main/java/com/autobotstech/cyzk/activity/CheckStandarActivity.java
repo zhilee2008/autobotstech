@@ -66,29 +66,28 @@ public class CheckStandarActivity extends Fragment {
 //            Toast.makeText(getActivity(),
 //                    "activity说的："+standarArr.getJSONObject(0).getString("id"), Toast.LENGTH_SHORT).show();
 
-            RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewstandar);
+            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewstandar);
 
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(linearLayoutManager);
 
             List<RecyclerItem> standarList = new ArrayList<>();
 
-            for(int i=0;i<standarArr.length();i++){
+            for (int i = 0; i < standarArr.length(); i++) {
                 RecyclerItem recyclerItem = new RecyclerItem();
                 recyclerItem.setId(standarArr.getJSONObject(i).getString("id"));
                 recyclerItem.setName(standarArr.getJSONObject(i).getString("name"));
-                recyclerItem.setImage(Utils.getImageID(this.getContext(),standarArr.getJSONObject(i).getString("img")));
+                recyclerItem.setImage(Utils.getImageID(this.getContext(), standarArr.getJSONObject(i).getString("img")));
                 standarList.add(recyclerItem);
             }
 
-            RecyclerStandarAdapter recyclerAdapter = new RecyclerStandarAdapter(standarList,appGlobals);
+            RecyclerStandarAdapter recyclerAdapter = new RecyclerStandarAdapter(standarList, appGlobals);
             recyclerView.setAdapter(recyclerAdapter);
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
 
 //        LinearLayout standar_1 = (LinearLayout) view.findViewById(R.id.G1);

@@ -1,7 +1,6 @@
 package com.autobotstech.cyzk.activity;
 
 import android.app.Instrumentation;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,7 +37,7 @@ public class CheckUsageActivity extends Fragment {
         View view = inflater.inflate(R.layout.activity_check_usage, container, false);
         appGlobals = (AppGlobals) getActivity().getApplication();
 
-        ViewGroup vg=(ViewGroup) container.getParent();
+        ViewGroup vg = (ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,14 +62,14 @@ public class CheckUsageActivity extends Fragment {
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
         titlebar.setText(R.string.usage);
 
-        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewusage);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewusage);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         List<RecyclerItem> usageList = new ArrayList<>();
 
-        JSONObject structOBJ = Utils.readJSONFromFile(getContext(),"usage.json");
+        JSONObject structOBJ = Utils.readJSONFromFile(getContext(), "usage.json");
         if (structOBJ != null) {
             try {
                 JSONArray usageArr = structOBJ.getJSONArray("usage");
@@ -78,7 +77,7 @@ public class CheckUsageActivity extends Fragment {
                     RecyclerItem recyclerItem = new RecyclerItem();
                     recyclerItem.setId(usageArr.getJSONObject(i).getString("id"));
                     recyclerItem.setName(usageArr.getJSONObject(i).getString("name"));
-                    recyclerItem.setImage(Utils.getImageID(getContext(),usageArr.getJSONObject(i).getString("img")));
+                    recyclerItem.setImage(Utils.getImageID(getContext(), usageArr.getJSONObject(i).getString("img")));
                     usageList.add(recyclerItem);
                 }
             } catch (JSONException e) {
@@ -86,13 +85,12 @@ public class CheckUsageActivity extends Fragment {
             }
         }
 
-        RecyclerUsageAdapter recyclerAdapter = new RecyclerUsageAdapter(usageList,appGlobals);
+        RecyclerUsageAdapter recyclerAdapter = new RecyclerUsageAdapter(usageList, appGlobals);
         recyclerView.setAdapter(recyclerAdapter);
 
 
         return view;
     }
-
 
 
 }

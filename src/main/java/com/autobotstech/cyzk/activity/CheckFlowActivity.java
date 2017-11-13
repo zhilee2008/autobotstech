@@ -23,45 +23,45 @@ import com.autobotstech.cyzk.R;
 import java.util.ArrayList;
 
 
-public class CheckFlowActivity extends Fragment{
+public class CheckFlowActivity extends Fragment {
 
     private ViewPager viewPager;
     private RadioGroup radioGroup;
-    private RadioButton flowlist,flowimage;
+    private RadioButton flowlist, flowimage;
     private ArrayList<Fragment> alFragment;
 
     SharedPreferences sp;
     private String token;
 
 
-    private void initView(View view){
-        viewPager=(ViewPager) view.findViewById(R.id.flowviewpager);
-        radioGroup=(RadioGroup) view.findViewById(R.id.flowradiogroup);
-        flowlist=(RadioButton) view.findViewById(R.id.rb_flowlist);
-        flowimage=(RadioButton) view.findViewById(R.id.rb_flowimage);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+    private void initView(View view) {
+        viewPager = (ViewPager) view.findViewById(R.id.flowviewpager);
+        radioGroup = (RadioGroup) view.findViewById(R.id.flowradiogroup);
+        flowlist = (RadioButton) view.findViewById(R.id.rb_flowlist);
+        flowimage = (RadioButton) view.findViewById(R.id.rb_flowimage);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.rb_flowlist:
-                        viewPager.setCurrentItem(0,true);
+                        viewPager.setCurrentItem(0, true);
                         break;
                     case R.id.rb_flowimage:
-                        viewPager.setCurrentItem(1,false);
+                        viewPager.setCurrentItem(1, false);
                         break;
                 }
             }
         });
     }
 
-    private void initViewPager(){
-        CheckFlowListFragment flowListFragment=new CheckFlowListFragment();
-        CheckFlowImageFragment flowImageFragment=new CheckFlowImageFragment();
-        alFragment=new ArrayList<>();
+    private void initViewPager() {
+        CheckFlowListFragment flowListFragment = new CheckFlowListFragment();
+        CheckFlowImageFragment flowImageFragment = new CheckFlowImageFragment();
+        alFragment = new ArrayList<>();
         alFragment.add(flowListFragment);
         alFragment.add(flowImageFragment);
 
-        FragmentManager fragmentManager= getChildFragmentManager();
+        FragmentManager fragmentManager = getChildFragmentManager();
 
         FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(fragmentManager) {
             @Override
@@ -85,7 +85,7 @@ public class CheckFlowActivity extends Fragment{
         token = sp.getString("token", "");
 
         View view = inflater.inflate(R.layout.activity_check_flow, container, false);
-        ViewGroup vg=(ViewGroup) container.getParent();
+        ViewGroup vg = (ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,9 +13,9 @@ import com.autobotstech.cyzk.activity.widget.PhotoBrowserActivity;
 
 public class MJavascriptInterface {
     private Context context;
-    private String [] imageUrls;
+    private String[] imageUrls;
 
-    public MJavascriptInterface(Context context,String[] imageUrls) {
+    public MJavascriptInterface(Context context, String[] imageUrls) {
         this.context = context;
         this.imageUrls = imageUrls;
     }
@@ -28,7 +28,7 @@ public class MJavascriptInterface {
         intent.setClass(context, PhotoBrowserActivity.class);
         context.startActivity(intent);
         for (int i = 0; i < imageUrls.length; i++) {
-            Log.e("图片地址"+i,imageUrls[i].toString());
+            Log.e("图片地址" + i, imageUrls[i].toString());
         }
     }
 }

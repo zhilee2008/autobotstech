@@ -24,17 +24,16 @@ import java.util.ArrayList;
 public class CheckFlowListDetailActivity extends Fragment {
 
 
-
     private ViewPager viewPager;
     private RadioGroup radioGroup;
-    private RadioButton flowmethod,flowmeasure,flowgist;
+    private RadioButton flowmethod, flowmeasure, flowgist;
     private ArrayList<Fragment> alFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_check_flow_list_detail, container, false);
-        ViewGroup vg=(ViewGroup) container.getParent();
+        ViewGroup vg = (ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,40 +64,41 @@ public class CheckFlowListDetailActivity extends Fragment {
         return view;
     }
 
-    private void initView(View view){
-        viewPager=(ViewPager) view.findViewById(R.id.flowdetailviewpager);
-        radioGroup=(RadioGroup) view.findViewById(R.id.detailradiogroup);
-        flowmethod=(RadioButton) view.findViewById(R.id.rb_method);
-        flowmeasure=(RadioButton) view.findViewById(R.id.rb_measure);
-        flowgist=(RadioButton) view.findViewById(R.id.rb_gist);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+    private void initView(View view) {
+        viewPager = (ViewPager) view.findViewById(R.id.flowdetailviewpager);
+        radioGroup = (RadioGroup) view.findViewById(R.id.detailradiogroup);
+        flowmethod = (RadioButton) view.findViewById(R.id.rb_method);
+        flowmeasure = (RadioButton) view.findViewById(R.id.rb_measure);
+        flowgist = (RadioButton) view.findViewById(R.id.rb_gist);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.rb_method:
-                        viewPager.setCurrentItem(0,true);
+                        viewPager.setCurrentItem(0, true);
                         break;
                     case R.id.rb_measure:
-                        viewPager.setCurrentItem(1,false);
+                        viewPager.setCurrentItem(1, false);
                         break;
                     case R.id.rb_gist:
-                        viewPager.setCurrentItem(2,false);
+                        viewPager.setCurrentItem(2, false);
                         break;
                 }
             }
         });
     }
 
-    private void initViewPager(){
-        CheckFlowListDetailMethodFragment flowDetailMethodFragment=new CheckFlowListDetailMethodFragment();
-        CheckFlowListDetailMeasureFragment flowDetailMeasureFragment=new CheckFlowListDetailMeasureFragment();
-        CheckFlowListDetailGistFragment flowDetailGistFragment=new CheckFlowListDetailGistFragment();
-        alFragment=new ArrayList<>();
+    private void initViewPager() {
+        CheckFlowListDetailMethodFragment flowDetailMethodFragment = new CheckFlowListDetailMethodFragment();
+        CheckFlowListDetailMeasureFragment flowDetailMeasureFragment = new CheckFlowListDetailMeasureFragment();
+        CheckFlowListDetailGistFragment flowDetailGistFragment = new CheckFlowListDetailGistFragment();
+        alFragment = new ArrayList<>();
         alFragment.add(flowDetailMethodFragment);
         alFragment.add(flowDetailMeasureFragment);
         alFragment.add(flowDetailGistFragment);
 
-        FragmentManager fragmentManager= getChildFragmentManager();;
+        FragmentManager fragmentManager = getChildFragmentManager();
+        ;
 
         FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(fragmentManager) {
             @Override

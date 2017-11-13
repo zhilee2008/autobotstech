@@ -26,7 +26,7 @@ public class FileUtils {
     public static void savePhoto(final Context context, final Bitmap bmp, final SaveResultCallback saveResultCallback) {
         final File sdDir = getSDPath();
         if (sdDir == null) {
-            Toast.makeText(context,"设备自带的存储不可用",Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "设备自带的存储不可用", Toast.LENGTH_LONG).show();
             return;
         }
         new Thread(new Runnable() {
@@ -77,21 +77,21 @@ public class FileUtils {
     }
 
 
-    public static void downloadFile(final Context context,final String urlStr, final String fileName, final SaveResultCallback saveResultCallback) {
+    public static void downloadFile(final Context context, final String urlStr, final String fileName, final SaveResultCallback saveResultCallback) {
         final File sdDir = getSDPath();
         if (sdDir == null) {
-            Toast.makeText(context,"设备自带的存储不可用",Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "设备自带的存储不可用", Toast.LENGTH_LONG).show();
             return;
         }
         new Thread(new Runnable() {
             @Override
             public void run() {
-                InputStream input =null;
+                InputStream input = null;
                 try {
                     URL url = new URL(urlStr);
                     HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
                     input = urlConn.getInputStream();
-                }catch(IOException e){
+                } catch (IOException e) {
                     saveResultCallback.onSavedFailed();
                     e.printStackTrace();
                 }
@@ -103,8 +103,8 @@ public class FileUtils {
                 File file = new File(appDir, fileName);
                 try {
                     output = new FileOutputStream(file);
-                    byte [] buffer = new byte[4 * 1024];
-                    while(input.read(buffer) != -1){
+                    byte[] buffer = new byte[4 * 1024];
+                    while (input.read(buffer) != -1) {
                         output.write(buffer);
                         output.flush();
                     }

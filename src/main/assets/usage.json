@@ -3,121 +3,121 @@
     {
       "id": "S1",
       "name": "公路客运",
-      "img":"s1",
+      "img": "s1",
       "parent": "营运"
     },
     {
       "id": "S2",
       "name": "公交客运",
-      "img":"s2",
+      "img": "s2",
       "parent": "营运"
     },
     {
       "id": "S3",
       "name": "出租客运",
-      "img":"s3",
+      "img": "s3",
       "parent": "营运"
     },
     {
       "id": "S4",
       "name": "旅游客运",
-      "img":"s4",
+      "img": "s4",
       "parent": "营运"
     },
     {
       "id": "S5",
       "name": "租赁",
-      "img":"s5",
+      "img": "s5",
       "parent": "营运"
     },
     {
       "id": "S6",
       "name": "教练",
-      "img":"s6",
+      "img": "s6",
       "parent": "营运"
     },
     {
       "id": "S7",
       "name": "货运",
-      "img":"s7",
+      "img": "s7",
       "parent": "营运"
     },
     {
       "id": "S8",
       "name": "危化品运输",
-      "img":"s8",
+      "img": "s8",
       "parent": "营运"
     },
     {
       "id": "S9",
       "name": "警用",
-      "img":"s9",
+      "img": "s9",
       "parent": "非营运"
     },
     {
       "id": "S10",
       "name": "消防",
-      "img":"s10",
+      "img": "s10",
       "parent": "非营运"
     },
     {
       "id": "S11",
       "name": "救护",
-      "img":"s11",
+      "img": "s11",
       "parent": "非营运"
     },
     {
       "id": "S12",
       "name": "工程救险",
-      "img":"s12",
+      "img": "s12",
       "parent": "营运"
     },
     {
       "id": "S13",
       "name": "营转非",
-      "img":"s13",
+      "img": "s13",
       "parent": "非营运"
     },
     {
       "id": "S14",
       "name": "出租转非",
-      "img":"s14",
+      "img": "s14",
       "parent": "非营运"
     },
     {
       "id": "S15",
       "name": "非营运",
-      "img":"s15",
+      "img": "s15",
       "parent": "非营运"
     },
     {
       "id": "S16",
       "name": "运送幼儿",
-      "img":"s16",
+      "img": "s16",
       "parent": "运送学生"
     },
     {
       "id": "S17",
       "name": "运送小学生",
-      "img":"s17",
+      "img": "s17",
       "parent": "运送学生"
     },
     {
       "id": "S18",
       "name": "运送中小学生",
-      "img":"s18",
+      "img": "s18",
       "parent": "运送学生"
     },
     {
       "id": "S19",
       "name": "运送初中生",
-      "img":"s19",
+      "img": "s19",
       "parent": "运送学生"
     },
     {
       "id": "S20",
       "name": "非专用校车",
-      "img":"s20",
+      "img": "s20",
       "parent": "运送学生"
     }
   ]

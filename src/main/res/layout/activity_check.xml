@@ -4,12 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <com.jude.rollviewpager.RollPagerView
         android:id="@+id/roll_view_pager"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        app:rollviewpager_play_delay="3000"/>
-    <LinearLayout android:background="#ffeaeaea" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+        app:rollviewpager_play_delay="3000" />
+
+    <LinearLayout
+        android:background="#ffeaeaea"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip" />
+
     <FrameLayout
         android:id="@+id/checkmenucontainer"
         android:layout_width="match_parent"

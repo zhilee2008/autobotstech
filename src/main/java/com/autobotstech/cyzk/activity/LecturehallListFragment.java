@@ -1,6 +1,5 @@
 package com.autobotstech.cyzk.activity;
 
-import android.app.Instrumentation;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,25 +7,18 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.fragment.BaseFragement;
 import com.autobotstech.cyzk.adapter.RecyclerLecturehallListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
-import com.autobotstech.cyzk.util.MJavascriptInterface;
-import com.autobotstech.cyzk.util.MyWebViewClient;
-import com.autobotstech.cyzk.util.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,7 +51,7 @@ public class LecturehallListFragment extends Fragment {
         token = sp.getString("token", "");
 
         view = inflater.inflate(R.layout.activity_lecturehall_list, container, false);
-        ViewGroup vg=(ViewGroup) container.getParent();
+        ViewGroup vg = (ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
 
         backbutton.setVisibility(View.INVISIBLE);
@@ -67,7 +59,7 @@ public class LecturehallListFragment extends Fragment {
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
         titlebar.setText(R.string.title_training);
 
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewlecturehall);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewlecturehall);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -98,7 +90,7 @@ public class LecturehallListFragment extends Fragment {
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.LECTUREHALL,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.LECTUREHALL, mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -134,8 +126,8 @@ public class LecturehallListFragment extends Fragment {
         protected void onPostExecute(final List result) {
             mTask = null;
 
-            if (result!=null) {
-                recyclerAdapter = new RecyclerLecturehallListAdapter(result,appGlobals);
+            if (result != null) {
+                recyclerAdapter = new RecyclerLecturehallListAdapter(result, appGlobals);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {

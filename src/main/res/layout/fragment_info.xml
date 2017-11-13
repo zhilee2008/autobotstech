@@ -5,7 +5,8 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/titlebar" android:id="@+id/infobar" />
+        layout="@layout/titlebar"
+        android:id="@+id/infobar" />
 
     <FrameLayout
         android:id="@+id/infomainpage"

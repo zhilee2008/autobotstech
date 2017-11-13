@@ -1,109 +1,68 @@
 package com.autobotstech.cyzk.activity;
 
-import android.Manifest;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
+import com.autobotstech.cyzk.util.Constants;
+import com.autobotstech.cyzk.util.HttpConnections;
 import com.autobotstech.cyzk.util.Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 
-import static android.app.Activity.RESULT_OK;
 
-
-public class MineActivity extends Fragment {
-
-    private String mobile;
-    private String password;
+public class InfoQaAdd extends AppCompatActivity {
+    private AppGlobals appGlobals;
     SharedPreferences sp;
     private String token;
-
-
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
     private static final int CROP_SMALL_PICTURE = 2;
     protected static Uri tempUri;
     private ImageView iv_personal_icon;
+    String uploadImagePath;
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    QaAddTask mTask;
 
+    String title,question;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+    public void onCreate(Bundle savedInstanceState) {
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
         token = sp.getString("token", "");
+        super.onCreate(savedInstanceState);
 
-        View view = inflater.inflate(R.layout.mine_content, container, false);
-        ViewGroup vg = (ViewGroup) container.getParent();
+        setContentView(R.layout.activity_add_question);
 
-        Button backbutton = (Button) vg.findViewById(R.id.button_backward);
-
-        backbutton.setVisibility(View.INVISIBLE);
-
-        TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
-        titlebar.setText(R.string.title_mine);
-        Button messageButton = (Button) vg.findViewById(R.id.button_message);
-        messageButton.setVisibility(View.INVISIBLE);
-
-
-        LinearLayout logout = (LinearLayout) view.findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putString("token", "");
-                editor.putString("mobile", "");
-                editor.putString("password", "");
-                editor.commit();
-
-                Intent intent = new Intent();
-                intent.setClass(getContext(), LoginActivity.class);
-                MineActivity.this.getActivity().startActivity(intent);
-                MineActivity.this.getActivity().finish();
-
-            }
-        });
-
-
-        if (Build.VERSION.SDK_INT >= 23) {
-            // Check if we have write permission
-            int permission = ActivityCompat.checkSelfPermission(getActivity(),
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            Utils.verifyStoragePermissions(getActivity(), permission, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-            StrictMode.setVmPolicy(builder.build());
-        }
-
-        LinearLayout changeportrait = (LinearLayout) view.findViewById(R.id.changeportrait);
-        iv_personal_icon = (ImageView) view.findViewById(R.id.iv_personal_icon);
-        changeportrait.setOnClickListener(new View.OnClickListener() {
+        iv_personal_icon = (ImageView) findViewById(R.id.iv_personal_icon);
+        iv_personal_icon.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -111,37 +70,87 @@ public class MineActivity extends Fragment {
             }
         });
 
+        Button save = (Button) findViewById(R.id.submit);
+        save.setOnClickListener(new View.OnClickListener() {
 
-        LinearLayout messageListActivity = (LinearLayout) view.findViewById(R.id.mymessage);
-        messageListActivity.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View arg0) {
+            public void onClick(View v) {
+                title = ((TextView)findViewById(R.id.qatitle)).getText().toString();
+                question = ((EditText)findViewById(R.id.qacontent)).getText().toString();
 
-                CheckActivityContainer.changeFragment(R.id.minemainpage, new MessageListInMineFragment());
+                mTask = new QaAddTask(token);
+                mTask.execute((Void) null);
 
             }
         });
 
-        LinearLayout myqaListActivity = (LinearLayout) view.findViewById(R.id.myqa);
-        myqaListActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-
-                CheckActivityContainer.changeFragment(R.id.minemainpage, new InfoQaListInMineFragment());
-
-            }
-        });
-
-
-        return view;
     }
+
+
+    public class QaAddTask extends AsyncTask<Void, Void, String> {
+
+        private final String mToken;
+
+        QaAddTask(String token) {
+            mToken = token;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+            JSONObject obj = new JSONObject();
+            String result="";
+
+            try {
+                HttpConnections httpConnections = new HttpConnections(InfoQaAdd.this.getApplicationContext());
+                obj = httpConnections.httpsPost(Constants.URL_PREFIX + Constants.FORUMS_ADD_QUESTION, title,question,uploadImagePath,"uploadfile.png", mToken);
+                result = obj.getString("result");
+            } catch (CertificateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(final String result) {
+            mTask = null;
+                if("success".equals(result)){
+                    Toast.makeText(InfoQaAdd.this,"发布问题成功",Toast.LENGTH_SHORT).show();
+                    InfoQaAdd.this.finish();
+
+                } else {
+                    Toast.makeText(InfoQaAdd.this,"发布问题失败",Toast.LENGTH_SHORT).show();
+                }
+
+        }
+
+        @Override
+        protected void onCancelled() {
+            mTask = null;
+//            showProgress(false);
+        }
+    }
+
+
+
 
 
     /**
      * 显示修改头像的对话框
      */
     protected void showChoosePicDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getResources().getString(R.string.changeportrait_title));
         String[] items = {getResources().getString(R.string.changeportrait_chose), getResources().getString(R.string.changeportrait_photo)};
         builder.setNegativeButton(getResources().getString(R.string.changeportrait_cancel), null);
@@ -204,7 +213,7 @@ public class MineActivity extends Fragment {
         Bundle extras = data.getExtras();
         if (extras != null) {
             Bitmap photo = extras.getParcelable("data");
-            photo = Utils.toRoundBitmap(photo, tempUri); // 这个时候的图片已经被处理成圆形的了
+//            photo = Utils.toRoundBitmap(photo, tempUri); // 这个时候的图片已经被处理成圆形的了
             iv_personal_icon.setImageBitmap(photo);
             uploadPic(photo);
         }
@@ -219,11 +228,12 @@ public class MineActivity extends Fragment {
         String imagePath = Utils.savePhoto(bitmap, Environment
                 .getExternalStorageDirectory().getAbsolutePath(), String
                 .valueOf(System.currentTimeMillis()));
-//        Toast.makeText(getContext(),imagePath,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,imagePath,Toast.LENGTH_SHORT).show();
         Log.e("imagePath", imagePath + "");
         if (imagePath != null) {
             // 拿着imagePath上传了
             // ...
+            uploadImagePath=imagePath;
         }
     }
 
@@ -247,7 +257,4 @@ public class MineActivity extends Fragment {
         }
     }
 
-
 }
-
-

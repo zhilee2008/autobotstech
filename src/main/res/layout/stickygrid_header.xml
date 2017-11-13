@@ -16,12 +16,11 @@
             app:srcCompat="@android:drawable/star_big_on" />
 
         <TextView
-android:id="@+id/structure_header"
+            android:id="@+id/structure_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical"
-             />
+            android:gravity="center_vertical" />
 
         <ImageView
             android:layout_width="wrap_content"

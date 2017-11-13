@@ -130,7 +130,7 @@ public class CheckFlowImageFragment extends BaseFragement {
 
                     }
 
-                    htmlbody = Utils.join("<br/>",imageHtmlList);
+                    htmlbody = Utils.join("<br/>", imageHtmlList);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

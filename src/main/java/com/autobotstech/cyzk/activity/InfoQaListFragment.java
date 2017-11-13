@@ -53,7 +53,7 @@ public class InfoQaListFragment extends Fragment {
 
 
         view = inflater.inflate(R.layout.activity_info_qa_list, container, false);
-        ViewGroup vg=(ViewGroup) container.getParent();
+        ViewGroup vg = (ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
 
         backbutton.setVisibility(View.INVISIBLE);
@@ -63,9 +63,9 @@ public class InfoQaListFragment extends Fragment {
 
         Button messageButton = (Button) vg.findViewById(R.id.button_message);
         messageButton.setVisibility(View.VISIBLE);
-        Drawable drawable =getResources().getDrawable(R.drawable.ic_add_message);
-        drawable.setBounds(0, 0,100, 100);
-        messageButton.setCompoundDrawables(null,null,drawable,null);
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_add_message);
+        drawable.setBounds(0, 0, 100, 100);
+        messageButton.setCompoundDrawables(null, null, drawable, null);
         messageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -73,14 +73,13 @@ public class InfoQaListFragment extends Fragment {
             }
         });
 
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewinfo);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewinfo);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         mTask = new CheckFlowListTask(token);
         mTask.execute((Void) null);
         return view;
-
 
 
 //        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewinfo);
@@ -116,7 +115,7 @@ public class InfoQaListFragment extends Fragment {
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.FORUMS,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.FORUMS, mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -152,8 +151,8 @@ public class InfoQaListFragment extends Fragment {
         protected void onPostExecute(final List result) {
             mTask = null;
 
-            if (result!=null) {
-                recyclerAdapter = new RecyclerQaListAdapter(result,appGlobals);
+            if (result != null) {
+                recyclerAdapter = new RecyclerQaListAdapter(result, appGlobals);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {

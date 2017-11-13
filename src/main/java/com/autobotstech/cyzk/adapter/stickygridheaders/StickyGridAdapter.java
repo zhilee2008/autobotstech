@@ -11,10 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
-import com.autobotstech.cyzk.activity.CheckActivity;
+import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.CheckActivityContainer;
 import com.autobotstech.cyzk.activity.CheckStandarActivity;
-import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.model.StructureGridItem;
 
 import java.util.List;
@@ -22,7 +21,6 @@ import java.util.List;
 /**
  * Created by zhi on 04/07/2017.
  */
-
 
 
 public class StickyGridAdapter extends BaseAdapter implements
@@ -61,7 +59,7 @@ public class StickyGridAdapter extends BaseAdapter implements
     public View getView(final int position, View convertView, ViewGroup parent) {
         convertView = mInflater.inflate(R.layout.stickygrid_items, parent, false);
         //TODO add click
-        ImageView iv = (ImageView)convertView.findViewById(R.id.stickyitemimage);
+        ImageView iv = (ImageView) convertView.findViewById(R.id.stickyitemimage);
         iv.setImageResource(hasHeaderIdList.get(position).getImage());
         TextView tv = (TextView) convertView.findViewById(R.id.stickyitemtext);
         tv.setText(hasHeaderIdList.get(position).getName());
@@ -98,9 +96,6 @@ public class StickyGridAdapter extends BaseAdapter implements
     public long getHeaderId(int position) {
         return hasHeaderIdList.get(position).getHeaderId();
     }
-
-
-
 
 
 }

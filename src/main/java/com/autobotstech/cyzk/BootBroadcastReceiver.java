@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.autobotstech.cyzk.activity.LoginActivity;
-import com.autobotstech.cyzk.notification.LocalBroadcastManager;
 import com.autobotstech.cyzk.notification.MessageActivity;
 
 import cn.jpush.android.api.JPushInterface;

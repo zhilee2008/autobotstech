@@ -4,8 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -35,8 +33,6 @@ import android.widget.TextView;
 
 import com.autobotstech.cyzk.BootBroadcastReceiver;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.notification.ExampleUtil;
-import com.autobotstech.cyzk.notification.LocalBroadcastManager;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
 
@@ -399,6 +395,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(intent);
                 finish();
             } else {
+                showProgress(false);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("token", "");
                 editor.putString("mobile", "");
@@ -407,6 +404,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
+
         }
 
         @Override

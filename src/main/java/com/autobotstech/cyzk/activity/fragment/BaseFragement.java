@@ -35,13 +35,16 @@ public abstract class BaseFragement extends Fragment {
 
     /*初始化页面布局和数据*/
     protected abstract void initView();
+
     /*布局*/
     public abstract int getLayoutId();
+
     /*服务器获取数据*/
     protected abstract void getDataFromServer();
 
     /**
      * 当前页面是否展示
+     *
      * @param isVisibleToUser 显示为true， 不显示为false
      */
     @Override
@@ -54,19 +57,21 @@ public abstract class BaseFragement extends Fragment {
     /**
      * 如果只想第一次进入该页面请求数据，return prepareGetData(false)
      * 如果想每次进入该页面就请求数据，return prepareGetData(true)
+     *
      * @return
      */
-    private boolean prepareGetData(){
+    private boolean prepareGetData() {
         return prepareGetData(false);
     }
 
     /**
      * 判断是否从服务器器获取数据
+     *
      * @param isforceUpdate 强制更新的标记
      * @return
      */
     protected boolean prepareGetData(boolean isforceUpdate) {
-        if(isVisibleToUser && isViewInitiated && (!isDataRequested || isforceUpdate)){
+        if (isVisibleToUser && isViewInitiated && (!isDataRequested || isforceUpdate)) {
             /*从服务器获取数据*/
             getDataFromServer();
             isDataRequested = true;
@@ -74,15 +79,18 @@ public abstract class BaseFragement extends Fragment {
         }
         return false;
     }
+
     // 切換Fragment 存在于栈中
-    public static void changeFragment(int fragemnt,Fragment f){
-        changeFragment(fragemnt,f, false);
+    public static void changeFragment(int fragemnt, Fragment f) {
+        changeFragment(fragemnt, f, false);
     }
+
     // 初始化Fragment(FragmentActivity中呼叫) 不在在于栈中
-    public static void initFragment(int fragment, Fragment f){
-        changeFragment(fragment,f, true);
+    public static void initFragment(int fragment, Fragment f) {
+        changeFragment(fragment, f, true);
     }
-    protected static void changeFragment(int fragment,Fragment f, boolean init){
+
+    protected static void changeFragment(int fragment, Fragment f, boolean init) {
         FragmentTransaction ft = fm.beginTransaction();
 //        .setCustomAnimations(R.anim.fragment_slide_left_enter,
 //                R.anim.fragment_slide_left_exit,
@@ -91,7 +99,7 @@ public abstract class BaseFragement extends Fragment {
 
         ft.replace(fragment, f);
 
-        if(!init)
+        if (!init)
             ft.addToBackStack(null);
         ft.commitAllowingStateLoss();
     }

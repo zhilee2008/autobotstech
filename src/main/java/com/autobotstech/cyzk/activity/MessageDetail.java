@@ -1,5 +1,8 @@
 package com.autobotstech.cyzk.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Instrumentation;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -12,9 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
@@ -45,6 +48,8 @@ public class MessageDetail extends Fragment {
     private String[] imageUrls;
 
     private String messageId;
+
+    private View mProgressView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,11 +85,12 @@ public class MessageDetail extends Fragment {
         titlebar.setText(R.string.messageDetail);
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-        WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
 
 
         webView = (WebView) view.findViewById(R.id.messagedetail);
-
+        mProgressView = (ProgressBar)view.findViewById(R.id.progressbar);
+        showProgress(true);
         mTask = new MessageDetailTask(token);
         mTask.execute((Void) null);
 
@@ -136,10 +142,10 @@ public class MessageDetail extends Fragment {
             if (result != null) {
                 try {
 //                    String bodyB="<div style=''>";
-                    String title = "<div><h2>"+result.getString("title")+"</h2></div>";
-                    String description = "<div>"+result.getString("description")+"</div>";
+                    String title = "<div><h2>" + result.getString("title") + "</h2></div>";
+                    String description = "<div>" + result.getString("description") + "</div>";
 //                    String bodyE="</div>";
-                    htmlbody = title+description;
+                    htmlbody = title + description;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -149,12 +155,39 @@ public class MessageDetail extends Fragment {
             } else {
 
             }
+            showProgress(false);
         }
 
         @Override
         protected void onCancelled() {
             mTask = null;
 //            showProgress(false);
+        }
+    }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
         }
     }
 

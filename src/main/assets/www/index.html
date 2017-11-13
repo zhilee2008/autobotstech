@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>JS Bin</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-  <style id="jsbin-css">
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <style id="jsbin-css">
     html, body {
       margin: 0;
       padding: 0;
@@ -60,44 +60,47 @@
 
       fill: #4355B6;
     }
-  </style>
+
+    </style>
 </head>
 <body>
 
-  <h1>No Poster Attribute</h1>
-  <div class="videoWrapper">
+<h1>No Poster Attribute</h1>
+<div class="videoWrapper">
     <video controls>
         <source src="http://simpl.info/video/video/chrome.webm" type="video/webm">
         <source src="http://simpl.info/video/video/chrome.mp4" type="video/mp4">
-      <p>This browser does not support the video element.</p>
+        <p>This browser does not support the video element.</p>
     </video>
-  </div>
-  
-  <h1>Poster Attribute</h1>
-  <div class="videoWrapper">
-    <video controls poster="file:///android_asset/www/poster.jpg">
-        <source src="https://www.autobotstech.com:9443/20170702//06469260-5efb-11e7-9c8f-c7c5c8523d7c.MOV?1500126922810?1500740892312" type="video/webm">
-        <source src="https://www.autobotstech.com:9443/20170702//06469260-5efb-11e7-9c8f-c7c5c8523d7c.MOV?1500126922810?1500740892312" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
-  </div>
+</div>
 
-  <h1>No Controls</h1>
-  <div class="videoWrapper">
+<h1>Poster Attribute</h1>
+<div class="videoWrapper">
+    <video controls poster="file:///android_asset/www/poster.jpg">
+        <source src="https://www.autobotstech.com:9443/20170702//06469260-5efb-11e7-9c8f-c7c5c8523d7c.MOV?1500126922810?1500740892312"
+                type="video/webm">
+        <source src="https://www.autobotstech.com:9443/20170702//06469260-5efb-11e7-9c8f-c7c5c8523d7c.MOV?1500126922810?1500740892312"
+                type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+</div>
+
+<h1>No Controls</h1>
+<div class="videoWrapper">
     <video>
         <source src="http://simpl.info/video/video/chrome.webm" type="video/webm">
         <source src="http://simpl.info/video/video/chrome.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
+        Your browser does not support HTML5 video.
     </video>
     <button class="fullscreenBtn">
-      <!-- Icon from: https://useiconic.com/open/ -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8">
-        <path d="M0 0v4l1.5-1.5 1.5 1.5 1-1-1.5-1.5 1.5-1.5h-4zm5 4l-1 1 1.5 1.5-1.5 1.5h4v-4l-1.5 1.5-1.5-1.5z" />
-      </svg>
+        <!-- Icon from: https://useiconic.com/open/ -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8">
+            <path d="M0 0v4l1.5-1.5 1.5 1.5 1-1-1.5-1.5 1.5-1.5h-4zm5 4l-1 1 1.5 1.5-1.5 1.5h4v-4l-1.5 1.5-1.5-1.5z"/>
+        </svg>
     </button>
-  </div>
+</div>
 
-  <script id="jsbin-javascript">
+<script id="jsbin-javascript">
     var videoWrapperElements = document.querySelectorAll('.videoWrapper');
 
     var showFullscreenButton = document.fullscreenEnabled || document.mozFullscreenEnabled || document.webkitFullscreenEnabled ? true : false;
@@ -136,6 +139,7 @@
         }
       });
     }
-  </script>
+
+</script>
 </body>
 </html>

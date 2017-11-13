@@ -21,48 +21,49 @@ import com.autobotstech.cyzk.R;
 import java.util.ArrayList;
 
 
-public class InfoActivity extends Fragment{
+public class InfoActivity extends Fragment {
 
     private ViewPager viewPager;
     private RadioGroup radioGroup;
-    private RadioButton qalist,downloadlist,specialtopiclist;
+    private RadioButton qalist, downloadlist, specialtopiclist;
     private ArrayList<Fragment> alFragment;
 
     SharedPreferences sp;
     private String token;
 
 
-    private void initView(View view){
-        viewPager=(ViewPager) view.findViewById(R.id.infoviewpager);
-        radioGroup=(RadioGroup) view.findViewById(R.id.inforadiogroup);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+    private void initView(View view) {
+        viewPager = (ViewPager) view.findViewById(R.id.infoviewpager);
+        radioGroup = (RadioGroup) view.findViewById(R.id.inforadiogroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.rb_specialtopiclist:
-                        viewPager.setCurrentItem(0,true);
+                        viewPager.setCurrentItem(0, true);
                         break;
                     case R.id.rb_qalist:
-                        viewPager.setCurrentItem(1,false);
+                        viewPager.setCurrentItem(1, false);
                         break;
                     case R.id.rb_downloadlist:
-                        viewPager.setCurrentItem(2,false);
+                        viewPager.setCurrentItem(2, false);
                         break;
                 }
             }
         });
     }
 
-    private void initViewPager(){
-        InfoSpecialtopic1List specialtopic1ListFragment=new InfoSpecialtopic1List();
-        InfoSpecialtopic2List specialtopic2ListFragment=new InfoSpecialtopic2List();
-        InfoSpecialtopic3List specialtopic3ListFragment=new InfoSpecialtopic3List();
-        alFragment=new ArrayList<>();
+    private void initViewPager() {
+        InfoSpecialtopic1List specialtopic1ListFragment = new InfoSpecialtopic1List();
+        InfoSpecialtopic2List specialtopic2ListFragment = new InfoSpecialtopic2List();
+        InfoSpecialtopic3List specialtopic3ListFragment = new InfoSpecialtopic3List();
+        alFragment = new ArrayList<>();
         alFragment.add(specialtopic1ListFragment);
         alFragment.add(specialtopic2ListFragment);
         alFragment.add(specialtopic3ListFragment);
 
-        FragmentManager fragmentManager= getChildFragmentManager();;
+        FragmentManager fragmentManager = getChildFragmentManager();
+        ;
 
         FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(fragmentManager) {
             @Override
@@ -86,7 +87,7 @@ public class InfoActivity extends Fragment{
         token = sp.getString("token", "");
 
         View view = inflater.inflate(R.layout.activity_info, container, false);
-        ViewGroup vg=(ViewGroup) container.getParent();
+        ViewGroup vg = (ViewGroup) container.getParent();
 
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
 

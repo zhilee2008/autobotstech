@@ -9,12 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.fragment.BaseFragement;
-import com.autobotstech.cyzk.adapter.RecyclerFlowListAdapter;
 import com.autobotstech.cyzk.adapter.RecyclerQaListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
-import com.autobotstech.cyzk.util.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +42,7 @@ public class InfoQaList extends BaseFragement {
     protected void initView() {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
-        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewinfo);
+        recyclerView = (RecyclerView) mView.findViewById(R.id.recyclerviewinfo);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -87,7 +85,7 @@ public class InfoQaList extends BaseFragement {
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.FORUMS,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.FORUMS, mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -123,8 +121,8 @@ public class InfoQaList extends BaseFragement {
         protected void onPostExecute(final List result) {
             mCheckFlowListTask = null;
 
-            if (result!=null) {
-                recyclerAdapter = new RecyclerQaListAdapter(result,appGlobals);
+            if (result != null) {
+                recyclerAdapter = new RecyclerQaListAdapter(result, appGlobals);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {

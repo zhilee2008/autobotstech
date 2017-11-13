@@ -1,10 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
-
+    <include
+        layout="@layout/titlebar"
+        android:id="@+id/qadetailtitle" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,9 +52,9 @@
                 </LinearLayout>
 
                 <!--<LinearLayout-->
-                    <!--android:layout_width="fill_parent"-->
-                    <!--android:layout_height="1dip"-->
-                    <!--android:background="#ffeaeaea" />-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="1dip"-->
+                <!--android:background="#ffeaeaea" />-->
 
                 <LinearLayout
                     android:id="@+id/huifucontainer"
@@ -66,17 +67,17 @@
                     android:weightSum="1">
 
                     <!--<TextView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:paddingBottom="20dp"-->
-                        <!--android:text="作者"-->
-                        <!--android:textColor="@color/black" />-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:paddingBottom="20dp"-->
+                    <!--android:text="作者"-->
+                    <!--android:textColor="@color/black" />-->
 
                     <!--<TextView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="这是一条评论"-->
-                        <!--android:textColor="@color/black" />-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="这是一条评论"-->
+                    <!--android:textColor="@color/black" />-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -97,6 +98,7 @@
 
         </ScrollView>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,7 +106,10 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:id="@+id/linearLayout2">
-
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:background="#ffeaeaea" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

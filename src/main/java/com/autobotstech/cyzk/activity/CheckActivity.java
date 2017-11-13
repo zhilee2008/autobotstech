@@ -5,12 +5,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.autobotstech.cyzk.R;
 import com.jude.rollviewpager.RollPagerView;
@@ -35,8 +33,6 @@ public class CheckActivity extends Fragment {
         CheckActivityContainer.initFragment(R.id.checkmenucontainer, new CheckMenuActivity());
 
 
-
-
         mRollViewPager = (RollPagerView) view.findViewById(R.id.roll_view_pager);
 
         //设置播放时间间隔
@@ -52,11 +48,9 @@ public class CheckActivity extends Fragment {
         //设置文字指示器
         //隐藏指示器
         //mRollViewPager.setHintView(new IconHintView(this, R.drawable.point_focus, R.drawable.point_normal));
-        mRollViewPager.setHintView(new ColorPointHintView(view.getContext(), Color.YELLOW,Color.WHITE));
+        mRollViewPager.setHintView(new ColorPointHintView(view.getContext(), Color.YELLOW, Color.WHITE));
         //mRollViewPager.setHintView(new TextHintView(this));
         //mRollViewPager.setHintView(null);
-
-
 
 
         return view;
@@ -86,7 +80,6 @@ public class CheckActivity extends Fragment {
             return imgs.length;
         }
     }
-
 
 
 }

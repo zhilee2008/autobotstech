@@ -1,26 +1,30 @@
 package com.autobotstech.cyzk.activity;
 
 import android.app.Instrumentation;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
+import com.autobotstech.cyzk.adapter.RecyclerQaListAdapter;
+import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,30 +33,29 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class InfoSpecial1Detail extends Fragment {
+public class InfoQaListInMineFragment extends Fragment {
     private AppGlobals appGlobals;
 
     SharedPreferences sp;
     private String token;
-    private LecturehallDetailTask mTask = null;
+    private CheckFlowListTask mTask = null;
 
-    private WebView webView;
-    private String htmlbody = "";
-
-    private String[] imageUrls;
-
-    private String lecturehallId;
+    private List<RecyclerItem> checkFlowList;
+    RecyclerQaListAdapter recyclerAdapter;
+    RecyclerView recyclerView;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
 
-        lecturehallId = getArguments().getString("detail");
 
-        View view = inflater.inflate(R.layout.activity_lecturehall_detail, container, false);
+        view = inflater.inflate(R.layout.activity_info_qa_list, container, false);
         ViewGroup vg = (ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
         backbutton.setOnClickListener(new View.OnClickListener() {
@@ -72,44 +75,75 @@ public class InfoSpecial1Detail extends Fragment {
 
             }
         });
-        backbutton.setText(R.string.change_finished);
+        backbutton.setText(R.string.title_mine);
         backbutton.setVisibility(View.VISIBLE);
 
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
-        titlebar.setText(R.string.title_info);
+        titlebar.setText(R.string.myqa);
 
-        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+        Button messageButton = (Button) vg.findViewById(R.id.button_message);
+        messageButton.setVisibility(View.VISIBLE);
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_add_message);
+        drawable.setBounds(0, 0, 100, 100);
+        messageButton.setCompoundDrawables(null, null, drawable, null);
+        messageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+//                Bundle bundle = new Bundle();
+                Intent intent = new Intent();
+                intent.setClass(getContext(), InfoQaAdd.class);
+//                intent.putExtras(bundle);
+                getContext().startActivity(intent);
+            }
+        });
 
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewinfo);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        webView = (WebView) view.findViewById(R.id.lecturehalldetail);
-
-        mTask = new LecturehallDetailTask(token);
+        mTask = new CheckFlowListTask(token);
         mTask.execute((Void) null);
-
         return view;
+
+
     }
 
 
-    public class LecturehallDetailTask extends AsyncTask<Void, Void, JSONObject> {
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
+    public class CheckFlowListTask extends AsyncTask<Void, Void, List> {
 
         private final String mToken;
 
-        LecturehallDetailTask(String token) {
+        CheckFlowListTask(String token) {
             mToken = token;
         }
 
         @Override
-        protected JSONObject doInBackground(Void... params) {
+        protected List doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             JSONObject obj = new JSONObject();
+            checkFlowList = new ArrayList<RecyclerItem>();
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.SPECIALTOPICS_DETAIL + lecturehallId, mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.FORUMS_MY_QUESTION, mToken);
                 if (obj != null) {
-                    obj = obj.getJSONObject("detail");
+                    try {
+                        JSONArray flowArr = obj.getJSONArray("detail");
+                        for (int i = 0; i < flowArr.length(); i++) {
+                            RecyclerItem recyclerItem = new RecyclerItem();
+                            recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
+                            recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
+                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+                            checkFlowList.add(recyclerItem);
 
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
             } catch (CertificateException e) {
@@ -122,42 +156,19 @@ public class InfoSpecial1Detail extends Fragment {
                 e.printStackTrace();
             } catch (KeyManagementException e) {
                 e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
 
-            return obj;
+            return checkFlowList;
         }
 
         @Override
-        protected void onPostExecute(final JSONObject result) {
+        protected void onPostExecute(final List result) {
             mTask = null;
+
             if (result != null) {
-                try {
-                    String title = "<div><h2>" + result.getString("title") + "</h2></div>";
-                    String keyword = "<div>" + result.getString("keyword") + "</div>";
-                    String description = "<div>" + result.getString("description") + "</div>";
+                recyclerAdapter = new RecyclerQaListAdapter(result, appGlobals);
+                recyclerView.setAdapter(recyclerAdapter);
 
-                    htmlbody = title + keyword + description;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.getSettings().setAppCacheEnabled(true);
-                webView.getSettings().setDatabaseEnabled(true);
-                webView.getSettings().setDomStorageEnabled(true);
-
-                webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-                webView.getSettings().setUseWideViewPort(true);
-
-                WebSettings settings = webView.getSettings();
-                settings.setUseWideViewPort(true);
-                settings.setLoadWithOverviewMode(true);
-                settings.setTextSize(WebSettings.TextSize.LARGEST);
-                webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-
-                webView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
             } else {
 
             }
@@ -169,5 +180,4 @@ public class InfoSpecial1Detail extends Fragment {
 //            showProgress(false);
         }
     }
-
 }

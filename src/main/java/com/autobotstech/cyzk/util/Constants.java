@@ -11,6 +11,7 @@ public class Constants {
 //    public static String HTTPS_PREFIX="https://www.autobotstech.com:5000";
 //    public static String URL_PREFIX="https://www.autobotstech.com:9443";
     public static String URL_PREFIX = "https://www.autobotstech.com:9443";
+    public static String URL_PREFIX_HTTP = "http://10.0.2.2:9000";
 //    public static String URL_PREFIX_HTTP="https://www.autobotstech.com:9443";
 
     public static String LOGIN = "/users/login";
@@ -31,6 +32,13 @@ public class Constants {
     public static String FORUMS_DETAIL = "/forums/queryOneById/";
 
     public static String FORUMS_DETAIL_ANSWERS = "/forums/queryAnswerById/";
+    //添加答案 /addanswer/:questionid
+    public static String FORUMS_ADD_ANSWER = "/forums/addanswer/";
+
+    public static String FORUMS_MY_QUESTION = "/forums/my";
+
+    //添加问题
+    public static String FORUMS_ADD_QUESTION = "/forums/addquestion2";
 
     public static String SPECIALTOPICS = "/specialtopics/queryAll";
 
@@ -46,6 +54,8 @@ public class Constants {
     public static String EXPERIENCES_DETAIL = "/experiences/queryOneById/";
 
     public static String TECHSUPPORTS = "/techsupports/all";
+
+    public static String UPLOAD_IMAGE = "/users/upload";
 
 
 }

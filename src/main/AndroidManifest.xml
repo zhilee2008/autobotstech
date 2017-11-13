@@ -67,6 +67,7 @@
         <!--<activity android:name=".activity.MessageListActivity"></activity>-->
         <activity android:name=".activity.InfoQaDetail"></activity>
         <activity android:name=".activity.PreviewOfficeOnline"></activity>
+        <activity android:name=".activity.InfoQaAdd"></activity>
 
 
 

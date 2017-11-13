@@ -43,7 +43,7 @@ public class CheckFlowListFragment extends BaseFragement {
     protected void initView() {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
-        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewflow);
+        recyclerView = (RecyclerView) mView.findViewById(R.id.recyclerviewflow);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -88,16 +88,16 @@ public class CheckFlowListFragment extends BaseFragement {
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
                 List<String> conditionslist = new ArrayList<String>();
-                conditionslist.add("businessType="+appGlobals.getBusinessType());
-                conditionslist.add("vehicleType="+appGlobals.getVehicleType());
-                conditionslist.add("carStandard="+appGlobals.getCarStandard());
-                conditionslist.add("useProperty="+appGlobals.getUseProperty());
+                conditionslist.add("businessType=" + appGlobals.getBusinessType());
+                conditionslist.add("vehicleType=" + appGlobals.getVehicleType());
+                conditionslist.add("carStandard=" + appGlobals.getCarStandard());
+                conditionslist.add("useProperty=" + appGlobals.getUseProperty());
 
-                String conditionString ="";
-                if(conditionslist.size()>0){
-                    conditionString = "?"+ Utils.join("&",conditionslist);
+                String conditionString = "";
+                if (conditionslist.size() > 0) {
+                    conditionString = "?" + Utils.join("&", conditionslist);
                 }
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.CHECK_FLOW+conditionString,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.CHECK_FLOW + conditionString, mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -147,8 +147,8 @@ public class CheckFlowListFragment extends BaseFragement {
         protected void onPostExecute(final List result) {
             mCheckFlowListTask = null;
 
-            if (result!=null) {
-                recyclerAdapter = new RecyclerFlowListAdapter(result,appGlobals);
+            if (result != null) {
+                recyclerAdapter = new RecyclerFlowListAdapter(result, appGlobals);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {

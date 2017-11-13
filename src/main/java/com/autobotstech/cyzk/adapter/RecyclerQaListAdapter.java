@@ -1,6 +1,5 @@
 package com.autobotstech.cyzk.adapter;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,8 +9,6 @@ import android.widget.LinearLayout;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.CheckActivity;
-import com.autobotstech.cyzk.activity.CheckActivityContainer;
 import com.autobotstech.cyzk.activity.InfoQaDetail;
 import com.autobotstech.cyzk.model.RecyclerItem;
 

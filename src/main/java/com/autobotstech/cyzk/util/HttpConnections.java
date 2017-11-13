@@ -6,8 +6,11 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.KeyManagementException;
@@ -52,7 +55,7 @@ public class HttpConnections {
     }
 
 
-    public static HttpsURLConnection httpsUrlConnection(Context context,String httpsUrl) throws CertificateException, IOException, KeyStoreException,
+    public static HttpsURLConnection httpsUrlConnection(Context context, String httpsUrl) throws CertificateException, IOException, KeyStoreException,
             NoSuchAlgorithmException, KeyManagementException {
 
         URL url = new URL(httpsUrl);
@@ -63,9 +66,9 @@ public class HttpConnections {
     }
 
 
-    public JSONObject httpsPostLogin(String httpsUrl,String mobile,String password){
+    public JSONObject httpsPostLogin(String httpsUrl, String mobile, String password) {
 
-        JSONObject obj =new JSONObject();
+        JSONObject obj = new JSONObject();
         try {
             //建立连接
             URL url = new URL(httpsUrl);
@@ -73,7 +76,7 @@ public class HttpConnections {
 
             urlConnection.setSSLSocketFactory(sslSocketFactory);
 
-            String param= "mobile=" + URLEncoder.encode(mobile, "UTF-8")
+            String param = "mobile=" + URLEncoder.encode(mobile, "UTF-8")
                     + "&password=" + URLEncoder.encode(password, "UTF-8");
             //设置参数
             urlConnection.setDoOutput(true);   //需要输出
@@ -87,12 +90,12 @@ public class HttpConnections {
             //连接,也可以不用明文connect，使用下面的httpConn.getOutputStream()会自动connect
             urlConnection.connect();
             //建立输入流，向指向的URL传入参数
-            DataOutputStream dos=new DataOutputStream(urlConnection.getOutputStream());
+            DataOutputStream dos = new DataOutputStream(urlConnection.getOutputStream());
             dos.writeBytes(param);
             dos.flush();
             dos.close();
             //获得响应状态
-            int resultCode=urlConnection.getResponseCode();
+            int resultCode = urlConnection.getResponseCode();
 
 
             if (urlConnection.getResponseCode() < 400) {
@@ -125,11 +128,10 @@ public class HttpConnections {
         return obj;
     }
 
-    public JSONObject httpsGet(String httpsUrl,String token){
+    public JSONObject httpsGet(String httpsUrl, String token) {
 
 
-
-        JSONObject obj =new JSONObject();
+        JSONObject obj = new JSONObject();
         try {
             //?businessType=1&carStandard=G1&useProperty=S1&vehicleType=J1
 //            httpsUrl="https://autobotstech.com:9443/inspects/querybycondition"+conditionString;
@@ -147,7 +149,7 @@ public class HttpConnections {
             urlConnection.connect();
 
             //获得响应状态
-            int resultCode=urlConnection.getResponseCode();
+            int resultCode = urlConnection.getResponseCode();
 
 
             if (urlConnection.getResponseCode() < 400) {
@@ -179,4 +181,436 @@ public class HttpConnections {
 
         return obj;
     }
+
+
+    public JSONObject httpsPost(String httpsUrl, String content, String token) {
+
+        JSONObject obj = new JSONObject();
+        try {
+            //建立连接
+            URL url = new URL(httpsUrl);
+            HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+
+            urlConnection.setSSLSocketFactory(sslSocketFactory);
+
+            String param = "answer=" + URLEncoder.encode(content, "UTF-8");
+            //设置参数
+            urlConnection.setDoOutput(true);   //需要输出
+            urlConnection.setDoInput(true);   //需要输入
+            urlConnection.setUseCaches(false);  //不允许缓存
+            urlConnection.setRequestMethod("POST");   //设置POST方式连接
+            //设置请求属性
+            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            urlConnection.setRequestProperty("Connection", "Keep-Alive");// 维持长连接
+            urlConnection.setRequestProperty("Charset", "UTF-8");
+            urlConnection.setRequestProperty("Authorization", token);
+            //连接,也可以不用明文connect，使用下面的httpConn.getOutputStream()会自动connect
+            urlConnection.connect();
+            //建立输入流，向指向的URL传入参数
+            DataOutputStream dos = new DataOutputStream(urlConnection.getOutputStream());
+            dos.writeBytes(param);
+            dos.flush();
+            dos.close();
+            //获得响应状态
+            int resultCode = urlConnection.getResponseCode();
+
+
+            if (urlConnection.getResponseCode() < 400) {
+                // 获取响应的输入流对象
+                InputStream is = urlConnection.getInputStream();
+                // 创建字节输出流对象
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                // 定义读取的长度
+                int len = 0;
+                // 定义缓冲区
+                byte buffer[] = new byte[1024];
+                // 按照缓冲区的大小，循环读取
+                while ((len = is.read(buffer)) != -1) {
+                    // 根据读取的长度写入到os对象中
+                    baos.write(buffer, 0, len);
+                }
+                // 释放资源
+                is.close();
+                baos.close();
+                String rev = new String(baos.toByteArray());
+                obj = new JSONObject(rev);
+
+            } else {
+                System.out.println("连接失败.........");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return obj;
+    }
+
+    public JSONObject httpsPost(String httpsUrl, String title, String question, String imagePath, String renameFile, String token) {
+
+        JSONObject obj = new JSONObject();
+        try {
+            String lineEnd = "\r\n";
+            String twoHyphens = "--";
+            String boundary = "*****";
+
+            int bytesRead, bytesAvailable, bufferSize;
+            byte[] buffer;
+            int maxBufferSize = 1 * 1024 * 1024;
+            File sourceFile = new File(imagePath);
+            FileInputStream fileInputStream = new FileInputStream(sourceFile);
+
+            //建立连接
+            URL url = new URL(httpsUrl);
+            HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+
+            urlConnection.setSSLSocketFactory(sslSocketFactory);
+
+
+            urlConnection.setDoInput(true); // Allow Inputs
+            urlConnection.setDoOutput(true); // Allow Outputs
+            urlConnection.setUseCaches(false); // Don't use a Cached Copy
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestProperty("Connection", "Keep-Alive");
+            urlConnection.setRequestProperty("ENCTYPE", "multipart/form-data");
+            urlConnection.setRequestProperty("Authorization", token);
+            urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+
+            urlConnection.setRequestProperty("files", renameFile);
+
+            DataOutputStream dos = new DataOutputStream(urlConnection.getOutputStream());
+
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+
+            // title
+            dos.writeBytes("Content-Disposition: form-data; name=\"title\""
+                    + lineEnd);
+            dos.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+            dos.writeBytes("Content-Length: " + title.length() + lineEnd);
+            dos.writeBytes(lineEnd);
+            // assign value
+            dos.writeBytes(title);
+            dos.writeBytes(lineEnd);
+
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+
+            // content
+            dos.writeBytes("Content-Disposition: form-data; name=\"question\""
+                    + lineEnd);
+            dos.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+            dos.writeBytes("Content-Length: " + question.length() + lineEnd);
+            dos.writeBytes(lineEnd);
+            // assign value
+            dos.writeBytes(question);
+            dos.writeBytes(lineEnd);
+
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+
+            // send image
+            dos.writeBytes("Content-Disposition: form-data; name='files';filename="
+                    + renameFile + "" + lineEnd);
+            dos.writeBytes(lineEnd);
+
+            // create a buffer of  maximum size
+            bytesAvailable = fileInputStream.available();
+
+            bufferSize = Math.min(bytesAvailable, maxBufferSize);
+            buffer = new byte[bufferSize];
+
+            // read file and write it into form...
+            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            while (bytesRead > 0) {
+                dos.write(buffer, 0, bufferSize);
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+            }
+
+            // send multipart form data necesssary after file data...
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+            //获得响应状态
+            int resultCode = urlConnection.getResponseCode();
+
+
+            if (urlConnection.getResponseCode() < 400) {
+                // 获取响应的输入流对象
+                InputStream is = urlConnection.getInputStream();
+                // 创建字节输出流对象
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                // 定义读取的长度
+                int len = 0;
+                // 定义缓冲区
+                byte bufferRes[] = new byte[1024];
+                // 按照缓冲区的大小，循环读取
+                while ((len = is.read(bufferRes)) != -1) {
+                    // 根据读取的长度写入到os对象中
+                    baos.write(bufferRes, 0, len);
+                }
+                // 释放资源
+                is.close();
+                baos.close();
+                String rev = new String(baos.toByteArray());
+                obj = new JSONObject(rev);
+
+            } else {
+                System.out.println("连接失败.........");
+            }
+            fileInputStream.close();
+            dos.flush();
+            dos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return obj;
+    }
+
+    public JSONObject httpsUpload(String httpsUrl, String filePath, String fileName, String token) {
+
+        JSONObject obj = new JSONObject();
+        try {
+
+            /// boundary就是request头和上传文件内容的分隔符(可自定义任意一组字符串)
+            String BOUNDARY = "******";
+            // 用来标识payLoad+文件流的起始位置和终止位置(相当于一个协议,告诉你从哪开始,从哪结束)
+            String preFix = ("\r\n--" + BOUNDARY + "--\r\n");
+
+            //建立连接
+            URL url = new URL(httpsUrl);
+            HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+
+            urlConnection.setSSLSocketFactory(sslSocketFactory);
+
+            //设置参数
+            urlConnection.setDoOutput(true);   //需要输出
+            urlConnection.setDoInput(true);   //需要输入
+            urlConnection.setUseCaches(false);  //不允许缓存
+            urlConnection.setRequestMethod("POST");   //设置POST方式连接
+            //设置请求属性
+            urlConnection.setRequestProperty("Content-Type",
+                    "multipart/form-data; boundary=" + BOUNDARY);
+            urlConnection.setRequestProperty("Connection", "Keep-Alive");// 维持长连接
+            urlConnection.setRequestProperty("Charset", "UTF-8");
+            urlConnection.setRequestProperty("Authorization", token);
+
+            //连接,也可以不用明文connect，使用下面的httpConn.getOutputStream()会自动connect
+            urlConnection.connect();
+            //建立输入流，向指向的URL传入参数
+            DataOutputStream dos = new DataOutputStream(urlConnection.getOutputStream());
+            // 获取上传文件
+            File file = new File(filePath);
+
+            // 要上传的数据
+            StringBuffer strBuf = new StringBuffer();
+
+            // 标识payLoad + 文件流的起始位置
+            strBuf.append(preFix);
+
+            // 下面这三行代码,用来标识服务器表单接收文件的name和filename的格式
+            // 在这里,我们是file和filename.后缀[后缀是必须的]。
+            // 这里的fileName必须加个.jpg,因为后台会判断这个东西。
+            // 这里的Content-Type的类型,必须与fileName的后缀一致。
+            // 如果不太明白,可以问一下后台,这里的name和fileName得与后台协定！
+            // 这里只要把.jpg改成.txt，把Content-Type改成上传文本的类型，就能上传txt文件了。
+            strBuf.append("Content-Disposition: form-data; name=\"file\"; filename=\"" + fileName + ".jpg" + "\"\r\n");
+            strBuf.append("Content-Type: image/jpeg" + "\r\n\r\n");
+
+            dos.write(strBuf.toString().getBytes());
+            dos.flush();
+            dos.close();
+            //获得响应状态
+            int resultCode = urlConnection.getResponseCode();
+
+
+            if (urlConnection.getResponseCode() < 400) {
+                // 获取响应的输入流对象
+                InputStream is = urlConnection.getInputStream();
+                // 创建字节输出流对象
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                // 定义读取的长度
+                int len = 0;
+                // 定义缓冲区
+                byte buffer[] = new byte[1024];
+                // 按照缓冲区的大小，循环读取
+                while ((len = is.read(buffer)) != -1) {
+                    // 根据读取的长度写入到os对象中
+                    baos.write(buffer, 0, len);
+                }
+                // 释放资源
+                is.close();
+                baos.close();
+                String rev = new String(baos.toByteArray());
+                obj = new JSONObject(rev);
+
+            } else {
+                System.out.println("连接失败.........");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return obj;
+    }
+
+
+    public JSONObject httpPost(String httpsUrl, String title, String question, String imagePath, String renameFile, String token) {
+
+
+        JSONObject obj = new JSONObject();
+        try {
+            String lineEnd = "\r\n";
+            String twoHyphens = "--";
+            String boundary = "*****";
+
+            int bytesRead, bytesAvailable, bufferSize;
+            byte[] buffer;
+            int maxBufferSize = 1 * 1024 * 1024;
+            File sourceFile = new File(imagePath);
+            FileInputStream fileInputStream = new FileInputStream(sourceFile);
+
+            //建立连接
+            URL url = new URL(httpsUrl);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+
+            urlConnection.setDoInput(true); // Allow Inputs
+            urlConnection.setDoOutput(true); // Allow Outputs
+            urlConnection.setUseCaches(false); // Don't use a Cached Copy
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestProperty("Connection", "Keep-Alive");
+            urlConnection.setRequestProperty("ENCTYPE", "multipart/form-data");
+            urlConnection.setRequestProperty("Authorization", token);
+            urlConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+
+            urlConnection.setRequestProperty("files", renameFile);
+
+            DataOutputStream dos = new DataOutputStream(urlConnection.getOutputStream());
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"question\""
+                    + lineEnd);
+            dos.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+            dos.writeBytes("Content-Length: " + question.length() + lineEnd);
+            dos.writeBytes(lineEnd);
+
+            // assign value
+            dos.writeBytes(question);
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            // add parameters
+            dos.writeBytes("Content-Disposition: form-data; name=\"title\""
+                    + lineEnd);
+            dos.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+            dos.writeBytes("Content-Length: " + title.length() + lineEnd);
+            dos.writeBytes(lineEnd);
+            // assign value
+            dos.writeBytes(title);
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+
+
+            // send image
+            dos.writeBytes("Content-Disposition: form-data; name='files';filename="
+                    + renameFile + "" + lineEnd);
+            dos.writeBytes(lineEnd);
+
+            // create a buffer of  maximum size
+            bytesAvailable = fileInputStream.available();
+
+            bufferSize = Math.min(bytesAvailable, maxBufferSize);
+            buffer = new byte[bufferSize];
+
+            // read file and write it into form...
+            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            while (bytesRead > 0) {
+                dos.write(buffer, 0, bufferSize);
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+            }
+
+            // send multipart form data necesssary after file data...
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+            //获得响应状态
+            int resultCode = urlConnection.getResponseCode();
+
+
+            if (urlConnection.getResponseCode() < 400) {
+                // 获取响应的输入流对象
+                InputStream is = urlConnection.getInputStream();
+                // 创建字节输出流对象
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                // 定义读取的长度
+                int len = 0;
+                // 定义缓冲区
+                byte bufferRes[] = new byte[1024];
+                // 按照缓冲区的大小，循环读取
+                while ((len = is.read(bufferRes)) != -1) {
+                    // 根据读取的长度写入到os对象中
+                    baos.write(bufferRes, 0, len);
+                }
+                // 释放资源
+                is.close();
+                baos.close();
+                String rev = new String(baos.toByteArray());
+                obj = new JSONObject(rev);
+
+            } else {
+                System.out.println("连接失败.........");
+            }
+            fileInputStream.close();
+            dos.flush();
+            dos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return obj;
+    }
+
+    public InputStream httpsGetPDFStream(String httpsUrl) {
+
+
+        InputStream is = null;
+        try {
+            //?businessType=1&carStandard=G1&useProperty=S1&vehicleType=J1
+//            httpsUrl="https://autobotstech.com:9443/inspects/querybycondition"+conditionString;
+//            httpsUrl=Constants.HTTPS_PREFIX+Constants.CHECK_FLOW+conditionString;
+            URL url = new URL(httpsUrl);
+            HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+
+            urlConnection.setSSLSocketFactory(sslSocketFactory);
+            //设置请求属性
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Connection", "Keep-Alive");// 维持长连接
+            urlConnection.setRequestProperty("Charset", "UTF-8");
+            //连接,也可以不用明文connect，使用下面的httpConn.getOutputStream()会自动connect
+            urlConnection.connect();
+
+            //获得响应状态
+            int resultCode = urlConnection.getResponseCode();
+
+
+            if (urlConnection.getResponseCode() < 400) {
+                // 获取响应的输入流对象
+                is = urlConnection.getInputStream();
+                // 创建字节输出流对象
+                // 释放资源
+//                is.close();
+
+
+            } else {
+                System.out.println("连接失败.........");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return is;
+    }
+
 }

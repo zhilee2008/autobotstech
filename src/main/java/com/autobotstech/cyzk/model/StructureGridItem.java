@@ -25,7 +25,7 @@ public class StructureGridItem {
 
     private JSONArray standar;
 
-    public StructureGridItem(String id, String name, int image, String parent,JSONArray standar, int headerId) {
+    public StructureGridItem(String id, String name, int image, String parent, JSONArray standar, int headerId) {
         super();
         this.id = id;
         this.name = name;
@@ -42,6 +42,7 @@ public class StructureGridItem {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }

@@ -5,7 +5,13 @@
     android:orientation="vertical">
 
     <WebView
+        android:visibility="gone"
         android:id="@+id/officeonline"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"></WebView>
+
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdfView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 </LinearLayout>

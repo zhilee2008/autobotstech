@@ -10,6 +10,7 @@ import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.fragment.BaseFragement;
 import com.autobotstech.cyzk.adapter.RecyclerSpecialListAdapter;
+import com.autobotstech.cyzk.adapter.RecyclerYLJXListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
@@ -23,7 +24,11 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -35,14 +40,14 @@ public class InfoSpecialtopic4List extends BaseFragement {
     private CheckFlowListTask mCheckFlowListTask = null;
 
     private List<RecyclerItem> checkFlowList;
-    RecyclerSpecialListAdapter recyclerAdapter;
+    RecyclerYLJXListAdapter recyclerAdapter;
     RecyclerView recyclerView;
 
     @Override
     protected void initView() {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
-        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewinfo);
+        recyclerView = (RecyclerView) mView.findViewById(R.id.recyclerviewinfo);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -85,7 +90,7 @@ public class InfoSpecialtopic4List extends BaseFragement {
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.SPECIALTOPICS_INFOTYPE4,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.SPECIALTOPICS_INFOTYPE4, mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -93,6 +98,19 @@ public class InfoSpecialtopic4List extends BaseFragement {
                             RecyclerItem recyclerItem = new RecyclerItem();
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
+                            String createTimeString = flowArr.getJSONObject(i).getString("createTime");
+                            Format f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            Date date = null;
+                            String dateString = "";
+                            try {
+                                date = (Date) f.parseObject(createTimeString);
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                dateString = sdf.format(date);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            recyclerItem.setCreateTime(dateString);
                             recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
                             checkFlowList.add(recyclerItem);
 
@@ -121,8 +139,8 @@ public class InfoSpecialtopic4List extends BaseFragement {
         protected void onPostExecute(final List result) {
             mCheckFlowListTask = null;
 
-            if (result!=null) {
-                recyclerAdapter = new RecyclerSpecialListAdapter(result,appGlobals);
+            if (result != null) {
+                recyclerAdapter = new RecyclerYLJXListAdapter(result, appGlobals);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {

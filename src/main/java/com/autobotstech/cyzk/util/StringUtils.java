@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 
 public class StringUtils {
-    public static String [] returnImageUrlsFromHtml(String htmlbody) {
+    public static String[] returnImageUrlsFromHtml(String htmlbody) {
         List<String> imageSrcList = new ArrayList<String>();
         Pattern p = Pattern.compile("<img\\b[^>]*\\bsrc\\b\\s*=\\s*('|\")?([^'\"\n\r\f>]+(\\.jpg|\\.bmp|\\.eps|\\.gif|\\.mif|\\.miff|\\.png|\\.tif|\\.tiff|\\.svg|\\.wmf|\\.jpe|\\.jpeg|\\.dib|\\.ico|\\.tga|\\.cut|\\.pic)\\b)[^>]*>", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(htmlbody);
@@ -24,7 +24,7 @@ public class StringUtils {
             imageSrcList.add(src);
         }
         if (imageSrcList == null || imageSrcList.size() == 0) {
-            Log.e("imageSrcList","资讯中未匹配到图片链接");
+            Log.e("imageSrcList", "资讯中未匹配到图片链接");
             return null;
         }
         return imageSrcList.toArray(new String[imageSrcList.size()]);

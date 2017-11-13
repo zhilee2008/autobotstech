@@ -8,9 +8,7 @@ import android.widget.LinearLayout;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.CheckActivity;
 import com.autobotstech.cyzk.activity.CheckActivityContainer;
-import com.autobotstech.cyzk.activity.LecturehallDetail;
 import com.autobotstech.cyzk.activity.MessageDetail;
 import com.autobotstech.cyzk.model.RecyclerItem;
 
@@ -22,9 +20,14 @@ import java.util.List;
 
 public class RecyclerMessageListAdapter extends RecyclerAdapter {
 
+    boolean isinmine;
 
     public RecyclerMessageListAdapter(List<RecyclerItem> lecturehallList, AppGlobals appGlobals) {
         super(lecturehallList, appGlobals);
+    }
+    public RecyclerMessageListAdapter(List<RecyclerItem> lecturehallList, AppGlobals appGlobals,boolean isinmine) {
+        super(lecturehallList, appGlobals);
+        this.isinmine=isinmine;
     }
 
     @Override
@@ -40,14 +43,19 @@ public class RecyclerMessageListAdapter extends RecyclerAdapter {
                 Bundle bundle = new Bundle();
                 bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
                 messageDetailFragment.setArguments(bundle);
-                CheckActivityContainer.changeFragment(R.id.checkmainpage, messageDetailFragment);
+
+                if(isinmine){
+                    CheckActivityContainer.changeFragment(R.id.minemainpage, messageDetailFragment);
+                }else{
+                    CheckActivityContainer.changeFragment(R.id.checkmainpage, messageDetailFragment);
+                }
+
             }
         });
 
 
         return holder;
     }
-
 
 
 }

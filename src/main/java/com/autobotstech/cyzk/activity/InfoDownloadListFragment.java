@@ -10,11 +10,9 @@ import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.fragment.BaseFragement;
 import com.autobotstech.cyzk.adapter.RecyclerDownloadListAdapter;
-import com.autobotstech.cyzk.adapter.RecyclerFlowListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
-import com.autobotstech.cyzk.util.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +42,7 @@ public class InfoDownloadListFragment extends BaseFragement {
     protected void initView() {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
-        recyclerView = (RecyclerView)mView.findViewById(R.id.recyclerviewdownload);
+        recyclerView = (RecyclerView) mView.findViewById(R.id.recyclerviewdownload);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -89,7 +87,7 @@ public class InfoDownloadListFragment extends BaseFragement {
                 HttpConnections httpConnections = new HttpConnections(getContext());
                 List<String> conditionslist = new ArrayList<String>();
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX+Constants.TECHSUPPORTS,mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.TECHSUPPORTS, mToken);
                 if (obj != null) {
                     try {
                         JSONArray flowArr = obj.getJSONArray("detail");
@@ -127,8 +125,8 @@ public class InfoDownloadListFragment extends BaseFragement {
         protected void onPostExecute(final List result) {
             mTask = null;
 
-            if (result!=null) {
-                recyclerAdapter = new RecyclerDownloadListAdapter(result,appGlobals);
+            if (result != null) {
+                recyclerAdapter = new RecyclerDownloadListAdapter(result, appGlobals);
                 recyclerView.setAdapter(recyclerAdapter);
 
             } else {

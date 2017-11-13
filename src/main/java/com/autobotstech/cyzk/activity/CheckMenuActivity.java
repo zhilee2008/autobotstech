@@ -19,7 +19,7 @@ public class CheckMenuActivity extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_check_menu, container, false);
 
-        appGlobals = (AppGlobals)getActivity().getApplication();
+        appGlobals = (AppGlobals) getActivity().getApplication();
 
         view.findViewById(R.id.B1).setOnClickListener(new View.OnClickListener() {
             @Override

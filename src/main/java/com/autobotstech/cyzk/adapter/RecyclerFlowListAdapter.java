@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.CheckActivity;
 import com.autobotstech.cyzk.activity.CheckActivityContainer;
 import com.autobotstech.cyzk.activity.CheckFlowListDetailActivity;
 import com.autobotstech.cyzk.model.RecyclerItem;

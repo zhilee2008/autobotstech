@@ -2,30 +2,18 @@ package com.autobotstech.cyzk.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.CheckActivityContainer;
-import com.autobotstech.cyzk.activity.CheckFlowListDetailActivity;
-import com.autobotstech.cyzk.activity.InfoDownloadListFragment;
 import com.autobotstech.cyzk.activity.PreviewOfficeOnline;
-import com.autobotstech.cyzk.activity.widget.PhotoBrowserActivity;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.FileUtils;
-import com.bm.library.PhotoView;
-import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -51,10 +39,10 @@ public class RecyclerDownloadListAdapter extends RecyclerAdapter {
             public void onClick(View arg0) {
                 String fileName = mRecyclerList.get(holder.getAdapterPosition()).getName();
                 String filePath = mRecyclerList.get(holder.getAdapterPosition()).getFilePath();
-                FileUtils.downloadFile(view.getContext(), filePath,fileName, new FileUtils.SaveResultCallback() {
+                FileUtils.downloadFile(view.getContext(), filePath, fileName, new FileUtils.SaveResultCallback() {
                     @Override
                     public void onSavedSuccess() {
-                        Activity activityDownload=(Activity)view.getContext();
+                        Activity activityDownload = (Activity) view.getContext();
                         activityDownload.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -65,7 +53,7 @@ public class RecyclerDownloadListAdapter extends RecyclerAdapter {
 
                     @Override
                     public void onSavedFailed() {
-                        Activity activityDownload=(Activity)view.getContext();
+                        Activity activityDownload = (Activity) view.getContext();
                         activityDownload.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -84,7 +72,7 @@ public class RecyclerDownloadListAdapter extends RecyclerAdapter {
             public void onClick(View arg0) {
                 String fileName = mRecyclerList.get(holder.getAdapterPosition()).getName();
                 String filePath = mRecyclerList.get(holder.getAdapterPosition()).getFilePath();
-                Intent intent = new Intent(view.getContext() , PreviewOfficeOnline.class);
+                Intent intent = new Intent(view.getContext(), PreviewOfficeOnline.class);
                 intent.putExtra("documentURL", filePath);
                 view.getContext().startActivity(intent);
 

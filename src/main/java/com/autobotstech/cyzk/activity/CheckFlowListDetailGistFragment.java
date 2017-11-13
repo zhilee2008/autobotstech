@@ -32,7 +32,7 @@ public class CheckFlowListDetailGistFragment extends BaseFragement {
 
     private WebView webView;
     private String htmlbody = "";
-    private String currentFlowId="";
+    private String currentFlowId = "";
 
     @Override
     protected void initView() {
@@ -80,7 +80,7 @@ public class CheckFlowListDetailGistFragment extends BaseFragement {
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.CHECK_FLOW_BY_ID +"/"+ appGlobals.getCurrentFlowId(), mToken);
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.CHECK_FLOW_BY_ID + "/" + appGlobals.getCurrentFlowId(), mToken);
                 if (obj != null) {
                     obj = obj.getJSONObject("detail");
 

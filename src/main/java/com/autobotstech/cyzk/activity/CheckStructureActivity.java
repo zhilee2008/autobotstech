@@ -39,7 +39,7 @@ public class CheckStructureActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        appGlobals = (AppGlobals)getActivity().getApplication();
+        appGlobals = (AppGlobals) getActivity().getApplication();
 
         ViewGroup vg = (ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
@@ -73,12 +73,12 @@ public class CheckStructureActivity extends Fragment {
 
         List<StructureGridItem> nonHeaderIdList = new ArrayList<StructureGridItem>();
 
-        JSONObject structOBJ = Utils.readJSONFromFile(getContext(),"structure.json");
+        JSONObject structOBJ = Utils.readJSONFromFile(getContext(), "structure.json");
         if (structOBJ != null) {
             try {
                 JSONArray structArr = structOBJ.getJSONArray("structure");
                 for (int i = 0; i < structArr.length(); i++) {
-                    StructureGridItem mGridItem = new StructureGridItem(structArr.getJSONObject(i).getString("id"),structArr.getJSONObject(i).getString("name"),Utils.getImageID(this.getContext(),structArr.getJSONObject(i).getString("img")),structArr.getJSONObject(i).getString("parent"),structArr.getJSONObject(i).getJSONArray("standar"),i);
+                    StructureGridItem mGridItem = new StructureGridItem(structArr.getJSONObject(i).getString("id"), structArr.getJSONObject(i).getString("name"), Utils.getImageID(this.getContext(), structArr.getJSONObject(i).getString("img")), structArr.getJSONObject(i).getString("parent"), structArr.getJSONObject(i).getJSONArray("standar"), i);
                     nonHeaderIdList.add(mGridItem);
                 }
             } catch (JSONException e) {
@@ -86,7 +86,7 @@ public class CheckStructureActivity extends Fragment {
             }
         }
         List<StructureGridItem> hasHeaderIdList = generateHeaderId(nonHeaderIdList);
-        mGridView.setAdapter(new StickyGridAdapter(getContext(), hasHeaderIdList, mGridView,appGlobals));
+        mGridView.setAdapter(new StickyGridAdapter(getContext(), hasHeaderIdList, mGridView, appGlobals));
 
 
         return view;

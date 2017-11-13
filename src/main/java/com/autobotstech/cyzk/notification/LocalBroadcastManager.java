@@ -21,7 +21,7 @@ public final class LocalBroadcastManager {
     private static final boolean DEBUG = false;
     private final Context mAppContext;
     private final HashMap<BroadcastReceiver, ArrayList<IntentFilter>> mReceivers = new HashMap<BroadcastReceiver, ArrayList<IntentFilter>>();
-    private final HashMap<String, ArrayList<ReceiverRecord>> mActions = new HashMap<String, ArrayList<ReceiverRecord>> ();
+    private final HashMap<String, ArrayList<ReceiverRecord>> mActions = new HashMap<String, ArrayList<ReceiverRecord>>();
     private final ArrayList<BroadcastRecord> mPendingBroadcasts = new ArrayList<BroadcastRecord>();
     static final int MSG_EXEC_PENDING_BROADCASTS = 1;
     private final Handler mHandler;
@@ -136,18 +136,18 @@ public final class LocalBroadcastManager {
                 for (i = 0; i < entries.size(); ++i) {
                     LocalBroadcastManager.ReceiverRecord receiver = (LocalBroadcastManager.ReceiverRecord) entries.get(i);
                     if (debug) {
-                       // Logger.v("LocalBroadcastManager", "Matching against filter " + receiver.filter);
+                        // Logger.v("LocalBroadcastManager", "Matching against filter " + receiver.filter);
                     }
 
                     if (receiver.broadcasting) {
                         if (debug) {
-                           // Logger.v("LocalBroadcastManager", "  Filter\'s target already added");
+                            // Logger.v("LocalBroadcastManager", "  Filter\'s target already added");
                         }
                     } else {
                         int match = receiver.filter.match(action, type, scheme, data, categories, "LocalBroadcastManager");
                         if (match >= 0) {
                             if (debug) {
-                               // Logger.v("LocalBroadcastManager", "  Filter matched!  match=0x" + Integer.toHexString(match));
+                                // Logger.v("LocalBroadcastManager", "  Filter matched!  match=0x" + Integer.toHexString(match));
                             }
 
                             if (receivers == null) {

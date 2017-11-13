@@ -18,16 +18,16 @@ import java.util.List;
  * Created by zhi on 06/07/2017.
  */
 
-public class RecyclerSpecialListAdapter extends RecyclerAdapter {
+public class RecyclerYLJXListAdapter extends RecyclerAdapter {
 
 
-    public RecyclerSpecialListAdapter(List<RecyclerItem> lecturehallList, AppGlobals appGlobals) {
+    public RecyclerYLJXListAdapter(List<RecyclerItem> lecturehallList, AppGlobals appGlobals) {
         super(lecturehallList, appGlobals);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_lecturehall_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_info_list_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
 
         LinearLayout recycleritem = (LinearLayout) view.findViewById(R.id.recycleritemtag);
@@ -39,7 +39,7 @@ public class RecyclerSpecialListAdapter extends RecyclerAdapter {
                 bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
                 infoSpecialDetailFragment.setArguments(bundle);
 
-                CheckActivityContainer.changeFragment(R.id.infomainpage, infoSpecialDetailFragment);
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, infoSpecialDetailFragment);
 
             }
         });

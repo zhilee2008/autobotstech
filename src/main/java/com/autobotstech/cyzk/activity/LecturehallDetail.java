@@ -12,24 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.fragment.BaseFragement;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
-import com.autobotstech.cyzk.util.MJavascriptInterface;
-import com.autobotstech.cyzk.util.MyWebViewClient;
-import com.autobotstech.cyzk.util.StringUtils;
-import com.autobotstech.cyzk.util.Utils;
-import com.bumptech.glide.Glide;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,8 +29,6 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class LecturehallDetail extends Fragment {
@@ -90,7 +79,7 @@ public class LecturehallDetail extends Fragment {
         titlebar.setText(R.string.title_auditorium);
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-        WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
 
 
         webView = (WebView) view.findViewById(R.id.lecturehalldetail);
@@ -145,9 +134,9 @@ public class LecturehallDetail extends Fragment {
             mTask = null;
             if (result != null) {
                 try {
-                    String title = "<div>"+result.getString("title")+"</div>";
-                    String keyword = "<div>"+result.getString("keyword")+"</div>";
-                    String description = "<div>"+result.getString("description")+"</div>";
+                    String title = "<div>" + result.getString("title") + "</div>";
+                    String keyword = "<div>" + result.getString("keyword") + "</div>";
+                    String description = "<div>" + result.getString("description") + "</div>";
                     String video = result.getString("video");
                     String videoHtml = "<video width=\"305\" height=\"305\" controls=\"controls\" preload=\"none\"  >" +
                             "<source src=\"" + video + "\" type=\"video/mp4\">" +
@@ -155,7 +144,7 @@ public class LecturehallDetail extends Fragment {
 
                     String test = "<div><video id=\"widget\" width=\"500\" height=\"500\" controls=\"\"><source id=\"vidSource\" src=\"https://www.autobotstech.com:9443/20170702//06469260-5efb-11e7-9c8f-c7c5c8523d7c.MOV?1500126922810?1500740892312\" type=\"video/mp4\"></video></div>";
 
-                    htmlbody = title+keyword+description+test;
+                    htmlbody = title + keyword + description + test;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
