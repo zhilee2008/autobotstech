@@ -3,9 +3,14 @@ package com.autobotstech.cyzk.activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -45,6 +50,7 @@ public class PreviewOfficeOnline extends AppCompatActivity {
     String regPdf = ".pdf|.PDF";
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,24 +60,34 @@ public class PreviewOfficeOnline extends AppCompatActivity {
         Intent getIntent = getIntent();
         documentURL = getIntent.getStringExtra("documentURL");
 
+        webView = (WebView) findViewById(R.id.officeonline);
+        pdfView = (PDFView)findViewById(R.id.pdfView);
+
         boolean resultOffice = Pattern.compile(regOffice).matcher(documentURL).find();
         boolean resultPdf = Pattern.compile(regPdf).matcher(documentURL).find();
         if(resultOffice){
-            webView = (WebView) findViewById(R.id.officeonline);
 
             webView.setWebViewClient(new WebViewClient() {
                 @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    // TODO Auto-generated method stub
-                    view.loadUrl(url);
+                public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        view.loadUrl(request.getUrl().toString());
+                    } else {
+                        view.loadUrl(request.toString());
+                    }
                     return true;
                 }
-
                 @Override
                 public void onPageFinished(WebView view, String url) {
-                    // TODO Auto-generated method stub
                     super.onPageFinished(view, url);
-
+                }
+                @Override
+                public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                    if(error.getPrimaryError() == android.net.http.SslError.SSL_INVALID ){// 校验过程遇到了bug
+                        handler.proceed();
+                    }else{
+                        handler.cancel();
+                    }
                 }
             });
 // webview必须设置支持Javascript才可打开
@@ -79,8 +95,10 @@ public class PreviewOfficeOnline extends AppCompatActivity {
 // 设置此属性,可任意比例缩放
             webView.getSettings().setUseWideViewPort(true);
             webView.loadUrl("https://view.officeapps.live.com/op/view.aspx?src=" + documentURL);
+            webView.setVisibility(View.VISIBLE);
+
         }else if(resultPdf){
-            pdfView = (PDFView)findViewById(R.id.pdfView);
+            pdfView.setVisibility(View.VISIBLE);
             mTask = new DocumentPreviewTask();
             mTask.execute((Void) null);
         }

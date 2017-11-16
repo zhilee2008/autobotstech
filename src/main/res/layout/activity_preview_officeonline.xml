@@ -11,6 +11,7 @@
         android:layout_height="fill_parent"></WebView>
 
     <com.github.barteksc.pdfviewer.PDFView
+        android:visibility="gone"
         android:id="@+id/pdfView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>
