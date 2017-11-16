@@ -121,10 +121,9 @@ public class Utils {
      * 转换图片成圆形
      *
      * @param bitmap  传入Bitmap对象
-     * @param tempUri
      * @return
      */
-    public static Bitmap toRoundBitmap(Bitmap bitmap, Uri tempUri) {
+    public static Bitmap toRoundBitmap(Bitmap bitmap) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         float roundPx;

@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.CheckActivityContainer;
-import com.autobotstech.cyzk.activity.MessageDetail;
+import com.autobotstech.cyzk.activity.MessageDetailFragment;
 import com.autobotstech.cyzk.model.RecyclerItem;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class RecyclerMessageListAdapter extends RecyclerAdapter {
         recycleritem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                MessageDetail messageDetailFragment = new MessageDetail();
+                MessageDetailFragment messageDetailFragment = new MessageDetailFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
                 messageDetailFragment.setArguments(bundle);
