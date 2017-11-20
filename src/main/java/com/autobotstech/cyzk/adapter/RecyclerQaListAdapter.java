@@ -27,7 +27,7 @@ public class RecyclerQaListAdapter extends RecyclerAdapter {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_lecturehall_list_item, parent, false);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_info_qa_list_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
 
         LinearLayout recycleritem = (LinearLayout) view.findViewById(R.id.recycleritemtag);

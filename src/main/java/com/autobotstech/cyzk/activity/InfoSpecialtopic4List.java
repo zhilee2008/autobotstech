@@ -111,7 +111,7 @@ public class InfoSpecialtopic4List extends BaseFragement {
                             }
 
                             recyclerItem.setCreateTime(dateString);
-                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+                            recyclerItem.setImage(R.drawable.default_personal);
                             checkFlowList.add(recyclerItem);
 
                         }

@@ -144,9 +144,26 @@ public class CheckFlowImageFragment extends BaseFragement {
                 webView.getSettings().setLoadWithOverviewMode(true);
                 webView.getSettings().setTextSize(WebSettings.TextSize.LARGEST);
 
+                // 设置可以支持缩放
+                webView.getSettings().setSupportZoom(true);
+
 //              webView.loadUrl("http://a.mp.uc.cn/article.html?uc_param_str=frdnsnpfvecpntnwprdssskt&client=ucweb&wm_aid=c51bcf6c1553481885da371a16e33dbe&wm_id=482efebe15ed4922a1f24dc42ab654e6&pagetype=share&btifl=100");
+                String css = "<style type=\"text/css\"> img {" +
+                        "width:100%;" +
+                        "height:auto;" +
+                        "}" +
+                        "body {" +
+                        "margin-right:15px;" +
+                        "margin-left:15px;" +
+                        "margin-top:15px;" +
+                        "font-size:45px;" +
+                        "}" +
+                        "</style>";
+                htmlbody = "<html><header>" + css + "</header><body>" + htmlbody + "</body></html>";
+
                 webView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
 //                webView.addJavascriptInterface(new MJavascriptInterface(getActivity(),imageSrcList.toArray(new String[imageSrcList.size()])), "imagelistener");
+                //点击图片弹出图片
                 webView.addJavascriptInterface(new MJavascriptInterface(getActivity(), imageUrls), "imagelistener");
                 webView.setWebViewClient(new MyWebViewClient());
             } else {

@@ -23,7 +23,11 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -93,7 +97,20 @@ public class InfoSpecialtopic3List extends BaseFragement {
                             RecyclerItem recyclerItem = new RecyclerItem();
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
-                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+                            String createTimeString = flowArr.getJSONObject(i).getString("createTime");
+                            Format f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            Date date = null;
+                            String dateString = "";
+                            try {
+                                date = (Date) f.parseObject(createTimeString);
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                dateString = sdf.format(date);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            recyclerItem.setCreateTime(dateString);
+                            recyclerItem.setImage(R.drawable.default_personal);
                             checkFlowList.add(recyclerItem);
 
                         }

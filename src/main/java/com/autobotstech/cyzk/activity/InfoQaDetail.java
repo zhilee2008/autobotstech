@@ -1,12 +1,15 @@
 package com.autobotstech.cyzk.activity;
 
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -49,6 +52,9 @@ public class InfoQaDetail extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         super.onCreate(savedInstanceState);
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         token = sp.getString("token", "");
@@ -57,7 +63,32 @@ public class InfoQaDetail extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle = this.getIntent().getExtras();
         qaId = bundle.getString("detail");
+
         setContentView(R.layout.activity_qa_detail);
+
+        Button backbutton = (Button) findViewById(R.id.button_backward);
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                new Thread() {
+                    public void run() {
+                        try {
+                            Instrumentation inst = new Instrumentation();
+                            inst.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
+
+            }
+        });
+        backbutton.setText(R.string.change_finished);
+        backbutton.setVisibility(View.VISIBLE);
+
+        TextView titlebar = (TextView) findViewById(R.id.text_title);
+        titlebar.setText(R.string.title_auditorium);
 
         Button huifu = (Button) findViewById(R.id.huifu);
 

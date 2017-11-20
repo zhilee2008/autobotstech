@@ -4,6 +4,7 @@ package com.autobotstech.cyzk.activity;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.Instrumentation;
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,7 +61,7 @@ public class InfoQaAdd extends AppCompatActivity {
     protected static Uri imageUri;
     private String imagePath;
     private ImageView iv_personal_icon;
-    String uploadImagePath;
+    String uploadImagePath="";
 
     private static final int REQUEST_PERMISSION = 1;
     static final String[] PERMISSIONS = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -77,11 +79,38 @@ public class InfoQaAdd extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         token = sp.getString("token", "");
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_question);
+
+        Button backbutton = (Button) findViewById(R.id.button_backward);
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                new Thread() {
+                    public void run() {
+                        try {
+                            Instrumentation inst = new Instrumentation();
+                            inst.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
+
+            }
+        });
+        backbutton.setText(R.string.change_finished);
+        backbutton.setVisibility(View.VISIBLE);
+
+        TextView titlebar = (TextView) findViewById(R.id.text_title);
+        titlebar.setText(R.string.addquestion);
 
         mPermissionsChecker = new PermissionsChecker(this);
         iv_personal_icon = (ImageView) findViewById(R.id.iv_personal_icon);
@@ -126,7 +155,11 @@ public class InfoQaAdd extends AppCompatActivity {
 
             try {
                 HttpConnections httpConnections = new HttpConnections(InfoQaAdd.this.getApplicationContext());
-                obj = httpConnections.httpsPost(Constants.URL_PREFIX + Constants.FORUMS_ADD_QUESTION, title,question,uploadImagePath,"uploadfile.png", mToken);
+                if("".equals(uploadImagePath)){
+                    obj = httpConnections.httpsPost(Constants.URL_PREFIX + Constants.FORUMS_ADD_QUESTION, title,question, mToken);
+                }else{
+                    obj = httpConnections.httpsPost(Constants.URL_PREFIX + Constants.FORUMS_ADD_QUESTION, title,question,uploadImagePath,"uploadfile.png", mToken);
+                }
                 result = obj.getString("result");
             } catch (CertificateException e) {
                 e.printStackTrace();

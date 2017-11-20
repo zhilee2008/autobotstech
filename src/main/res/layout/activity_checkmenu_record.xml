@@ -36,9 +36,10 @@
 
                     <ImageView
                         android:id="@+id/imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@android:drawable/star_big_on" />
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:paddingRight="5dp"
+                        app:srcCompat="@drawable/record_1" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -74,9 +75,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@android:drawable/star_big_on" />
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:paddingRight="5dp"
+                        app:srcCompat="@drawable/record_2" />
 
                     <TextView
 
@@ -112,9 +114,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@android:drawable/star_big_on" />
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:paddingRight="5dp"
+                        app:srcCompat="@drawable/record_3" />
 
                     <TextView
 

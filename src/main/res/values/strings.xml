@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Autobotstech</string>
+    <string name="app_name">查验智库</string>
 
     <string name="title_check">查验</string>
     <string name="title_check_1">疑例解析</string>
@@ -19,6 +19,7 @@
     <string name="messageList">消息列表</string>
     <string name="messageDetail">消息详情</string>
     <string name="answer">评论 0</string>
+    <string name="addquestion">添加问答</string>
 
 
     <string name="changeportrait_chose">选择本地照片</string>

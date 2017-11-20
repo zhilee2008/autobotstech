@@ -245,6 +245,69 @@ public class HttpConnections {
         return obj;
     }
 
+    public JSONObject httpsPost(String httpsUrl, String title, String question, String token) {
+
+        JSONObject obj = new JSONObject();
+        try {
+            //建立连接
+            URL url = new URL(httpsUrl);
+            HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+
+            urlConnection.setSSLSocketFactory(sslSocketFactory);
+
+            String param = "title=" + URLEncoder.encode(title, "UTF-8")
+                    + "&question=" + URLEncoder.encode(question, "UTF-8");
+            //设置参数
+            urlConnection.setDoOutput(true);   //需要输出
+            urlConnection.setDoInput(true);   //需要输入
+            urlConnection.setUseCaches(false);  //不允许缓存
+            urlConnection.setRequestMethod("POST");   //设置POST方式连接
+            //设置请求属性
+            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            urlConnection.setRequestProperty("Connection", "Keep-Alive");// 维持长连接
+            urlConnection.setRequestProperty("Charset", "UTF-8");
+            urlConnection.setRequestProperty("Authorization", token);
+            //连接,也可以不用明文connect，使用下面的httpConn.getOutputStream()会自动connect
+            urlConnection.connect();
+            //建立输入流，向指向的URL传入参数
+            DataOutputStream dos = new DataOutputStream(urlConnection.getOutputStream());
+            dos.writeBytes(param);
+            dos.flush();
+            dos.close();
+            //获得响应状态
+            int resultCode = urlConnection.getResponseCode();
+
+
+            if (urlConnection.getResponseCode() < 400) {
+                // 获取响应的输入流对象
+                InputStream is = urlConnection.getInputStream();
+                // 创建字节输出流对象
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                // 定义读取的长度
+                int len = 0;
+                // 定义缓冲区
+                byte buffer[] = new byte[1024];
+                // 按照缓冲区的大小，循环读取
+                while ((len = is.read(buffer)) != -1) {
+                    // 根据读取的长度写入到os对象中
+                    baos.write(buffer, 0, len);
+                }
+                // 释放资源
+                is.close();
+                baos.close();
+                String rev = new String(baos.toByteArray());
+                obj = new JSONObject(rev);
+
+            } else {
+                System.out.println("连接失败.........");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return obj;
+    }
+
     public JSONObject httpsPost(String httpsUrl, String title, String question, String imagePath, String renameFile, String token) {
 
         JSONObject obj = new JSONObject();
