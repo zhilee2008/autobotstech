@@ -1,6 +1,10 @@
 package com.autobotstech.cyzk.activity;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -41,6 +46,7 @@ public class InfoSpecialtopic3List extends BaseFragement {
     private List<RecyclerItem> checkFlowList;
     RecyclerSpecialListAdapter recyclerAdapter;
     RecyclerView recyclerView;
+    Bitmap bitmap=null;
 
     @Override
     protected void initView() {
@@ -110,7 +116,15 @@ public class InfoSpecialtopic3List extends BaseFragement {
                             }
 
                             recyclerItem.setCreateTime(dateString);
-                            recyclerItem.setImage(R.drawable.default_personal);
+                            String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
+                            InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                            bitmap = BitmapFactory.decodeStream(is);
+                            if(bitmap==null){
+                                recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                            }else{
+                                Drawable drawable = new BitmapDrawable(bitmap);
+                                recyclerItem.setImage(drawable);
+                            }
                             checkFlowList.add(recyclerItem);
 
                         }

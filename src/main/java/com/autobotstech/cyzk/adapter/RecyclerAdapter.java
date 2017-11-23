@@ -33,7 +33,7 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapt
 
         RecyclerItem recyclerItem = mRecyclerList.get(position);
         if (holder.image != null) {
-            holder.image.setImageResource(recyclerItem.getImage());
+            holder.image.setImageDrawable(recyclerItem.getImage());
         }
 
         if (holder.name != null) {

@@ -1,6 +1,8 @@
 package com.autobotstech.cyzk.model;
 
 
+import android.graphics.drawable.Drawable;
+
 import org.json.JSONArray;
 
 public class StructureGridItem {
@@ -9,7 +11,7 @@ public class StructureGridItem {
 
     private String name;
 
-    private int image;
+    private Drawable image;
 
     private String parent;
 
@@ -25,7 +27,7 @@ public class StructureGridItem {
 
     private JSONArray standar;
 
-    public StructureGridItem(String id, String name, int image, String parent, JSONArray standar, int headerId) {
+    public StructureGridItem(String id, String name, Drawable image, String parent, JSONArray standar, int headerId) {
         super();
         this.id = id;
         this.name = name;
@@ -51,11 +53,11 @@ public class StructureGridItem {
         this.name = name;
     }
 
-    public int getImage() {
+    public Drawable getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(Drawable image) {
         this.image = image;
     }
 

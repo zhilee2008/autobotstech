@@ -1,6 +1,10 @@
 package com.autobotstech.cyzk.activity;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -25,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -48,6 +53,7 @@ public class LecturehallListFragment extends Fragment {
     RecyclerLecturehallListAdapter recyclerAdapter;
     RecyclerView recyclerView;
     View view;
+    Bitmap bitmap = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -115,7 +121,15 @@ public class LecturehallListFragment extends Fragment {
                             }
 
                             recyclerItem.setCreateTime(dateString);
-                            recyclerItem.setImage(R.drawable.default_personal);
+                            String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
+                            InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                            bitmap = BitmapFactory.decodeStream(is);
+                            if(bitmap==null){
+                                recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                            }else{
+                                Drawable drawable = new BitmapDrawable(bitmap);
+                                recyclerItem.setImage(drawable);
+                            }
                             lecturehallList.add(recyclerItem);
 
                         }

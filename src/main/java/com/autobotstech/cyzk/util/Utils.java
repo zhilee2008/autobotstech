@@ -11,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 
@@ -191,9 +192,10 @@ public class Utils {
     }
 
 
-    public static int getImageID(Context context, String imageName) {
+    public static Drawable getImageID(Context context, String imageName) {
         int resId = context.getResources().getIdentifier(imageName, "mipmap", context.getPackageName());
-        return resId;
+        Drawable image = context.getResources().getDrawable(resId);
+        return image;
     }
 
     public Bitmap returnBitMap(String url){

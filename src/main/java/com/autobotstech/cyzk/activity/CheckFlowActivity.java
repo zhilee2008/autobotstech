@@ -75,7 +75,7 @@ public class CheckFlowActivity extends Fragment {
             }
         };
         viewPager.setAdapter(mAdapter);
-        viewPager.setCurrentItem(0);
+        viewPager.setCurrentItem(1);
 
     }
 

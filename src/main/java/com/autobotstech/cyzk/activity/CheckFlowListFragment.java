@@ -105,7 +105,8 @@ public class CheckFlowListFragment extends BaseFragement {
                             RecyclerItem recyclerItem = new RecyclerItem();
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("inspectItem"));
-                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+//                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+                            recyclerItem.setImage(getResources().getDrawable(R.drawable.ic_dashboard_black_24dp));
                             checkFlowList.add(recyclerItem);
 
 //                            CheckFlowDetail checkFlowDetail = new CheckFlowDetail();

@@ -60,7 +60,7 @@ public class StickyGridAdapter extends BaseAdapter implements
         convertView = mInflater.inflate(R.layout.stickygrid_items, parent, false);
         //TODO add click
         ImageView iv = (ImageView) convertView.findViewById(R.id.stickyitemimage);
-        iv.setImageResource(hasHeaderIdList.get(position).getImage());
+        iv.setImageDrawable(hasHeaderIdList.get(position).getImage());
         TextView tv = (TextView) convertView.findViewById(R.id.stickyitemtext);
         tv.setText(hasHeaderIdList.get(position).getName());
 

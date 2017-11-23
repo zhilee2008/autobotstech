@@ -97,7 +97,8 @@ public class InfoDownloadListFragment extends BaseFragement {
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("originalFileName"));
                             recyclerItem.setFilePath(flowArr.getJSONObject(i).getString("file"));
 //                            recyclerItem.setName(flowArr.getJSONObject(i).getString("file"));
-                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+//                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+                            recyclerItem.setImage(getResources().getDrawable(R.drawable.ic_dashboard_black_24dp));
                             downloadList.add(recyclerItem);
 
                         }

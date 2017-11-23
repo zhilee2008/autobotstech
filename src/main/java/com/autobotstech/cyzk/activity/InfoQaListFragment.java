@@ -2,6 +2,9 @@ package com.autobotstech.cyzk.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
@@ -27,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -50,6 +55,7 @@ public class InfoQaListFragment extends Fragment {
     RecyclerQaListAdapter recyclerAdapter;
     RecyclerView recyclerView;
     View view;
+    Bitmap bitmap = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,6 +92,7 @@ public class InfoQaListFragment extends Fragment {
 
         mTask = new CheckFlowListTask(token);
         mTask.execute((Void) null);
+
         return view;
 
 
@@ -97,8 +104,15 @@ public class InfoQaListFragment extends Fragment {
 //
 //        mCheckFlowListTask = new CheckFlowListTask(token);
 //        mCheckFlowListTask.execute((Void) null);
-//        Toast.makeText(mContext, "MessageFragment页面请求数据了", Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        Toast.makeText(getContext(), "resume", Toast.LENGTH_SHORT).show();
+        mTask = new CheckFlowListTask(token);
+        mTask.execute((Void) null);
     }
 
 
@@ -143,7 +157,15 @@ public class InfoQaListFragment extends Fragment {
                             }
 
                             recyclerItem.setCreateTime(dateString);
-                            recyclerItem.setImage(R.drawable.default_personal);
+                            String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
+                            InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                            bitmap = BitmapFactory.decodeStream(is);
+                            if(bitmap==null){
+                                recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                            }else{
+                                Drawable drawable = new BitmapDrawable(bitmap);
+                                recyclerItem.setImage(drawable);
+                            }
                             checkFlowList.add(recyclerItem);
 
                         }

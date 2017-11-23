@@ -1,17 +1,19 @@
 package com.autobotstech.cyzk.model;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by zhi on 06/07/2017.
  */
 
 public class RecyclerItem {
-    private int image;
+    private Drawable image;
 
-    public int getImage() {
+    public Drawable getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(Drawable image) {
         this.image = image;
     }
 

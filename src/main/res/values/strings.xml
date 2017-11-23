@@ -46,6 +46,7 @@
     <string name="specialtopiclist">专题信息</string>
     <string name="qalist">在线问答</string>
     <string name="downloadlist">文件下载</string>
+    <string name="preview">在线预览</string>
 
     <string name="transfer">转移登记</string>
 
@@ -65,8 +66,8 @@
     <string name="ask">咨询</string>
     <string name="notice">通知</string>
 
-    <string name="tmpenter">临时入境机动车号牌、行驶证业务</string>
-    <string name="replacement">申请补领机动车登记证书</string>
+    <string name="tmpenter">临时入境</string>
+    <string name="replacement">申请补领</string>
 
     <string name="flow">查验流程</string>
     <string name="flowdetail">详情</string>
