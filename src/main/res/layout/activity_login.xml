@@ -37,10 +37,11 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:adjustViewBounds="true"
                 android:paddingRight="5dp"
-                app:srcCompat="@drawable/userback" />
+                android:paddingTop="5dp"
+                app:srcCompat="@drawable/user_128" />
 
             <EditText
                 android:id="@+id/mobile"
@@ -64,10 +65,12 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:adjustViewBounds="true"
-                android:paddingLeft="5dp"
-                app:srcCompat="@drawable/passwordback" />
+                android:paddingLeft="0dp"
+                android:paddingRight="5dp"
+                android:paddingTop="10dp"
+                app:srcCompat="@drawable/secure_128" />
 
             <EditText
                 android:id="@+id/password"

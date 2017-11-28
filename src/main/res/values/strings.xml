@@ -73,11 +73,11 @@
     <string name="flowdetail">详情</string>
 
     <string name="flowlist">查验项目</string>
-    <string name="flowchart">流程图</string>
+    <string name="flowchart">基本要求</string>
 
-    <string name="method">方法判定</string>
+    <string name="method">方法</string>
     <string name="measure">法规标准</string>
-    <string name="gist">注意要点</string>
+    <string name="gist">知识点</string>
 
     <string name="structure">结构</string>
 

@@ -56,6 +56,7 @@ public class Constants {
     public static String TECHSUPPORTS = "/techsupports/all";
 
     public static String UPLOAD_IMAGE = "/users/upload";
+    public static String GET_USERE = "/users/mobile/";
 
 
 }

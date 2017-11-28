@@ -10,7 +10,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,6 +26,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,22 +34,42 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.autobotstech.cyzk.R;
+import com.autobotstech.cyzk.adapter.RecyclerMessageListAdapter;
+import com.autobotstech.cyzk.model.RecyclerItem;
+import com.autobotstech.cyzk.util.Constants;
+import com.autobotstech.cyzk.util.HttpConnections;
 import com.autobotstech.cyzk.util.ImageUtils.PermissionsActivity;
 import com.autobotstech.cyzk.util.ImageUtils.PermissionsChecker;
 import com.autobotstech.cyzk.util.Utils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
 
 public class MineActivity extends Fragment {
 
-    private String mobile;
     private String password;
     SharedPreferences sp;
     private String token;
+    private String mobile;
 
 
     protected static final int CHOOSE_PICTURE = 0;
@@ -53,6 +77,7 @@ public class MineActivity extends Fragment {
     private static final int CROP_SMALL_PICTURE = 2;
     protected static Uri imageUri;
     private String imagePath;
+    private String uploadImagePath;
     private ImageView iv_personal_icon;
 
     private static final int REQUEST_PERMISSION = 1;
@@ -64,13 +89,18 @@ public class MineActivity extends Fragment {
     private PermissionsChecker mPermissionsChecker; // 权限检测器
 
     Bitmap bitmap;
+    Bitmap imageBitMapFromServer;
     boolean isClickCamera = false;
+
+    UploadImageTask mUTask;
+    MGetImageTask mGTask;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
+        mobile = sp.getString("mobile", "");
 
         View view = inflater.inflate(R.layout.mine_content, container, false);
         ViewGroup vg = (ViewGroup) container.getParent();
@@ -136,6 +166,9 @@ public class MineActivity extends Fragment {
 
             }
         });
+
+        mGTask = new MGetImageTask(token);
+        mGTask.execute((Void) null);
 
 
         return view;
@@ -261,9 +294,14 @@ public class MineActivity extends Fragment {
                 .valueOf(System.currentTimeMillis()));
 //        Toast.makeText(getContext(),imagePath,Toast.LENGTH_SHORT).show();
         Log.e("imagePath", imagePath + "");
+        Bitmap photo = Utils.toRoundBitmap(bitmap);
+        imagePath = Utils.savePhoto(photo, Environment
+                .getExternalStorageDirectory().getAbsolutePath(), String
+                .valueOf(System.currentTimeMillis()));
         if (imagePath != null) {
-            // 拿着imagePath上传了
-            // ...
+            uploadImagePath = imagePath;
+            mUTask = new UploadImageTask(token);
+            mUTask.execute((Void) null);
         }
     }
 
@@ -372,6 +410,120 @@ public class MineActivity extends Fragment {
                     }
                     break;
             }
+        }
+    }
+
+    public class UploadImageTask extends AsyncTask<Void, Void, String> {
+
+        private final String mToken;
+
+        UploadImageTask(String token) {
+            mToken = token;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+            JSONObject obj = new JSONObject();
+            String result="";
+
+            try {
+                HttpConnections httpConnections = new HttpConnections(getContext());
+                if(!"".equals(uploadImagePath)){
+                    obj = httpConnections.httpsUpload(Constants.URL_PREFIX + Constants.UPLOAD_IMAGE, uploadImagePath,"uploadfile.png", mToken);
+                }
+                result = obj.getString("result");
+            } catch (CertificateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(final String result) {
+            mUTask = null;
+            if("success".equals(result)){
+                Toast.makeText(getContext(),"上传头像成功",Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(getContext(),"上传头像失败",Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        protected void onCancelled() {
+            mUTask = null;
+//            showProgress(false);
+        }
+    }
+
+
+    public class MGetImageTask extends AsyncTask<Void, Void, Bitmap> {
+
+        private final String mToken;
+
+        MGetImageTask(String token) {
+            mToken = token;
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+            JSONObject obj = new JSONObject();
+            try {
+                HttpConnections httpConnections = new HttpConnections(getContext());
+
+                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.GET_USERE + mobile, mToken);
+                if (obj != null) {
+                    String imageString = obj.getJSONObject("detail").getJSONObject("portrait").getString("small");
+                    InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                    imageBitMapFromServer = BitmapFactory.decodeStream(is);
+                }
+
+            } catch (CertificateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return imageBitMapFromServer;
+        }
+
+        @Override
+        protected void onPostExecute(final Bitmap result) {
+            mGTask = null;
+            if (result != null) {
+                iv_personal_icon.setImageBitmap(result);
+
+            } else {
+
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mGTask = null;
+//            showProgress(false);
         }
     }
 
