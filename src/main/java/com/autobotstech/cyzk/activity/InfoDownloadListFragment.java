@@ -1,10 +1,19 @@
 package com.autobotstech.cyzk.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
@@ -23,7 +32,11 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -37,6 +50,10 @@ public class InfoDownloadListFragment extends BaseFragement {
     private List<RecyclerItem> downloadList;
     RecyclerDownloadListAdapter recyclerAdapter;
     RecyclerView recyclerView;
+    SearchView mSearchView = null;
+
+    LinearLayout listContainer;
+    private View mProgressView;
 
     @Override
     protected void initView() {
@@ -47,11 +64,54 @@ public class InfoDownloadListFragment extends BaseFragement {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         appGlobals = (AppGlobals) getActivity().getApplication();
+        mSearchView = (SearchView)mView.findViewById(R.id.searchView);
+        listContainer = (LinearLayout) mView.findViewById(R.id.listcontainer);
+        mProgressView = (ProgressBar)mView.findViewById(R.id.progressbar);
 
+        showProgress(true);
         mTask = new DownloadListTask(token);
         mTask.execute((Void) null);
 //        Toast.makeText(mContext, "MessageFragment页面请求数据了", Toast.LENGTH_SHORT).show();
 
+        // 设置搜索文本监听
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // 当点击搜索按钮时触发该方法
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            // 当搜索内容改变时触发该方法
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (!TextUtils.isEmpty(newText)){
+                    search(newText);
+                }else{
+                    showProgress(true);
+                    mTask = new DownloadListTask(token);
+                    mTask.execute((Void) null);
+                }
+                return false;
+            }
+        });
+
+    }
+
+    public void search(String searchText){
+        searchText = searchText.trim();
+        if("".equals(searchText)){
+            return;
+        }
+        List<RecyclerItem> searchList = new ArrayList<RecyclerItem>();
+        searchList.addAll(downloadList);
+        downloadList.clear();
+        for(int i=0;i<searchList.size();i++){
+            RecyclerItem recyclerItem = searchList.get(i);
+            if(recyclerItem.getName().contains(searchText)){
+                downloadList.add(recyclerItem);
+            }
+        }
+        recyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -61,7 +121,8 @@ public class InfoDownloadListFragment extends BaseFragement {
 
     @Override
     protected void getDataFromServer() {
-
+        mSearchView.clearFocus();
+        mSearchView.setFocusable(false);
     }
 
 
@@ -96,9 +157,22 @@ public class InfoDownloadListFragment extends BaseFragement {
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("originalFileName"));
                             recyclerItem.setFilePath(flowArr.getJSONObject(i).getString("file"));
-//                            recyclerItem.setName(flowArr.getJSONObject(i).getString("file"));
-//                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
-                            recyclerItem.setImage(getResources().getDrawable(R.drawable.ic_dashboard_black_24dp));
+                            recyclerItem.setImage(getResources().getDrawable(R.drawable.document_128));
+                            String keyword = flowArr.getJSONObject(i).getString("keyword");
+                            recyclerItem.setKeyword("关键字："+keyword);
+                            String createTimeString = flowArr.getJSONObject(i).getString("createTime");
+                            Format f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            Date date = null;
+                            String dateString = "";
+                            try {
+                                date = (Date) f.parseObject(createTimeString);
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                dateString = sdf.format(date);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            recyclerItem.setCreateTime(dateString);
                             downloadList.add(recyclerItem);
 
                         }
@@ -133,12 +207,49 @@ public class InfoDownloadListFragment extends BaseFragement {
             } else {
 
             }
+            showProgress(false);
         }
 
         @Override
         protected void onCancelled() {
             mTask = null;
-//            showProgress(false);
+            showProgress(false);
+        }
+    }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+            listContainer.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 }

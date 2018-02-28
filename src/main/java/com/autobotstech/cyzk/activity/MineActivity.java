@@ -115,7 +115,7 @@ public class MineActivity extends Fragment {
         messageButton.setVisibility(View.INVISIBLE);
 
 
-        LinearLayout logout = (LinearLayout) view.findViewById(R.id.logout);
+        Button logout = (Button) view.findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -136,9 +136,9 @@ public class MineActivity extends Fragment {
 
         mPermissionsChecker = new PermissionsChecker(this.getContext());
 
-        LinearLayout changeportrait = (LinearLayout) view.findViewById(R.id.changeportrait);
+//        ImageView changeportrait = (ImageView) view.findViewById(R.id.iv_personal_icon);
         iv_personal_icon = (ImageView) view.findViewById(R.id.iv_personal_icon);
-        changeportrait.setOnClickListener(new View.OnClickListener() {
+        iv_personal_icon.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -146,6 +146,8 @@ public class MineActivity extends Fragment {
             }
         });
 
+        TextView mtv = (TextView)view.findViewById(R.id.mobiletext);
+        mtv.setText(mobile);
 
         LinearLayout messageListActivity = (LinearLayout) view.findViewById(R.id.mymessage);
         messageListActivity.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +168,16 @@ public class MineActivity extends Fragment {
 
             }
         });
+        LinearLayout changePWD = (LinearLayout) view.findViewById(R.id.changepassword);
+        changePWD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                CheckActivityContainer.changeFragment(R.id.minemainpage, new ChangePwDFragment());
+
+            }
+        });
+
 
         mGTask = new MGetImageTask(token);
         mGTask.execute((Void) null);
@@ -488,8 +500,12 @@ public class MineActivity extends Fragment {
                 obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.GET_USERE + mobile, mToken);
                 if (obj != null) {
                     String imageString = obj.getJSONObject("detail").getJSONObject("portrait").getString("small");
-                    InputStream is = httpConnections.httpsGetPDFStream(imageString);
-                    imageBitMapFromServer = BitmapFactory.decodeStream(is);
+
+                    if(!"".equals(imageString)){
+                        InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                        imageBitMapFromServer = BitmapFactory.decodeStream(is);
+                    }
+
                 }
 
             } catch (CertificateException e) {
@@ -516,7 +532,6 @@ public class MineActivity extends Fragment {
                 iv_personal_icon.setImageBitmap(result);
 
             } else {
-
             }
         }
 

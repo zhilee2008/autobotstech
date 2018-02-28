@@ -110,10 +110,17 @@ public class CheckFlowListDetailMeasureFragment extends BaseFragement {
             if (result != null) {
                 String htmlbody = "";
                 try {
-                    htmlbody = result.getString("measure");
+                    String data = "<head><style>img{ width:100% !important;}</style></head>";
+                    htmlbody = data+ result.getString("measure");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                WebSettings settings = webView.getSettings();
+                settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+                settings.setBuiltInZoomControls(true);
+                settings.setSupportZoom(true); // 支持缩放
+                // 设置显示缩放按钮
+                settings.setDisplayZoomControls(false);
                 webView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
             } else {
 

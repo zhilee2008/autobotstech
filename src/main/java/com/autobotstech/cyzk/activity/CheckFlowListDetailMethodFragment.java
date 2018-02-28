@@ -42,9 +42,18 @@ public class CheckFlowListDetailMethodFragment extends BaseFragement {
 
         webView = (WebView) mView.findViewById(R.id.flowdetailmethod);
         WebSettings settings = webView.getSettings();
-        settings.setUseWideViewPort(true);
+//        settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
-        settings.setTextSize(WebSettings.TextSize.LARGEST);
+//        settings.setTextSize(WebSettings.TextSize.LARGEST);
+        // 设置可以支持缩放
+        settings.setSupportZoom(true);
+//// 设置出现缩放工具
+//        web.getSettings().setBuiltInZoomControls(true);
+////扩大比例的缩放
+//        web.getSettings().setUseWideViewPort(true);
+        //自适应屏幕
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setLoadWithOverviewMode(true);
 
         mTask = new CheckFlowOBJTask(token);
         mTask.execute((Void) null);
@@ -110,10 +119,17 @@ public class CheckFlowListDetailMethodFragment extends BaseFragement {
             if (result != null) {
                 String htmlbody = "";
                 try {
-                    htmlbody = result.getString("method");
+                    String data = "<head><style>img{ width:100% !important;}</style></head>";
+                    htmlbody = data+result.getString("method");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                WebSettings settings = webView.getSettings();
+                settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+                settings.setBuiltInZoomControls(true);
+                settings.setSupportZoom(true); // 支持缩放
+                // 设置显示缩放按钮
+                settings.setDisplayZoomControls(false);
                 webView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
             } else {
 

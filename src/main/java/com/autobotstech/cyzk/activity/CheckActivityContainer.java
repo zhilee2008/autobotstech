@@ -45,7 +45,7 @@ public class CheckActivityContainer extends Fragment {
 
 
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
-        titlebar.setText(R.string.title_check);
+        titlebar.setText(R.string.titlebar_check);
 
         Button messageButton = (Button) vg.findViewById(R.id.button_message);
         messageButton.setVisibility(View.VISIBLE);

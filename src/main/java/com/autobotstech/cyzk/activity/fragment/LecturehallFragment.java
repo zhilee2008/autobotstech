@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.LecturehallListFragment;
+import com.autobotstech.cyzk.activity.TrainingFragment;
 
 
 public class LecturehallFragment extends BaseFragement {
@@ -20,7 +20,7 @@ public class LecturehallFragment extends BaseFragement {
 
 //        TextView titlebar = (TextView) mView.findViewById(R.id.text_title);
 //        titlebar.setText(R.string.title_auditorium);
-        initFragment(R.id.lecturehallmainpage, new LecturehallListFragment());
+        initFragment(R.id.lecturehallmainpage, new TrainingFragment());
 
     }
 

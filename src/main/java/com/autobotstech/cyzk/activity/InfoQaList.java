@@ -42,6 +42,7 @@ public class InfoQaList extends BaseFragement {
     private List<RecyclerItem> checkFlowList;
     RecyclerQaListAdapter recyclerAdapter;
     RecyclerView recyclerView;
+    Bitmap bitmap = null;
 
     @Override
     protected void initView() {
@@ -98,14 +99,25 @@ public class InfoQaList extends BaseFragement {
                             RecyclerItem recyclerItem = new RecyclerItem();
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
-                            String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
-                            InputStream is = httpConnections.httpsGetPDFStream(imageString);
-                            Bitmap bitmap = BitmapFactory.decodeStream(is);
-                            if(bitmap==null){
+
+                            boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
+                            if(!hasPortrait){
                                 recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
                             }else{
-                                Drawable drawable = new BitmapDrawable(bitmap);
-                                recyclerItem.setImage(drawable);
+                                String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
+                                if("".equals(imageString)){
+                                    recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                }else{
+                                    InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                                    bitmap = BitmapFactory.decodeStream(is);
+                                    if(bitmap==null){
+                                        recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                    }else{
+                                        Drawable drawable = new BitmapDrawable(bitmap);
+                                        recyclerItem.setImage(drawable);
+                                    }
+                                }
+
                             }
                             checkFlowList.add(recyclerItem);
 

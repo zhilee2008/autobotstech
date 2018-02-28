@@ -94,7 +94,7 @@ public class InfoActivity extends Fragment {
         backbutton.setVisibility(View.INVISIBLE);
 
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
-        titlebar.setText(R.string.title_info);
+        titlebar.setText(R.string.titlebar_info);
 
         initView(view);
         initViewPager();

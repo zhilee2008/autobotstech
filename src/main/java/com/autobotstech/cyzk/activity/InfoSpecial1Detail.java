@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -52,7 +53,7 @@ public class InfoSpecial1Detail extends Fragment {
 
         lecturehallId = getArguments().getString("detail");
 
-        View view = inflater.inflate(R.layout.activity_lecturehall_detail, container, false);
+        View view = inflater.inflate(R.layout.activity_info_list_specialdetail, container, false);
         ViewGroup vg = (ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
         backbutton.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +83,14 @@ public class InfoSpecial1Detail extends Fragment {
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
 
 
-        webView = (WebView) view.findViewById(R.id.lecturehalldetail);
+        webView = (WebView) view.findViewById(R.id.infospecialdetail);
+        webView.setScrollContainer(false);
+//        webView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                return (event.getAction() == MotionEvent.ACTION_MOVE);
+//            }
+//        });
 
         mTask = new LecturehallDetailTask(token);
         mTask.execute((Void) null);
@@ -134,28 +142,23 @@ public class InfoSpecial1Detail extends Fragment {
             mTask = null;
             if (result != null) {
                 try {
-                    String title = "<div><h2>" + result.getString("title") + "</h2></div>";
-                    String keyword = "<div>" + result.getString("keyword") + "</div>";
+                    String data = "<head><style>img{ width:100% !important;}</style></head>";
+//                    String title = "<div><h2>" + result.getString("title") + "</h2></div>";
+//                    String keyword = "<div>" + result.getString("keyword") + "</div>";
                     String description = "<div>" + result.getString("description") + "</div>";
 
-                    htmlbody = title + keyword + description;
+//                    htmlbody = title + keyword + description;
+                    htmlbody = data+description;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.getSettings().setAppCacheEnabled(true);
-                webView.getSettings().setDatabaseEnabled(true);
-                webView.getSettings().setDomStorageEnabled(true);
-
-                webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-                webView.getSettings().setUseWideViewPort(true);
-
                 WebSettings settings = webView.getSettings();
-                settings.setUseWideViewPort(true);
-                settings.setLoadWithOverviewMode(true);
-                settings.setTextSize(WebSettings.TextSize.LARGEST);
-                webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+                settings.setBuiltInZoomControls(true);
+                settings.setSupportZoom(true); // 支持缩放
+                // 设置显示缩放按钮
+                settings.setDisplayZoomControls(false);
 
                 webView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
             } else {

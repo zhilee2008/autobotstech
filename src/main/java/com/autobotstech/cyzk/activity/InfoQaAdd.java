@@ -113,14 +113,14 @@ public class InfoQaAdd extends AppCompatActivity {
         titlebar.setText(R.string.addquestion);
 
         mPermissionsChecker = new PermissionsChecker(this);
-        iv_personal_icon = (ImageView) findViewById(R.id.iv_personal_icon);
-        iv_personal_icon.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                showChoosePicDialog();
-            }
-        });
+//        iv_personal_icon = (ImageView) findViewById(R.id.iv_personal_icon);
+//        iv_personal_icon.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                showChoosePicDialog();
+//            }
+//        });
 
         Button save = (Button) findViewById(R.id.submit);
         save.setOnClickListener(new View.OnClickListener() {

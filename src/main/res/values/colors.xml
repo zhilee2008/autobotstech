@@ -2,11 +2,11 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff4081</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="gray">#ffeaeaea</color>
-    <color name="red">#FF3333</color>
+    <color name="gray">#eaeaea</color>
+    <color name="red">#f7a4a4</color>
     <color name="disable">#EBEAD8</color>
     <color name="backGroundColor">#efeff4</color>
     <color name="listItemBGColor">#efeff4</color>
@@ -14,4 +14,5 @@
     <color name="titleblue">#4169E1</color>
 
     <color name="transparent">#000000</color>
+    <color name="grey">#aaa9a9</color>
 </resources>

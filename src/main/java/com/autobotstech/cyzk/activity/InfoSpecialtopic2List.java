@@ -1,14 +1,23 @@
 package com.autobotstech.cyzk.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
@@ -41,12 +50,16 @@ public class InfoSpecialtopic2List extends BaseFragement {
 
     SharedPreferences sp;
     private String token;
-    private CheckFlowListTask mCheckFlowListTask = null;
+    private CheckFlowListTask mTask = null;
 
     private List<RecyclerItem> checkFlowList;
     RecyclerSpecialListAdapter recyclerAdapter;
     RecyclerView recyclerView;
     Bitmap bitmap=null;
+    SearchView mSearchView = null;
+
+    LinearLayout listContainer;
+    private View mProgressView;
 
     @Override
     protected void initView() {
@@ -58,10 +71,53 @@ public class InfoSpecialtopic2List extends BaseFragement {
 
         appGlobals = (AppGlobals) getActivity().getApplication();
 
-        mCheckFlowListTask = new CheckFlowListTask(token);
-        mCheckFlowListTask.execute((Void) null);
-//        Toast.makeText(mContext, "MessageFragment页面请求数据了", Toast.LENGTH_SHORT).show();
+        mSearchView = (SearchView)mView.findViewById(R.id.searchView);
 
+        listContainer = (LinearLayout) mView.findViewById(R.id.listcontainer);
+        mProgressView = (ProgressBar)mView.findViewById(R.id.progressbar);
+        // 设置搜索文本监听
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // 当点击搜索按钮时触发该方法
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            // 当搜索内容改变时触发该方法
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (!TextUtils.isEmpty(newText)){
+                    search(newText);
+                }else{
+                    showProgress(true);
+                    mTask = new CheckFlowListTask(token);
+                    mTask.execute((Void) null);
+                }
+                return false;
+            }
+        });
+
+        showProgress(true);
+        mTask = new CheckFlowListTask(token);
+        mTask.execute((Void) null);
+
+    }
+
+    public void search(String searchText){
+        searchText = searchText.trim();
+        if("".equals(searchText)){
+            return;
+        }
+        List<RecyclerItem> searchList = new ArrayList<RecyclerItem>();
+        searchList.addAll(checkFlowList);
+        checkFlowList.clear();
+        for(int i=0;i<searchList.size();i++){
+            RecyclerItem recyclerItem = searchList.get(i);
+            if(recyclerItem.getName().contains(searchText) || recyclerItem.getKeyword().contains(searchText)){
+                checkFlowList.add(recyclerItem);
+            }
+        }
+        recyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -109,22 +165,37 @@ public class InfoSpecialtopic2List extends BaseFragement {
                             String dateString = "";
                             try {
                                 date = (Date) f.parseObject(createTimeString);
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                 dateString = sdf.format(date);
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
 
                             recyclerItem.setCreateTime(dateString);
-                            String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
-                            InputStream is = httpConnections.httpsGetPDFStream(imageString);
-                            bitmap = BitmapFactory.decodeStream(is);
-                            if(bitmap==null){
+                            boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
+                            if(!hasPortrait){
                                 recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
                             }else{
-                                Drawable drawable = new BitmapDrawable(bitmap);
-                                recyclerItem.setImage(drawable);
+                                String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
+                                if("".equals(imageString)){
+                                    recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                }else{
+                                    InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                                    bitmap = BitmapFactory.decodeStream(is);
+                                    if(bitmap==null){
+                                        recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                    }else{
+                                        Drawable drawable = new BitmapDrawable(bitmap);
+                                        recyclerItem.setImage(drawable);
+                                    }
+                                }
                             }
+                            String keyword = flowArr.getJSONObject(i).getString("keyword");
+                            recyclerItem.setKeyword("关键字："+keyword);
+
+                            String author = flowArr.getJSONObject(i).getJSONObject("createPerson").getString("name");
+                            recyclerItem.setAuthor(author);
+
                             checkFlowList.add(recyclerItem);
 
                         }
@@ -150,7 +221,7 @@ public class InfoSpecialtopic2List extends BaseFragement {
 
         @Override
         protected void onPostExecute(final List result) {
-            mCheckFlowListTask = null;
+            mTask = null;
 
             if (result != null) {
                 recyclerAdapter = new RecyclerSpecialListAdapter(result, appGlobals);
@@ -159,12 +230,49 @@ public class InfoSpecialtopic2List extends BaseFragement {
             } else {
 
             }
+            showProgress(false);
         }
 
         @Override
         protected void onCancelled() {
-            mCheckFlowListTask = null;
-//            showProgress(false);
+            mTask = null;
+            showProgress(false);
+        }
+    }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+            listContainer.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 }

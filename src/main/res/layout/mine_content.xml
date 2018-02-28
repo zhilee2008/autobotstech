@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -30,20 +32,65 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="1.0dip"
+        android:background="#ffeaeaea" />d
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            app:srcCompat="@drawable/ic_smartphone_black_24dp" />
+
+        <TextView
+            android:id="@+id/mobiletext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|fill_vertical"
+            android:textColor="@color/blue" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
         android:background="#ffeaeaea" />
 
     <LinearLayout
-        android:id="@+id/changeportrait"
+        android:id="@+id/changepassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="15dp">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            app:srcCompat="@drawable/ic_vpn_key_black_24dp" />
+
         <TextView
-            android:layout_width="match_parent"
+            android:gravity="left"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="@string/changeportrait" />
+            android:layout_weight="1"
+            android:textColor="@color/blue"
+            android:text="@string/changepassword" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right|fill_vertical"
+            android:src="@drawable/ic_chevron_right_black_24dp" />
 
     </LinearLayout>
 
@@ -56,14 +103,31 @@
         android:id="@+id/mymessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="15dp">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            app:srcCompat="@drawable/ic_message_black_24dp" />
+
         <TextView
-            android:layout_width="match_parent"
+            android:gravity="left"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:textColor="@color/blue"
             android:text="@string/message" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right|fill_vertical"
+            android:src="@drawable/ic_chevron_right_black_24dp" />
 
     </LinearLayout>
 
@@ -76,14 +140,30 @@
         android:id="@+id/myqa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="15dp">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            app:srcCompat="@drawable/ic_question_answer_black_24dp" />
+
         <TextView
-            android:layout_width="match_parent"
+            android:gravity="left"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:textColor="@color/blue"
             android:text="@string/myqa" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right|fill_vertical"
+            android:src="@drawable/ic_chevron_right_black_24dp" />
 
     </LinearLayout>
 
@@ -93,17 +173,25 @@
         android:background="#ffeaeaea" />
 
     <LinearLayout
-        android:id="@+id/logout"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="15dp">
 
-        <TextView
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="@string/logout" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/logoutborder"
+            android:paddingLeft="130dp"
+            android:paddingRight="130dp"
+            android:id="@+id/logout"
+            android:text="@string/logout"
+            android:textColor="@color/blue"
+            android:textColorLink="@color/white"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

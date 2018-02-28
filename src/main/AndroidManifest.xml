@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.autobotstech.cyzk"
-    android:versionCode="1"
-    android:versionName="1.01"> <!-- Required -->
+    android:versionCode="10"
+    android:versionName="@string/app_versionName"> <!-- Required -->
     <uses-sdk
         android:minSdkVersion="9"
-        android:targetSdkVersion="22" />
+        android:targetSdkVersion="22"
+        tools:overrideLibrary="cn.jzvd" />
 
     <!-- Required -->
     <permission
@@ -55,9 +57,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity" android:configChanges="orientation|screenSize|keyboardHidden"></activity>
         <activity
             android:name=".activity.LoginActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,12 +68,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.widget.PhotoBrowserActivity" />
+        <activity android:name=".activity.widget.PhotoBrowserActivity" android:configChanges="orientation|screenSize|keyboardHidden" />
         <!--<activity android:name=".activity.MessageListActivity"></activity>-->
-        <activity android:name=".activity.InfoQaDetail"></activity>
-        <activity android:name=".activity.PreviewOfficeOnline"></activity>
-        <activity android:name=".activity.InfoQaAdd"></activity>
+        <activity android:name=".activity.InfoQaDetail"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            ></activity>
+        <activity android:name=".activity.PreviewOfficeOnline"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            ></activity>
+        <activity
+            android:name=".activity.PreviewVideo"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.PreviewOfficeOnlineLocal"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            ></activity>
+        <activity android:name=".activity.InfoQaAdd"
+            android:configChanges="orientation|screenSize"
+            ></activity>
         <activity android:name=".util.ImageUtils.PermissionsActivity"
+            />
+        <activity android:name=".activity.EmptyActivity"
             />
 
         <provider

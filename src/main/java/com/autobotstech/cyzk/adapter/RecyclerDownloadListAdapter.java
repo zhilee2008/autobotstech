@@ -32,38 +32,38 @@ public class RecyclerDownloadListAdapter extends RecyclerAdapter {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_download_list_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
 
-        ImageView recycleritem = (ImageView) view.findViewById(R.id.downloadbutton);
-
-        recycleritem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                String fileName = mRecyclerList.get(holder.getAdapterPosition()).getName();
-                String filePath = mRecyclerList.get(holder.getAdapterPosition()).getFilePath();
-                FileUtils.downloadFile(view.getContext(), filePath, fileName, new FileUtils.SaveResultCallback() {
-                    @Override
-                    public void onSavedSuccess() {
-                        Activity activityDownload = (Activity) view.getContext();
-                        activityDownload.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(view.getContext(), "保存成功", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onSavedFailed() {
-                        Activity activityDownload = (Activity) view.getContext();
-                        activityDownload.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(view.getContext(), "保存失败", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
-            }
-        });
+//        ImageView recycleritem = (ImageView) view.findViewById(R.id.downloadbutton);
+//
+//        recycleritem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View arg0) {
+//                String fileName = mRecyclerList.get(holder.getAdapterPosition()).getName();
+//                String filePath = mRecyclerList.get(holder.getAdapterPosition()).getFilePath();
+//                FileUtils.downloadFile(view.getContext(), filePath, fileName, new FileUtils.SaveResultCallback() {
+//                    @Override
+//                    public void onSavedSuccess() {
+//                        Activity activityDownload = (Activity) view.getContext();
+//                        activityDownload.runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(view.getContext(), "保存成功", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                    }
+//
+//                    @Override
+//                    public void onSavedFailed() {
+//                        Activity activityDownload = (Activity) view.getContext();
+//                        activityDownload.runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(view.getContext(), "保存失败", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                    }
+//                });
+//            }
+//        });
 
         ImageView previewbutton = (ImageView) view.findViewById(R.id.previewbutton);
 

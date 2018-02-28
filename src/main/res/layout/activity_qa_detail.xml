@@ -38,13 +38,14 @@
                     android:background="#ffeaeaea" />
 
                 <LinearLayout
-                    android:id="@+id/answercount"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="15dp">
 
                     <TextView
+                        android:id="@+id/answercount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="fill_vertical"

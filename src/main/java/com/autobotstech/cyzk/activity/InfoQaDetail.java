@@ -1,5 +1,6 @@
 package com.autobotstech.cyzk.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -25,12 +26,17 @@ import com.autobotstech.cyzk.util.HttpConnections;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class InfoQaDetail extends AppCompatActivity {
@@ -46,10 +52,13 @@ public class InfoQaDetail extends AppCompatActivity {
     private String answerhtmlbody = "";
     private String huifucontent = "";
 
+    private TextView answerCountView;
+
     private String[] imageUrls;
 
     private String qaId;
 
+    @SuppressLint("WrongViewCast")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (getSupportActionBar() != null) {
@@ -65,6 +74,8 @@ public class InfoQaDetail extends AppCompatActivity {
         qaId = bundle.getString("detail");
 
         setContentView(R.layout.activity_qa_detail);
+
+        answerCountView = (TextView) findViewById(R.id.answercount);
 
         Button backbutton = (Button) findViewById(R.id.button_backward);
         backbutton.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +102,8 @@ public class InfoQaDetail extends AppCompatActivity {
         titlebar.setText(R.string.title_auditorium);
 
         Button huifu = (Button) findViewById(R.id.huifu);
+
+
 
         huifu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -281,6 +294,7 @@ public class InfoQaDetail extends AppCompatActivity {
                     try {
                         JSONObject objq = result.getJSONObject("objq");
                         JSONObject obja = result.getJSONObject("obja");
+
                         if (objq != null) {
                             String title = "<div><h2>" + objq.getString("title") + "</h2></div>";
                             String description = "<div>" + objq.getString("question") + "</div>";
@@ -288,8 +302,21 @@ public class InfoQaDetail extends AppCompatActivity {
                         }
                         if (obja != null) {
                             JSONArray answerArray = obja.getJSONArray("detail");
+                            answerCountView.setText("评论："+answerArray.length());
                             for (int i = 0; i < answerArray.length(); i++) {
-                                String answerperson = "<div>" + answerArray.getJSONObject(i).getJSONObject("createPerson").getString("mobile") + "</div>";
+                                String answerperson = "<div>" + answerArray.getJSONObject(i).getJSONObject("createPerson").getString("name") + "</div>";
+                                String createTimeString = answerArray.getJSONObject(i).getString("createTime");
+                                Format f = new SimpleDateFormat("yyyy-MM-dd");
+                                Date date = null;
+                                String dateString = "";
+                                try {
+                                    date = (Date) f.parseObject(createTimeString);
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                    dateString = sdf.format(date);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                String dateContent = "<div>" + dateString + "</div>";
                                 String answerContent = "<div style='border-bottom:1.5px solid #d3d3d3'>" + answerArray.getJSONObject(i).getString("answer") + "</div>";
                                 answerhtmlbody = answerperson + answerContent + answerhtmlbody;
                             }

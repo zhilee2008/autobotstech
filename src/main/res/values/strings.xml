@@ -1,25 +1,55 @@
 <resources>
     <string name="app_name">查验智库</string>
+    <string name="app_versionName">1.1.10</string>
 
     <string name="title_check">查验</string>
-    <string name="title_check_1">疑例解析</string>
-    <string name="title_check_2">技术支持</string>
+    <string name="titlebar_check">机动车查验助手</string>
+    <string name="title1_check">查验方法</string>
+    <string name="title_check_1">疑难案例</string>
+    <string name="title_check_2">法规标准库</string>
     <string name="title_info">资讯</string>
+    <string name="titlebar_info">机动车安全管理资讯</string>
     <!--在资讯中不同的资讯类型获取-->
-    <string name="title_info1">车管动态</string>
-    <string name="title_info2">专题跟踪</string>
-    <string name="title_info3">专家解读</string>
+    <!--车管动态-->
+    <string name="title_info1">业内动态</string>
+    <!--专题跟踪-->
+    <string name="title_info2">专家视角</string>
+    <!--专家解读-->
+    <string name="title_info3">执法规范化</string>
     <string name="title_auditorium">论坛</string>
+    <string name="titlebar_auditorium">机动车查验业务交流论坛</string>
     <!--培训对应业务大讲堂-->
     <string name="title_training">培训</string>
+    <string name="titlebar_training">培训大纲</string>
     <string name="title_mine">我的</string>
     <string name="changeportrait">修改头像</string>
     <string name="message">我的消息</string>
     <string name="myqa">我的问答</string>
     <string name="messageList">消息列表</string>
     <string name="messageDetail">消息详情</string>
-    <string name="answer">评论 0</string>
+    <string name="answer">评论: </string>
     <string name="addquestion">添加问答</string>
+    <string name="changepassword">修改密码</string>
+    <string name="oldpwd">原密码</string>
+    <string name="newpwd">新密码</string>
+    <string name="renewpwd">重复输入新密码</string>
+
+    <string name="trainingtitle">机动车查验业务培训</string>
+
+    <string name="training11">好好学习</string>
+    <string name="training12">天天向上</string>
+
+    <string name="training21">政策法规培训</string>
+    <string name="training22">道路交通安全及其实施条例等</string>
+
+    <string name="training31">技术标准培训</string>
+    <string name="training32">GB7258-2017等</string>
+
+    <string name="training41">查验实战培训</string>
+    <string name="training42">查验实践中的疑难案例</string>
+
+    <string name="training51">其他</string>
+    <string name="training52">有关培训的其他内容</string>
 
 
     <string name="changeportrait_chose">选择本地照片</string>
@@ -46,7 +76,7 @@
     <string name="specialtopiclist">专题信息</string>
     <string name="qalist">在线问答</string>
     <string name="downloadlist">文件下载</string>
-    <string name="preview">在线预览</string>
+    <string name="preview">详情</string>
 
     <string name="transfer">转移登记</string>
 

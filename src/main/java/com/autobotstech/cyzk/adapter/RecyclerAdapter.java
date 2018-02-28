@@ -48,6 +48,19 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapt
             holder.createTime.setText(recyclerItem.getCreateTime());
         }
 
+        if (holder.keyword != null) {
+            holder.keyword.setText(recyclerItem.getKeyword());
+        }
+
+        if (holder.author != null) {
+            holder.author.setText(recyclerItem.getAuthor());
+        }
+
+        if (holder.checkComment != null) {
+            holder.checkComment.setText(recyclerItem.getCheckComment());
+        }
+
+
     }
 
     @Override
@@ -60,6 +73,9 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapt
         TextView name;
         LinearLayout tag;
         TextView createTime;
+        TextView keyword;
+        TextView author;
+        TextView checkComment;
 
         public ViewHolder(View view) {
             super(view);
@@ -77,6 +93,18 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapt
 
             if (null != view.findViewById(R.id.recycleritemcreatetime)) {
                 createTime = (TextView) view.findViewById(R.id.recycleritemcreatetime);
+            }
+
+            if (null != view.findViewById(R.id.recycleritemkeyword)) {
+                keyword = (TextView) view.findViewById(R.id.recycleritemkeyword);
+            }
+
+            if (null != view.findViewById(R.id.recycleritemauthor)) {
+                author = (TextView) view.findViewById(R.id.recycleritemauthor);
+            }
+
+            if (null != view.findViewById(R.id.checkComment)) {
+                checkComment = (TextView) view.findViewById(R.id.checkComment);
             }
 
         }

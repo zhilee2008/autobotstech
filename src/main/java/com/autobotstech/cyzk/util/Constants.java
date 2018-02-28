@@ -7,12 +7,9 @@ package com.autobotstech.cyzk.util;
 public class Constants {
 
 
-    //    public static String HTTP_PREFIX="https://www.autobotstech.com:9443";
-//    public static String HTTPS_PREFIX="https://www.autobotstech.com:5000";
-//    public static String URL_PREFIX="https://www.autobotstech.com:9443";
-    public static String URL_PREFIX = "https://www.autobotstech.com:9443";
+    public static String URL_PREFIX_DEV = "https://www.autobotstech.com:9443";
+    public static String URL_PREFIX = "https://chayan.autobotstech.com:9443";
     public static String URL_PREFIX_HTTP = "http://10.0.2.2:9000";
-//    public static String URL_PREFIX_HTTP="https://www.autobotstech.com:9443";
 
     public static String LOGIN = "/users/login";
 
@@ -53,10 +50,18 @@ public class Constants {
 
     public static String EXPERIENCES_DETAIL = "/experiences/queryOneById/";
 
-    public static String TECHSUPPORTS = "/techsupports/all";
+    public static String TECHSUPPORTS = "/techsupports/queryAllByFenlei/faguibiaozhun?pagecount=1000";
+    public static String TECHSUPPORTS_XYCL = "/techsupports/queryAllByFenlei/xianyicheliang";
 
     public static String UPLOAD_IMAGE = "/users/upload";
     public static String GET_USERE = "/users/mobile/";
+
+    public static String CHANGE_PWD = "/users/change/password/";
+
+    public static String LECTUREHALLTRAINING2 = "/leturehalls//queryByZhuanlan/zhengcefagui";
+    public static String LECTUREHALLTRAINING3 = "/leturehalls/queryByZhuanlan/jishubiaozhun";
+    public static String LECTUREHALLTRAINING4 = "/leturehalls/queryByZhuanlan/jianchashizhan";
+    public static String LECTUREHALLTRAINING5 = "/leturehalls/queryByZhuanlan/others";
 
 
 }

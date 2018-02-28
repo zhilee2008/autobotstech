@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.autobotstech.cyzk.R;
 import com.jude.rollviewpager.RollPagerView;
@@ -20,7 +21,7 @@ public class CheckActivity extends Fragment {
 
     protected Context mContext;
     protected static FragmentManager fm;
-    private RollPagerView mRollViewPager;
+//    private RollPagerView mRollViewPager;
 
 
     @Override
@@ -32,25 +33,33 @@ public class CheckActivity extends Fragment {
 
         CheckActivityContainer.initFragment(R.id.checkmenucontainer, new CheckMenuActivity());
 
+        TextView reportmenu = (TextView)view.findViewById(R.id.reportmenu);
+        reportmenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                CheckActivityContainer.changeFragment(R.id.checkmainpage, new CheckXYCLListFragment());
+            }
+        });
 
-        mRollViewPager = (RollPagerView) view.findViewById(R.id.roll_view_pager);
 
-        //设置播放时间间隔
-        mRollViewPager.setPlayDelay(1000);
-        //设置透明度
-        mRollViewPager.setAnimationDurtion(500);
-        //设置适配器
-        mRollViewPager.setAdapter(new TestNormalAdapter());
-
-        //设置指示器（顺序依次）
-        //自定义指示器图片
-        //设置圆点指示器颜色
-        //设置文字指示器
-        //隐藏指示器
-        //mRollViewPager.setHintView(new IconHintView(this, R.drawable.point_focus, R.drawable.point_normal));
-        mRollViewPager.setHintView(new ColorPointHintView(view.getContext(), Color.YELLOW, Color.WHITE));
-        //mRollViewPager.setHintView(new TextHintView(this));
-        //mRollViewPager.setHintView(null);
+//        mRollViewPager = (RollPagerView) view.findViewById(R.id.roll_view_pager);
+//
+//        //设置播放时间间隔
+//        mRollViewPager.setPlayDelay(1000);
+//        //设置透明度
+//        mRollViewPager.setAnimationDurtion(500);
+//        //设置适配器
+//        mRollViewPager.setAdapter(new TestNormalAdapter());
+//
+//        //设置指示器（顺序依次）
+//        //自定义指示器图片
+//        //设置圆点指示器颜色
+//        //设置文字指示器
+//        //隐藏指示器
+//        //mRollViewPager.setHintView(new IconHintView(this, R.drawable.point_focus, R.drawable.point_normal));
+//        mRollViewPager.setHintView(new ColorPointHintView(view.getContext(), Color.YELLOW, Color.WHITE));
+//        //mRollViewPager.setHintView(new TextHintView(this));
+//        //mRollViewPager.setHintView(null);
 
 
         return view;

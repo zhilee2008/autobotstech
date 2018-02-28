@@ -1,5 +1,6 @@
 package com.autobotstech.cyzk.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -41,10 +42,12 @@ public class CheckFlowImageFragment extends BaseFragement {
     private String htmlbody = "";
 
     private String[] imageUrls;
+    private Context mContext;
 
     @Override
     protected void initView() {
-        sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+        mContext=getContext();
+        sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         token = sp.getString("token", "");
 
         appGlobals = (AppGlobals) getActivity().getApplication();
@@ -80,7 +83,7 @@ public class CheckFlowImageFragment extends BaseFragement {
             JSONObject obj = new JSONObject();
             JSONArray array = new JSONArray();
             try {
-                HttpConnections httpConnections = new HttpConnections(getContext());
+                HttpConnections httpConnections = new HttpConnections(mContext);
                 List<String> conditionslist = new ArrayList<String>();
                 conditionslist.add("businessType=" + appGlobals.getBusinessType());
                 conditionslist.add("vehicleType=" + appGlobals.getVehicleType());
@@ -135,36 +138,19 @@ public class CheckFlowImageFragment extends BaseFragement {
                     e.printStackTrace();
                 }
                 imageUrls = StringUtils.returnImageUrlsFromHtml(htmlbody);
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.getSettings().setAppCacheEnabled(true);
-                webView.getSettings().setDatabaseEnabled(true);
-                webView.getSettings().setDomStorageEnabled(true);
 
-                webView.getSettings().setUseWideViewPort(true);
-                webView.getSettings().setLoadWithOverviewMode(true);
-                webView.getSettings().setTextSize(WebSettings.TextSize.LARGEST);
+                WebSettings settings = webView.getSettings();
+                settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+                settings.setBuiltInZoomControls(true);
+                settings.setSupportZoom(true); // 支持缩放
+                // 设置显示缩放按钮
+                settings.setDisplayZoomControls(false);
 
-                // 设置可以支持缩放
-                webView.getSettings().setSupportZoom(true);
-
-//              webView.loadUrl("http://a.mp.uc.cn/article.html?uc_param_str=frdnsnpfvecpntnwprdssskt&client=ucweb&wm_aid=c51bcf6c1553481885da371a16e33dbe&wm_id=482efebe15ed4922a1f24dc42ab654e6&pagetype=share&btifl=100");
-                String css = "<style type=\"text/css\"> img {" +
-                        "width:100%;" +
-                        "height:auto;" +
-                        "}" +
-                        "body {" +
-                        "margin-right:15px;" +
-                        "margin-left:15px;" +
-                        "margin-top:15px;" +
-                        "font-size:45px;" +
-                        "}" +
-                        "</style>";
-                htmlbody = "<html><header>" + css + "</header><body>" + htmlbody + "</body></html>";
+                htmlbody = "<html><body>" + htmlbody + "</body></html>";
 
                 webView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
-//                webView.addJavascriptInterface(new MJavascriptInterface(getActivity(),imageSrcList.toArray(new String[imageSrcList.size()])), "imagelistener");
                 //点击图片弹出图片
-                webView.addJavascriptInterface(new MJavascriptInterface(getActivity(), imageUrls), "imagelistener");
+//                webView.addJavascriptInterface(new MJavascriptInterface(getActivity(), imageUrls), "imagelistener");
                 webView.setWebViewClient(new MyWebViewClient());
             } else {
 

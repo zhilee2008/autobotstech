@@ -155,27 +155,38 @@ public class InfoQaListInMineFragment extends Fragment {
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
                             String createTimeString = flowArr.getJSONObject(i).getString("createTime");
-                            Format f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            Format f = new SimpleDateFormat("yyyy-MM-dd");
                             Date date = null;
                             String dateString = "";
                             try {
                                 date = (Date) f.parseObject(createTimeString);
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                 dateString = sdf.format(date);
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
 
                             recyclerItem.setCreateTime(dateString);
-                            String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
-                            InputStream is = httpConnections.httpsGetPDFStream(imageString);
-                            bitmap = BitmapFactory.decodeStream(is);
-                            if(bitmap==null){
+                            boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
+                            if(!hasPortrait){
                                 recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
                             }else{
-                                Drawable drawable = new BitmapDrawable(bitmap);
-                                recyclerItem.setImage(drawable);
+                                String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
+                                if("".equals(imageString)){
+                                    recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                }else{
+                                    InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                                    bitmap = BitmapFactory.decodeStream(is);
+                                    if(bitmap==null){
+                                        recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                    }else{
+                                        Drawable drawable = new BitmapDrawable(bitmap);
+                                        recyclerItem.setImage(drawable);
+                                    }
+                                }
                             }
+                            String author = flowArr.getJSONObject(i).getJSONObject("createPerson").getString("name");
+                            recyclerItem.setAuthor(author);
 
                             checkFlowList.add(recyclerItem);
 

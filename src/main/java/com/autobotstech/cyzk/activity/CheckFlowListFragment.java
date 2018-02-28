@@ -38,6 +38,7 @@ public class CheckFlowListFragment extends BaseFragement {
     private List<RecyclerItem> checkFlowList;
     RecyclerFlowListAdapter recyclerAdapter;
     RecyclerView recyclerView;
+    HttpConnections httpConnections;
 
     @Override
     protected void initView() {
@@ -48,6 +49,19 @@ public class CheckFlowListFragment extends BaseFragement {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         appGlobals = (AppGlobals) getActivity().getApplication();
+        try {
+            httpConnections = new HttpConnections(getContext());
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
 
         mCheckFlowListTask = new CheckFlowListTask(token);
         mCheckFlowListTask.execute((Void) null);
@@ -85,8 +99,7 @@ public class CheckFlowListFragment extends BaseFragement {
 //            LitePal.getDatabase();
             JSONObject obj = new JSONObject();
             checkFlowList = new ArrayList<RecyclerItem>();
-            try {
-                HttpConnections httpConnections = new HttpConnections(getContext());
+
                 List<String> conditionslist = new ArrayList<String>();
                 conditionslist.add("businessType=" + appGlobals.getBusinessType());
                 conditionslist.add("vehicleType=" + appGlobals.getVehicleType());
@@ -105,23 +118,15 @@ public class CheckFlowListFragment extends BaseFragement {
                             RecyclerItem recyclerItem = new RecyclerItem();
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("inspectItem"));
-//                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+                            boolean mustCheck = flowArr.getJSONObject(i).getBoolean("mustCheck");
+                            String checkCondition="";
+                            checkCondition = mustCheck ? "此项为必查项目" : "存疑时查验此项";
+                            recyclerItem.setCheckComment(checkCondition);
+//                            conditionCheck
+//                            mustCheck
                             recyclerItem.setImage(getResources().getDrawable(R.drawable.ic_dashboard_black_24dp));
-                            checkFlowList.add(recyclerItem);
 
-//                            CheckFlowDetail checkFlowDetail = new CheckFlowDetail();
-//                            checkFlowDetail.setFlowid(flowArr.getJSONObject(i).getString("_id"));
-//                            checkFlowDetail.setBusinessType(flowArr.getJSONObject(i).getString("businessType"));
-//                            checkFlowDetail.setVehicleType(flowArr.getJSONObject(i).getString("vehicleType"));
-//                            checkFlowDetail.setCarStandard(flowArr.getJSONObject(i).getString("carStandard"));
-//                            checkFlowDetail.setUseProperty(flowArr.getJSONObject(i).getString("useProperty"));
-//                            checkFlowDetail.setMethod(flowArr.getJSONObject(i).getString("method"));
-//                            checkFlowDetail.setMeasure(flowArr.getJSONObject(i).getString("standard"));
-//                            checkFlowDetail.setGist(flowArr.getJSONObject(i).getString("gist"));
-//                            checkFlowDetail.setStep(flowArr.getJSONObject(i).getInt("step"));
-//                            checkFlowDetail.setInspectItem(flowArr.getJSONObject(i).getString("inspectItem"));
-//                            //判断是否存在 如果存在 且不同 则更新或不操作 不存在添加
-//                            checkFlowDetail.save();
+                            checkFlowList.add(recyclerItem);
 
                         }
                     } catch (JSONException e) {
@@ -129,17 +134,6 @@ public class CheckFlowListFragment extends BaseFragement {
                     }
                 }
 
-            } catch (CertificateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (KeyStoreException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (KeyManagementException e) {
-                e.printStackTrace();
-            }
 
             return checkFlowList;
         }

@@ -134,28 +134,36 @@ public class InfoSpecial4Detail extends Fragment {
             mTask = null;
             if (result != null) {
                 try {
-                    String title = "<div><h2>" + result.getString("title") + "</h2></div>";
-                    String keyword = "<div>" + result.getString("keyword") + "</div>";
+                    String data = "<head><style>img{ width:100% !important;}</style></head>";
+//                    String title = "<div><h2>" + result.getString("title") + "</h2></div>";
+//                    String keyword = "<div>" + result.getString("keyword") + "</div>";
                     String description = "<div>" + result.getString("description") + "</div>";
 
-                    htmlbody = title + keyword + description;
+//                    htmlbody = title + keyword + description;
+                    htmlbody = data+description;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.getSettings().setAppCacheEnabled(true);
-                webView.getSettings().setDatabaseEnabled(true);
-                webView.getSettings().setDomStorageEnabled(true);
-
-                webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-                webView.getSettings().setUseWideViewPort(true);
-
+//                webView.getSettings().setJavaScriptEnabled(true);
+//                webView.getSettings().setAppCacheEnabled(true);
+//                webView.getSettings().setDatabaseEnabled(true);
+//                webView.getSettings().setDomStorageEnabled(true);
+//
+//                webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+//                webView.getSettings().setUseWideViewPort(true);
+//
+//                WebSettings settings = webView.getSettings();
+//                settings.setUseWideViewPort(true);
+//                settings.setLoadWithOverviewMode(true);
+//                settings.setTextSize(WebSettings.TextSize.LARGEST);
+//                webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 WebSettings settings = webView.getSettings();
-                settings.setUseWideViewPort(true);
-                settings.setLoadWithOverviewMode(true);
-                settings.setTextSize(WebSettings.TextSize.LARGEST);
-                webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+                settings.setBuiltInZoomControls(true);
+                settings.setSupportZoom(true); // 支持缩放
+                // 设置显示缩放按钮
+                settings.setDisplayZoomControls(false);
 
                 webView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
             } else {

@@ -36,6 +36,16 @@ public class RecyclerItem {
     private String name;
     private String id;
 
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    private String keyword;
+
     public String getCreateTime() {
         return createTime;
     }
@@ -55,5 +65,25 @@ public class RecyclerItem {
     }
 
     public String filePath;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String author;
+
+    public String getCheckComment() {
+        return checkComment;
+    }
+
+    public void setCheckComment(String checkComment) {
+        this.checkComment = checkComment;
+    }
+
+    public String checkComment;
 
 }
