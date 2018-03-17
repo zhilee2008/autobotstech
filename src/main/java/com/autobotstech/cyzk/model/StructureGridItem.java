@@ -17,6 +17,16 @@ public class StructureGridItem {
 
     private int headerId;
 
+    public String getBgcolor() {
+        return bgcolor;
+    }
+
+    public void setBgcolor(String bgcolor) {
+        this.bgcolor = bgcolor;
+    }
+
+    private String bgcolor;
+
     public JSONArray getStandar() {
         return standar;
     }
@@ -27,7 +37,7 @@ public class StructureGridItem {
 
     private JSONArray standar;
 
-    public StructureGridItem(String id, String name, Drawable image, String parent, JSONArray standar, int headerId) {
+    public StructureGridItem(String id, String name, Drawable image, String parent, JSONArray standar, int headerId, String bgcolor) {
         super();
         this.id = id;
         this.name = name;
@@ -35,6 +45,7 @@ public class StructureGridItem {
         this.parent = parent;
         this.headerId = headerId;
         this.standar = standar;
+        this.bgcolor = bgcolor;
     }
 
     public String getId() {

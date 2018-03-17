@@ -140,7 +140,7 @@ public class InfoSpecial4Detail extends Fragment {
                     String description = "<div>" + result.getString("description") + "</div>";
 
 //                    htmlbody = title + keyword + description;
-                    htmlbody = data+description;
+                    htmlbody = data + description;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

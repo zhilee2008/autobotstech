@@ -18,12 +18,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.fragment.BaseFragement;
-import com.autobotstech.cyzk.adapter.RecyclerSpecialListAdapter;
 import com.autobotstech.cyzk.adapter.RecyclerYLJXListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
@@ -57,7 +55,7 @@ public class InfoSpecialtopic4List extends BaseFragement {
     private List<RecyclerItem> checkFlowList;
     RecyclerYLJXListAdapter recyclerAdapter;
     RecyclerView recyclerView;
-    Bitmap bitmap=null;
+    Bitmap bitmap = null;
     SearchView mSearchView = null;
 
     LinearLayout listContainer;
@@ -74,10 +72,10 @@ public class InfoSpecialtopic4List extends BaseFragement {
         appGlobals = (AppGlobals) getActivity().getApplication();
 
 //        recyclerView.setf.setTextFilterEnabled(true);
-        mSearchView = (SearchView)mView.findViewById(R.id.searchView);
+        mSearchView = (SearchView) mView.findViewById(R.id.searchView);
 
         listContainer = (LinearLayout) mView.findViewById(R.id.listcontainer);
-        mProgressView = (ProgressBar)mView.findViewById(R.id.progressbar);
+        mProgressView = (ProgressBar) mView.findViewById(R.id.progressbar);
         showProgress(true);
 
         mTask = new CheckFlowListTask(token);
@@ -95,9 +93,9 @@ public class InfoSpecialtopic4List extends BaseFragement {
             // 当搜索内容改变时触发该方法
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (!TextUtils.isEmpty(newText)){
+                if (!TextUtils.isEmpty(newText)) {
                     search(newText);
-                }else{
+                } else {
                     showProgress(true);
                     mTask = new CheckFlowListTask(token);
                     mTask.execute((Void) null);
@@ -109,17 +107,17 @@ public class InfoSpecialtopic4List extends BaseFragement {
 
     }
 
-    public void search(String searchText){
+    public void search(String searchText) {
         searchText = searchText.trim();
-        if("".equals(searchText)){
+        if ("".equals(searchText)) {
             return;
         }
         List<RecyclerItem> searchList = new ArrayList<RecyclerItem>();
         searchList.addAll(checkFlowList);
         checkFlowList.clear();
-        for(int i=0;i<searchList.size();i++){
+        for (int i = 0; i < searchList.size(); i++) {
             RecyclerItem recyclerItem = searchList.get(i);
-            if(recyclerItem.getName().contains(searchText) || recyclerItem.getKeyword().contains(searchText)){
+            if (recyclerItem.getName().contains(searchText) || recyclerItem.getKeyword().contains(searchText)) {
                 checkFlowList.add(recyclerItem);
             }
         }
@@ -180,18 +178,18 @@ public class InfoSpecialtopic4List extends BaseFragement {
 
                             recyclerItem.setCreateTime(dateString);
                             boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
-                            if(!hasPortrait){
+                            if (!hasPortrait) {
                                 recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-                            }else{
+                            } else {
                                 String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
-                                if("".equals(imageString)){
+                                if ("".equals(imageString)) {
                                     recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-                                }else{
+                                } else {
                                     InputStream is = httpConnections.httpsGetPDFStream(imageString);
                                     bitmap = BitmapFactory.decodeStream(is);
-                                    if(bitmap==null){
+                                    if (bitmap == null) {
                                         recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-                                    }else{
+                                    } else {
                                         Drawable drawable = new BitmapDrawable(bitmap);
                                         recyclerItem.setImage(drawable);
                                     }
@@ -199,7 +197,7 @@ public class InfoSpecialtopic4List extends BaseFragement {
                             }
 //keyword
                             String keyword = flowArr.getJSONObject(i).getString("keyword");
-                            recyclerItem.setKeyword("关键字："+keyword);
+                            recyclerItem.setKeyword("关键字：" + keyword);
 
                             String author = flowArr.getJSONObject(i).getJSONObject("createPerson").getString("name");
                             recyclerItem.setAuthor(author);

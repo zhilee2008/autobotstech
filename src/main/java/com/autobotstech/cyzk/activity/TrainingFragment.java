@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
@@ -31,6 +32,9 @@ public class TrainingFragment extends Fragment {
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
 
         backbutton.setVisibility(View.INVISIBLE);
+
+        TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
+        titlebar.setText(R.string.trainingtitlecontaineer);
 
         view.findViewById(R.id.training2).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +74,6 @@ public class TrainingFragment extends Fragment {
 
         return view;
     }
-
 
 
 }

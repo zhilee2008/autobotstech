@@ -57,7 +57,18 @@ public abstract class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapt
         }
 
         if (holder.checkComment != null) {
-            holder.checkComment.setText(recyclerItem.getCheckComment());
+//            holder.checkComment.setText(recyclerItem.getCheckComment());
+            String commentString = mRecyclerList.get(position).getCheckComment();
+            String checkCondition = commentString.equals("1") ? "此项为必查项目" : "存疑时查验此项";
+            if (commentString.equals("1")) {
+                holder.checkComment.setText(checkCondition);
+                holder.checkComment.setBackgroundColor(holder.checkComment.getResources().getColor(R.color.must));
+
+            } else {
+                holder.checkComment.setText(checkCondition);
+                holder.checkComment.setBackgroundColor(holder.checkComment.getResources().getColor(R.color.notsure));
+
+            }
         }
 
 

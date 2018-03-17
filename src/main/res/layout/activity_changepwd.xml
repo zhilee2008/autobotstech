@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -14,15 +13,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/oldpwdtext" />
 
         <EditText
             android:id="@+id/oldpwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
             android:hint="@string/oldpwd"
+            android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
             android:textColorHint="@color/grey"
@@ -39,8 +43,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/newpwdtext" />
 
         <EditText
             android:id="@+id/newpwd"
@@ -64,8 +73,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/renewpwdtext" />
 
         <EditText
             android:id="@+id/renewpwd"
@@ -85,18 +99,27 @@
         android:layout_width="fill_parent"
         android:layout_height="1.0dip"
         android:background="#ffeaeaea" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="15dp">
 
-
         <Button
-            android:id="@+id/changePWD"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="确认修改" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/logoutborder"
+            android:paddingLeft="130dp"
+            android:paddingRight="130dp"
+            android:id="@+id/changePWD"
+            android:text="确定"
+            android:textColor="@color/blue"
+            android:textColorLink="@color/white"
+            android:textSize="18sp" />
+
     </LinearLayout>
 
 </LinearLayout>

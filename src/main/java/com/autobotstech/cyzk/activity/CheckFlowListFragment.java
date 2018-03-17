@@ -100,39 +100,40 @@ public class CheckFlowListFragment extends BaseFragement {
             JSONObject obj = new JSONObject();
             checkFlowList = new ArrayList<RecyclerItem>();
 
-                List<String> conditionslist = new ArrayList<String>();
-                conditionslist.add("businessType=" + appGlobals.getBusinessType());
-                conditionslist.add("vehicleType=" + appGlobals.getVehicleType());
-                conditionslist.add("carStandard=" + appGlobals.getCarStandard());
-                conditionslist.add("useProperty=" + appGlobals.getUseProperty());
+            List<String> conditionslist = new ArrayList<String>();
+            conditionslist.add("businessType=" + appGlobals.getBusinessType());
+            conditionslist.add("vehicleType=" + appGlobals.getVehicleType());
+            conditionslist.add("carStandard=" + appGlobals.getCarStandard());
+            conditionslist.add("useProperty=" + appGlobals.getUseProperty());
 
-                String conditionString = "";
-                if (conditionslist.size() > 0) {
-                    conditionString = "?" + Utils.join("&", conditionslist);
-                }
-                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.CHECK_FLOW + conditionString, mToken);
-                if (obj != null) {
-                    try {
-                        JSONArray flowArr = obj.getJSONArray("detail");
-                        for (int i = 0; i < flowArr.length(); i++) {
-                            RecyclerItem recyclerItem = new RecyclerItem();
-                            recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
-                            recyclerItem.setName(flowArr.getJSONObject(i).getString("inspectItem"));
-                            boolean mustCheck = flowArr.getJSONObject(i).getBoolean("mustCheck");
-                            String checkCondition="";
-                            checkCondition = mustCheck ? "此项为必查项目" : "存疑时查验此项";
-                            recyclerItem.setCheckComment(checkCondition);
+            String conditionString = "";
+            if (conditionslist.size() > 0) {
+                conditionString = "?" + Utils.join("&", conditionslist);
+            }
+            obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.CHECK_FLOW + conditionString, mToken);
+            if (obj != null) {
+                try {
+                    JSONArray flowArr = obj.getJSONArray("detail");
+                    for (int i = 0; i < flowArr.length(); i++) {
+                        RecyclerItem recyclerItem = new RecyclerItem();
+                        recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
+                        recyclerItem.setName(flowArr.getJSONObject(i).getString("inspectItem"));
+                        boolean mustCheck = flowArr.getJSONObject(i).getBoolean("mustCheck");
+                        String checkCondition = "";
+                        checkCondition = mustCheck ? "1" : "0";
+//                            checkCondition = mustCheck ? "此项为必查项目" : "存疑时查验此项";
+                        recyclerItem.setCheckComment(checkCondition);
 //                            conditionCheck
 //                            mustCheck
-                            recyclerItem.setImage(getResources().getDrawable(R.drawable.ic_dashboard_black_24dp));
+//                            recyclerItem.setImage(getResources().getDrawable(R.drawable.ic_dashboard_black_24dp));
 
-                            checkFlowList.add(recyclerItem);
+                        checkFlowList.add(recyclerItem);
 
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+            }
 
 
             return checkFlowList;

@@ -12,7 +12,6 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 
 import org.json.JSONObject;
@@ -122,7 +121,7 @@ public class Utils {
     /**
      * 转换图片成圆形
      *
-     * @param bitmap  传入Bitmap对象
+     * @param bitmap 传入Bitmap对象
      * @return
      */
     public static Bitmap toRoundBitmap(Bitmap bitmap) {
@@ -199,7 +198,7 @@ public class Utils {
         return image;
     }
 
-    public Bitmap returnBitMap(String url){
+    public Bitmap returnBitMap(String url) {
         URL myFileUrl = null;
         Bitmap bitmap = null;
         try {
@@ -222,9 +221,9 @@ public class Utils {
     }
 
     public final static String MD5(String s) {
-        char hexDigits[] = { '0', '1', '2', '3', '4',
+        char hexDigits[] = {'0', '1', '2', '3', '4',
                 '5', '6', '7', '8', '9',
-                'A', 'B', 'C', 'D', 'E', 'F' };
+                'A', 'B', 'C', 'D', 'E', 'F'};
         try {
             byte[] btInput = s.getBytes();
             //获得MD5摘要算法的 MessageDigest 对象
@@ -243,8 +242,7 @@ public class Utils {
                 str[k++] = hexDigits[byte0 & 0xf];
             }
             return new String(str);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

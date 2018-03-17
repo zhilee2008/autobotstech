@@ -175,6 +175,7 @@
                 android:text="@string/schoolbus" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="1.0dip"
@@ -250,14 +251,15 @@
 
             <ImageView
                 android:layout_width="40dip"
-                android:layout_height="40dip" />
+                android:layout_height="40dip"
+                app:srcCompat="@drawable/others" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
-                android:gravity="center_vertical|center_horizontal"
-                 />
+                android:text="@string/others"
+                android:gravity="center_vertical|center_horizontal" />
         </LinearLayout>
 
     </LinearLayout>

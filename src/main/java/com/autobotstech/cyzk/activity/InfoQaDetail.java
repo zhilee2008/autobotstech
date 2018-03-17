@@ -2,33 +2,37 @@ package com.autobotstech.cyzk.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Instrumentation;
-import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
-import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
+import com.autobotstech.cyzk.adapter.RecyclerQaAnswerListAdapter;
+import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -36,7 +40,9 @@ import java.security.cert.CertificateException;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class InfoQaDetail extends AppCompatActivity {
@@ -46,17 +52,21 @@ public class InfoQaDetail extends AppCompatActivity {
     private String token;
     private InfoQaDetailTask mTask = null;
 
-    private WebView qawebView;
-    private WebView answerswebView;
-    private String htmlbody = "";
-    private String answerhtmlbody = "";
-    private String huifucontent = "";
-
+    private TextView qContentView;
+    private TextView qTitleView;
     private TextView answerCountView;
 
     private String[] imageUrls;
 
     private String qaId;
+
+    private List<RecyclerItem> checkFlowList;
+    RecyclerQaAnswerListAdapter recyclerAdapter;
+    RecyclerView recyclerView;
+    Bitmap bitmap = null;
+    ImageView recycleritemauthorimage;
+    Drawable qimage;
+
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -75,7 +85,10 @@ public class InfoQaDetail extends AppCompatActivity {
 
         setContentView(R.layout.activity_qa_detail);
 
+        qTitleView = (TextView) findViewById(R.id.qTitleView);
+        qContentView = (TextView) findViewById(R.id.qContentView);
         answerCountView = (TextView) findViewById(R.id.answercount);
+        recycleritemauthorimage = (ImageView) findViewById(R.id.recycleritemauthorimage);
 
         Button backbutton = (Button) findViewById(R.id.button_backward);
         backbutton.setOnClickListener(new View.OnClickListener() {
@@ -95,143 +108,165 @@ public class InfoQaDetail extends AppCompatActivity {
 
             }
         });
-        backbutton.setText(R.string.change_finished);
+        backbutton.setText("");
         backbutton.setVisibility(View.VISIBLE);
 
         TextView titlebar = (TextView) findViewById(R.id.text_title);
-        titlebar.setText(R.string.title_auditorium);
+        titlebar.setText(R.string.title_huifu);
 
-        Button huifu = (Button) findViewById(R.id.huifu);
-
-
-
-        huifu.setOnClickListener(new View.OnClickListener() {
+        Button messageButton = (Button) findViewById(R.id.button_message);
+        messageButton.setVisibility(View.VISIBLE);
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_add_message);
+        drawable.setBounds(0, 0, 100, 100);
+        messageButton.setCompoundDrawables(null, null, drawable, null);
+        messageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-
-                huifucontent = ((TextView) findViewById(R.id.huifucontent)).getText().toString().trim();
-                if (huifucontent.equals("")) {
-                    Toast.makeText(InfoQaDetail.this, "请输入回复内容", Toast.LENGTH_SHORT).show();
-                } else {
-                    mTask = new InfoQaDetailTask(token, 1);
-                    mTask.execute((Void) null);
-                }
-
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putString("detail", qaId);
+                intent.putExtras(bundle);
+                intent.setClass(InfoQaDetail.this, InfoQaReply.class);
+                startActivityForResult(intent, 1);
+//                startActivity(intent);
             }
         });
 
-//        View view = inflater.inflate(R.layout.activity_qa_detail, container, false);
-//        ViewGroup vg = (ViewGroup) container.getParent();
-//        Button backbutton = (Button) vg.findViewById(R.id.button_backward);
-//        backbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View arg0) {
-//                // TODO Auto-generated method stub
-//                new Thread() {
-//                    public void run() {
-//                        try {
-//                            Instrumentation inst = new Instrumentation();
-//                            inst.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }.start();
-//
-//            }
-//        });
-//        backbutton.setText(R.string.change_finished);
-//        backbutton.setVisibility(View.VISIBLE);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerviewanswer);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-//        TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
-//        titlebar.setText(R.string.title_check_1);
-
-
-        qawebView = (WebView) findViewById(R.id.qadetail);
-        answerswebView = (WebView) findViewById(R.id.answersdetail);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        qawebView.setLayoutManager(linearLayoutManager);
-
-        mTask = new InfoQaDetailTask(token, 0);
+        mTask = new InfoQaDetailTask(token);
         mTask.execute((Void) null);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+// 当otherActivity中返回数据的时候，会响应此方法
+// requestCode和resultCode必须与请求startActivityForResult()和返回setResult()的时候传入的值一致。
+        if (requestCode == 1 && resultCode == InfoQaReply.RESULT_CODE) {
+            Bundle bundle = data.getExtras();
+            String strResult = bundle.getString("result");
+//            Log.i(TAG,"onActivityResult: "+ strResult);
+//            Toast.makeText(InfoQaDetail.this, strResult, Toast.LENGTH_LONG).show();
+            mTask = new InfoQaDetailTask(token);
+            mTask.execute((Void) null);
+        }
     }
 
 
     public class InfoQaDetailTask extends AsyncTask<Void, Void, JSONObject> {
 
         private final String mToken;
-        private final int misupdate;
 
-        InfoQaDetailTask(String token, int isupdate) {
+        InfoQaDetailTask(String token) {
             mToken = token;
-            misupdate = isupdate;
         }
 
         @Override
         protected JSONObject doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             JSONObject obj = new JSONObject();
-            if (misupdate == 1) {
-                try {
-                    HttpConnections httpConnections = new HttpConnections(InfoQaDetail.this.getApplicationContext());
-                    obj = httpConnections.httpsPost(Constants.URL_PREFIX + Constants.FORUMS_ADD_ANSWER + qaId, huifucontent, mToken);
 
-                } catch (CertificateException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (KeyStoreException e) {
-                    e.printStackTrace();
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                } catch (KeyManagementException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                JSONObject objq = new JSONObject();
-                JSONObject obja = new JSONObject();
-                try {
-                    HttpConnections httpConnections = new HttpConnections(InfoQaDetail.this.getApplicationContext());
+            JSONObject objq = new JSONObject();
+            JSONObject obja = new JSONObject();
+            try {
+                HttpConnections httpConnections = new HttpConnections(InfoQaDetail.this.getApplicationContext());
 
-                    objq = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.FORUMS_DETAIL + qaId, mToken);
-                    if (objq != null) {
-                        objq = objq.getJSONObject("forum");
-                        obj.put("objq", objq);
+                objq = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.FORUMS_DETAIL + qaId, mToken);
+                if (objq != null) {
+                    objq = objq.getJSONObject("forum");
+                    boolean hasPortrait = objq.getJSONObject("createPerson").has("portrait");
+                    if (!hasPortrait) {
+                        qimage = getResources().getDrawable(R.drawable.default_personal);
                     } else {
-                        obj.put("objq", null);
+                        String imageString = objq.getJSONObject("createPerson").getJSONObject("portrait").getString("small");
+                        if ("".equals(imageString)) {
+                            qimage = getResources().getDrawable(R.drawable.default_personal);
+                        } else {
+                            InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                            bitmap = BitmapFactory.decodeStream(is);
+                            if (bitmap == null) {
+                                qimage = getResources().getDrawable(R.drawable.default_personal);
+                            } else {
+                                qimage = new BitmapDrawable(bitmap);
+                            }
+                        }
                     }
-
-                    obja = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.FORUMS_DETAIL_ANSWERS + qaId, mToken);
-                    if (obja != null) {
-                        obj.put("obja", obja);
-
-                    } else {
-                        obj.put("obja", null);
-                    }
-
-
-//                obj = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.FORUMS_DETAIL_ANSWERS + qaId, mToken);
-//                if (obj != null) {
-//                    obj = obj.getJSONObject("forum");
-//
-//                }
-
-                } catch (CertificateException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (KeyStoreException e) {
-                    e.printStackTrace();
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                } catch (KeyManagementException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    obj.put("objq", objq);
+                } else {
+                    obj.put("objq", null);
                 }
+
+                obja = httpConnections.httpsGet(Constants.URL_PREFIX + Constants.FORUMS_DETAIL_ANSWERS + qaId, mToken);
+                if (obja != null) {
+                    checkFlowList = new ArrayList<RecyclerItem>();
+                    try {
+                        JSONArray flowArr = obja.getJSONArray("detail");
+                        for (int i = 0; i < flowArr.length(); i++) {
+                            RecyclerItem recyclerItem = new RecyclerItem();
+                            recyclerItem.setName(flowArr.getJSONObject(i).getString("answer"));
+                            String createTimeString = flowArr.getJSONObject(i).getString("createTime");
+                            Format f = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date = null;
+                            String dateString = "";
+                            try {
+                                date = (Date) f.parseObject(createTimeString);
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                dateString = sdf.format(date);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            recyclerItem.setCreateTime(dateString);
+                            boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
+                            if (!hasPortrait) {
+                                recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                            } else {
+                                String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
+                                if ("".equals(imageString)) {
+                                    recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                } else {
+                                    InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                                    bitmap = BitmapFactory.decodeStream(is);
+                                    if (bitmap == null) {
+                                        recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                    } else {
+                                        Drawable drawable = new BitmapDrawable(bitmap);
+                                        recyclerItem.setImage(drawable);
+                                    }
+                                }
+                            }
+
+                            String author = flowArr.getJSONObject(i).getJSONObject("createPerson").getString("name");
+                            recyclerItem.setAuthor(author);
+                            checkFlowList.add(recyclerItem);
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    obj.put("obja", checkFlowList);
+
+                } else {
+                    obj.put("obja", null);
+                }
+
+
+            } catch (CertificateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
 
             return obj;
         }
@@ -239,101 +274,30 @@ public class InfoQaDetail extends AppCompatActivity {
         @Override
         protected void onPostExecute(final JSONObject result) {
             mTask = null;
-            if (misupdate == 1) {
-                if (result != null) {
-                    try {
-                        JSONObject obj = result.getJSONObject("detail");
-                        if (obj != null) {
-                            LinearLayout hr = new LinearLayout(InfoQaDetail.this);
-                            LinearLayout.LayoutParams hrp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2);
-                            hr.setBackgroundColor(getResources().getColor(R.color.gray));
-                            hr.setLayoutParams(hrp);
-                            ((LinearLayout) findViewById(R.id.huifucontainer)).addView(hr);
 
-                            TextView tvAuthor = new TextView(InfoQaDetail.this);
-//                tvAuthor.setWidth(ConstraintLayout.LayoutParams.MATCH_PARENT);
-//                tvAuthor.setHeight(ConstraintLayout.LayoutParams.WRAP_CONTENT);
-                            tvAuthor.setPadding(0, 20, 0, 20);
-                            tvAuthor.setTextColor(getResources().getColor(R.color.black));
-                            tvAuthor.setText("作者");
-                            ((LinearLayout) findViewById(R.id.huifucontainer)).addView(tvAuthor);
+            if (result != null) {
 
-                            TextView inputext = (TextView) findViewById(R.id.huifucontent);
-                            huifucontent = inputext.getText().toString();
+                try {
+                    JSONObject objq = result.getJSONObject("objq");
+//                    JSONObject obja = result.getJSONObject("obja");
 
-                            TextView tvContent = new TextView(InfoQaDetail.this);
-//                tvContent.setWidth(ConstraintLayout.LayoutParams.MATCH_PARENT);
-//                tvContent.setHeight(ConstraintLayout.LayoutParams.WRAP_CONTENT);
-                            tvContent.setTextColor(getResources().getColor(R.color.black));
-                            tvContent.setPadding(0, 0, 0, 20);
-                            tvContent.setText(huifucontent);
-                            ((LinearLayout) findViewById(R.id.huifucontainer)).addView(tvContent);
-                            InputMethodManager imm = (InputMethodManager) InfoQaDetail.this
-                                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-                            // imm.hideSoftInputFromWindow(myEditText.getWindowToken(), 0);
-                            if (imm.isActive())  //一直是true
-                                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,
-                                        InputMethodManager.HIDE_NOT_ALWAYS);
-                            inputext.setText("");
-                        }
+                    if (objq != null) {
+                        recycleritemauthorimage.setImageDrawable(qimage);
+                        qTitleView.setText(objq.getString("title"));
+                        qContentView.setText(objq.getString("question"));
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+                    answerCountView.setText("" + checkFlowList.size());
 
+                    recyclerAdapter = new RecyclerQaAnswerListAdapter(checkFlowList, appGlobals);
+                    recyclerView.setAdapter(recyclerAdapter);
 
-                    qawebView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
-                    answerswebView.loadDataWithBaseURL(null, answerhtmlbody, "text/html", "utf-8", null);
-
-                } else {
-
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
             } else {
-                if (result != null) {
-                    try {
-                        JSONObject objq = result.getJSONObject("objq");
-                        JSONObject obja = result.getJSONObject("obja");
 
-                        if (objq != null) {
-                            String title = "<div><h2>" + objq.getString("title") + "</h2></div>";
-                            String description = "<div>" + objq.getString("question") + "</div>";
-                            htmlbody = title + description;
-                        }
-                        if (obja != null) {
-                            JSONArray answerArray = obja.getJSONArray("detail");
-                            answerCountView.setText("评论："+answerArray.length());
-                            for (int i = 0; i < answerArray.length(); i++) {
-                                String answerperson = "<div>" + answerArray.getJSONObject(i).getJSONObject("createPerson").getString("name") + "</div>";
-                                String createTimeString = answerArray.getJSONObject(i).getString("createTime");
-                                Format f = new SimpleDateFormat("yyyy-MM-dd");
-                                Date date = null;
-                                String dateString = "";
-                                try {
-                                    date = (Date) f.parseObject(createTimeString);
-                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                                    dateString = sdf.format(date);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                String dateContent = "<div>" + dateString + "</div>";
-                                String answerContent = "<div style='border-bottom:1.5px solid #d3d3d3'>" + answerArray.getJSONObject(i).getString("answer") + "</div>";
-                                answerhtmlbody = answerperson + answerContent + answerhtmlbody;
-                            }
-                        }
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    qawebView.loadDataWithBaseURL(null, htmlbody, "text/html", "utf-8", null);
-                    answerswebView.loadDataWithBaseURL(null, answerhtmlbody, "text/html", "utf-8", null);
-
-                } else {
-
-                }
             }
         }
 

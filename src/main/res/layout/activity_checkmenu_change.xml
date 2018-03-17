@@ -51,7 +51,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_chevron_right_black_24dp" />
+                        android:src="@drawable/ic_chevron_right_blue_24dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -90,7 +90,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_chevron_right_black_24dp" />
+                        android:src="@drawable/ic_chevron_right_blue_24dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -129,7 +129,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_chevron_right_black_24dp" />
+                        android:src="@drawable/ic_chevron_right_blue_24dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -168,7 +168,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_chevron_right_black_24dp" />
+                        android:src="@drawable/ic_chevron_right_blue_24dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -207,7 +207,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_chevron_right_black_24dp" />
+                        android:src="@drawable/ic_chevron_right_blue_24dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -247,7 +247,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_chevron_right_black_24dp" />
+                        android:src="@drawable/ic_chevron_right_blue_24dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -286,7 +286,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_chevron_right_black_24dp" />
+                        android:src="@drawable/ic_chevron_right_blue_24dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -303,13 +303,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
 
         <Button
             android:id="@+id/change_finished"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/change_finished" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/logoutborder"
+            android:paddingLeft="130dp"
+            android:paddingRight="130dp"
+            android:text="@string/change_finished"
+            android:textColor="@color/blue"
+            android:textColorLink="@color/white"
+            android:textSize="18sp" />
 
     </LinearLayout>
 </RelativeLayout>

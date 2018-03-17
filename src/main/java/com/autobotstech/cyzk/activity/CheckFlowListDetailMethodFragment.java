@@ -120,7 +120,7 @@ public class CheckFlowListDetailMethodFragment extends BaseFragement {
                 String htmlbody = "";
                 try {
                     String data = "<head><style>img{ width:100% !important;}</style></head>";
-                    htmlbody = data+result.getString("method");
+                    htmlbody = data + result.getString("method");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

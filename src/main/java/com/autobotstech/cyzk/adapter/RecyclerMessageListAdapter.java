@@ -25,9 +25,10 @@ public class RecyclerMessageListAdapter extends RecyclerAdapter {
     public RecyclerMessageListAdapter(List<RecyclerItem> lecturehallList, AppGlobals appGlobals) {
         super(lecturehallList, appGlobals);
     }
-    public RecyclerMessageListAdapter(List<RecyclerItem> lecturehallList, AppGlobals appGlobals,boolean isinmine) {
+
+    public RecyclerMessageListAdapter(List<RecyclerItem> lecturehallList, AppGlobals appGlobals, boolean isinmine) {
         super(lecturehallList, appGlobals);
-        this.isinmine=isinmine;
+        this.isinmine = isinmine;
     }
 
     @Override
@@ -44,9 +45,9 @@ public class RecyclerMessageListAdapter extends RecyclerAdapter {
                 bundle.putString("detail", mRecyclerList.get(holder.getAdapterPosition()).getId());
                 messageDetailFragment.setArguments(bundle);
 
-                if(isinmine){
+                if (isinmine) {
                     CheckActivityContainer.changeFragment(R.id.minemainpage, messageDetailFragment);
-                }else{
+                } else {
                     CheckActivityContainer.changeFragment(R.id.checkmainpage, messageDetailFragment);
                 }
 

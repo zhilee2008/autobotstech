@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -148,7 +147,7 @@ public class InfoSpecial1Detail extends Fragment {
                     String description = "<div>" + result.getString("description") + "</div>";
 
 //                    htmlbody = title + keyword + description;
-                    htmlbody = data+description;
+                    htmlbody = data + description;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

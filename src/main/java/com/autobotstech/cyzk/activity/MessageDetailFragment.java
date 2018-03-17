@@ -89,7 +89,7 @@ public class MessageDetailFragment extends Fragment {
 
 
         webView = (WebView) view.findViewById(R.id.messagedetail);
-        mProgressView = (ProgressBar)view.findViewById(R.id.progressbar);
+        mProgressView = (ProgressBar) view.findViewById(R.id.progressbar);
         showProgress(true);
         mTask = new MessageDetailTask(token);
         mTask.execute((Void) null);

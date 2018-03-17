@@ -15,4 +15,14 @@
 
     <color name="transparent">#000000</color>
     <color name="grey">#aaa9a9</color>
+    <color name="training2">#eb9696</color>
+    <color name="training3">#80c3d3</color>
+    <color name="training4">#76c3f1</color>
+    <color name="training5">#edb95a</color>
+    <color name="minecolor">#979797</color>
+    <color name="standarcolor">#4a4a4a</color>
+    <color name="searchbg">#f5f5f5</color>
+    <color name="notsure">#AA9ED9</color>
+    <color name="must">#EB9696</color>
+
 </resources>

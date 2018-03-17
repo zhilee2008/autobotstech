@@ -2,10 +2,7 @@ package com.autobotstech.cyzk.activity;
 
 import android.app.Instrumentation;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.net.Uri;
 import android.net.http.SslError;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,24 +14,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.util.HttpConnections;
-import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnDrawListener;
-import com.github.barteksc.pdfviewer.listener.OnErrorListener;
-import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.listener.OnPageScrollListener;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.util.regex.Pattern;
 
 
 public class PreviewOfficeOnlineLocal extends AppCompatActivity {
@@ -47,7 +28,6 @@ public class PreviewOfficeOnlineLocal extends AppCompatActivity {
 
     String regOffice = ".doc|.xls|.ppt|.DOC|.XLS|.PPT|.docx|.xlsx|.pptx|.DOCX|.XLSX|.PPTX";
     String regPdf = ".pdf|.PDF";
-
 
 
     @Override
@@ -89,35 +69,37 @@ public class PreviewOfficeOnlineLocal extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.officeonline);
 
 
-            webView.setWebViewClient(new WebViewClient() {
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        view.loadUrl(request.getUrl().toString());
-                    } else {
-                        view.loadUrl(request.toString());
-                    }
-                    return true;
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    view.loadUrl(request.getUrl().toString());
+                } else {
+                    view.loadUrl(request.toString());
                 }
-                @Override
-                public void onPageFinished(WebView view, String url) {
-                    super.onPageFinished(view, url);
+                return true;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+            }
+
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                if (error.getPrimaryError() == SslError.SSL_INVALID) {// 校验过程遇到了bug
+                    handler.proceed();
+                } else {
+                    handler.cancel();
                 }
-                @Override
-                public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                    if(error.getPrimaryError() == SslError.SSL_INVALID ){// 校验过程遇到了bug
-                        handler.proceed();
-                    }else{
-                        handler.cancel();
-                    }
-                }
-            });
+            }
+        });
 // webview必须设置支持Javascript才可打开
-            webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setJavaScriptEnabled(true);
 // 设置此属性,可任意比例缩放
-            webView.getSettings().setUseWideViewPort(true);
-            webView.loadUrl("https://view.officeapps.live.com/op/view.aspx?src=" + documentURL);
-            webView.setVisibility(View.VISIBLE);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.loadUrl("https://view.officeapps.live.com/op/view.aspx?src=" + documentURL);
+        webView.setVisibility(View.VISIBLE);
 
 
     }

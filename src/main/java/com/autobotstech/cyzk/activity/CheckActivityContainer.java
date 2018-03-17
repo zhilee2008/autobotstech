@@ -85,7 +85,6 @@ public class CheckActivityContainer extends Fragment {
 
     private void initViewPager() {
         CheckActivity checkActivity = new CheckActivity();
-        InfoQaList infoQaList = new InfoQaList();
         InfoDownloadListFragment infoDownloadListFragment = new InfoDownloadListFragment();
         InfoSpecialtopic4List nfoSpecialtopic4List = new InfoSpecialtopic4List();
         alFragment = new ArrayList<>();

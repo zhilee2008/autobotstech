@@ -122,19 +122,19 @@ public class MessageListFragment extends Fragment {
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
                             String createTimeString = flowArr.getJSONObject(i).getString("createTime");
-                            Format f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            Format f = new SimpleDateFormat("yyyy-MM-dd");
                             Date date = null;
                             String dateString = "";
                             try {
                                 date = (Date) f.parseObject(createTimeString);
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                 dateString = sdf.format(date);
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
 
                             recyclerItem.setCreateTime(dateString);
-//                            recyclerItem.setImage(R.drawable.ic_dashboard_black_24dp);
+                            recyclerItem.setImage(getResources().getDrawable(R.drawable.message));
                             messageList.add(recyclerItem);
 
                         }

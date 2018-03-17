@@ -17,19 +17,12 @@ import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.adapter.RecyclerUsageAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
-import com.autobotstech.cyzk.util.Constants;
-import com.autobotstech.cyzk.util.HttpConnections;
 import com.autobotstech.cyzk.util.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
 

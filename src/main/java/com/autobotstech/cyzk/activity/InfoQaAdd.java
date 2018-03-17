@@ -61,7 +61,7 @@ public class InfoQaAdd extends AppCompatActivity {
     protected static Uri imageUri;
     private String imagePath;
     private ImageView iv_personal_icon;
-    String uploadImagePath="";
+    String uploadImagePath = "";
 
     private static final int REQUEST_PERMISSION = 1;
     static final String[] PERMISSIONS = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -75,7 +75,7 @@ public class InfoQaAdd extends AppCompatActivity {
 
     QaAddTask mTask;
 
-    String title,question;
+    String title, question;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -122,17 +122,24 @@ public class InfoQaAdd extends AppCompatActivity {
 //            }
 //        });
 
-        Button save = (Button) findViewById(R.id.submit);
-        save.setOnClickListener(new View.OnClickListener() {
 
+        Button messageButton = (Button) findViewById(R.id.button_message);
+        messageButton.setVisibility(View.VISIBLE);
+        messageButton.setText(R.string.save);
+//        Drawable drawable = getResources().getDrawable(R.drawable.ic_add_message);
+//        drawable.setBounds(0, 0, 100, 100);
+        messageButton.setCompoundDrawables(null, null, null, null);
+        messageButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                title = ((TextView)findViewById(R.id.qatitle)).getText().toString();
-                question = ((EditText)findViewById(R.id.qacontent)).getText().toString();
-
-                mTask = new QaAddTask(token);
-                mTask.execute((Void) null);
-
+            public void onClick(View arg0) {
+                title = ((TextView) findViewById(R.id.qatitle)).getText().toString();
+                question = ((EditText) findViewById(R.id.qacontent)).getText().toString();
+                if (title.equals("") || question.equals("")) {
+                    Toast.makeText(InfoQaAdd.this, "请输入标题或内容", Toast.LENGTH_SHORT).show();
+                } else {
+                    mTask = new QaAddTask(token);
+                    mTask.execute((Void) null);
+                }
             }
         });
 
@@ -151,14 +158,14 @@ public class InfoQaAdd extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             JSONObject obj = new JSONObject();
-            String result="";
+            String result = "";
 
             try {
                 HttpConnections httpConnections = new HttpConnections(InfoQaAdd.this.getApplicationContext());
-                if("".equals(uploadImagePath)){
-                    obj = httpConnections.httpsPost(Constants.URL_PREFIX + Constants.FORUMS_ADD_QUESTION, title,question, mToken);
-                }else{
-                    obj = httpConnections.httpsPost(Constants.URL_PREFIX + Constants.FORUMS_ADD_QUESTION, title,question,uploadImagePath,"uploadfile.png", mToken);
+                if ("".equals(uploadImagePath)) {
+                    obj = httpConnections.httpsPost(Constants.URL_PREFIX + Constants.FORUMS_ADD_QUESTION, title, question, mToken);
+                } else {
+                    obj = httpConnections.httpsPost(Constants.URL_PREFIX + Constants.FORUMS_ADD_QUESTION, title, question, uploadImagePath, "uploadfile.png", mToken);
                 }
                 result = obj.getString("result");
             } catch (CertificateException e) {
@@ -171,7 +178,7 @@ public class InfoQaAdd extends AppCompatActivity {
                 e.printStackTrace();
             } catch (KeyManagementException e) {
                 e.printStackTrace();
-            }catch (JSONException e){
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
@@ -181,13 +188,13 @@ public class InfoQaAdd extends AppCompatActivity {
         @Override
         protected void onPostExecute(final String result) {
             mTask = null;
-                if("success".equals(result)){
-                    Toast.makeText(InfoQaAdd.this,"发布问题成功",Toast.LENGTH_SHORT).show();
-                    InfoQaAdd.this.finish();
+            if ("success".equals(result)) {
+                Toast.makeText(InfoQaAdd.this, "发布问题成功", Toast.LENGTH_SHORT).show();
+                InfoQaAdd.this.finish();
 
-                } else {
-                    Toast.makeText(InfoQaAdd.this,"发布问题失败",Toast.LENGTH_SHORT).show();
-                }
+            } else {
+                Toast.makeText(InfoQaAdd.this, "发布问题失败", Toast.LENGTH_SHORT).show();
+            }
 
         }
 
@@ -197,7 +204,6 @@ public class InfoQaAdd extends AppCompatActivity {
 //            showProgress(false);
         }
     }
-
 
 
     /**
@@ -320,7 +326,7 @@ public class InfoQaAdd extends AppCompatActivity {
 //        Toast.makeText(getContext(),imagePath,Toast.LENGTH_SHORT).show();
         Log.e("imagePath", imagePath + "");
         if (imagePath != null) {
-            uploadImagePath=imagePath;
+            uploadImagePath = imagePath;
         }
     }
 
@@ -350,6 +356,7 @@ public class InfoQaAdd extends AppCompatActivity {
 
         startPhotoZoom();
     }
+
     ////////////andoird 4.4之前
     private void handleImageBeforeKitKat(Intent intent) {
         imageUri = intent.getData();
@@ -396,7 +403,7 @@ public class InfoQaAdd extends AppCompatActivity {
             switch (requestCode) {
                 case TAKE_PICTURE:
                     if (hasSdcard()) {
-                        isClickCamera=true;
+                        isClickCamera = true;
                         if (resultCode == RESULT_OK) {
                             startPhotoZoom();
                         }

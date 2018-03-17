@@ -28,8 +28,6 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnPageScrollListener;
 
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
@@ -44,7 +42,7 @@ public class PreviewOfficeOnline extends AppCompatActivity {
     String documentURL;
     private WebView webView;
     DocumentPreviewTask mTask;
-    PDFView  pdfView;
+    PDFView pdfView;
     Uri documentURI;
 
 //    .doc   .xls  .ppt .DOC
@@ -52,7 +50,6 @@ public class PreviewOfficeOnline extends AppCompatActivity {
 
     String regOffice = ".doc|.xls|.ppt|.DOC|.XLS|.PPT|.docx|.xlsx|.pptx|.DOCX|.XLSX|.PPTX";
     String regPdf = ".pdf|.PDF";
-
 
 
     @Override
@@ -92,11 +89,11 @@ public class PreviewOfficeOnline extends AppCompatActivity {
         documentURL = getIntent.getStringExtra("documentURL");
 
         webView = (WebView) findViewById(R.id.officeonline);
-        pdfView = (PDFView)findViewById(R.id.pdfView);
+        pdfView = (PDFView) findViewById(R.id.pdfView);
 
         boolean resultOffice = Pattern.compile(regOffice).matcher(documentURL).find();
         boolean resultPdf = Pattern.compile(regPdf).matcher(documentURL).find();
-        if(resultOffice){
+        if (resultOffice) {
 
             webView.setWebViewClient(new WebViewClient() {
                 @Override
@@ -108,15 +105,17 @@ public class PreviewOfficeOnline extends AppCompatActivity {
                     }
                     return true;
                 }
+
                 @Override
                 public void onPageFinished(WebView view, String url) {
                     super.onPageFinished(view, url);
                 }
+
                 @Override
                 public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                    if(error.getPrimaryError() == android.net.http.SslError.SSL_INVALID ){// 校验过程遇到了bug
+                    if (error.getPrimaryError() == android.net.http.SslError.SSL_INVALID) {// 校验过程遇到了bug
                         handler.proceed();
-                    }else{
+                    } else {
                         handler.cancel();
                     }
                 }
@@ -128,7 +127,7 @@ public class PreviewOfficeOnline extends AppCompatActivity {
             webView.loadUrl("https://view.officeapps.live.com/op/view.aspx?src=" + documentURL);
             webView.setVisibility(View.VISIBLE);
 
-        }else if(resultPdf){
+        } else if (resultPdf) {
             pdfView.setVisibility(View.VISIBLE);
             mTask = new DocumentPreviewTask();
             mTask.execute((Void) null);
@@ -142,20 +141,20 @@ public class PreviewOfficeOnline extends AppCompatActivity {
         protected InputStream doInBackground(Void... params) {
             InputStream is = null;
             try {
-            HttpConnections httpConnections = new HttpConnections(PreviewOfficeOnline.this);
-            is = httpConnections.httpsGetPDFStream(documentURL);
+                HttpConnections httpConnections = new HttpConnections(PreviewOfficeOnline.this);
+                is = httpConnections.httpsGetPDFStream(documentURL);
 
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (KeyManagementException e) {
-            e.printStackTrace();
-        }
+            } catch (CertificateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            }
             return is;
         }
 
@@ -210,7 +209,6 @@ public class PreviewOfficeOnline extends AppCompatActivity {
                     .password(null)
                     .scrollHandle(null)
                     .load();
-
 
 
         }

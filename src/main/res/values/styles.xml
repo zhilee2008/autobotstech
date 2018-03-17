@@ -11,10 +11,10 @@
     <style name="style_radiobutton">
         <item name="android:layout_weight">1</item>
         <item name="android:button">@null</item>
-        <item name="android:background">@null</item>
+        <item name="android:background">@drawable/radiobutton_selector</item>r
         <item name="android:gravity">center</item>
         <item name="android:drawablePadding">10dp</item>
-        <item name="android:drawableBottom">@drawable/radiobutton_selector</item>
+        <item name="android:drawableBottom">@drawable/line_blue</item>
         <item name="android:textColor">@drawable/textcolor_selector</item>
         <item name="android:textSize">16sp</item>
     </style>

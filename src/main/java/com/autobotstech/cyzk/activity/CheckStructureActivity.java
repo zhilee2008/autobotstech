@@ -78,7 +78,7 @@ public class CheckStructureActivity extends Fragment {
             try {
                 JSONArray structArr = structOBJ.getJSONArray("structure");
                 for (int i = 0; i < structArr.length(); i++) {
-                    StructureGridItem mGridItem = new StructureGridItem(structArr.getJSONObject(i).getString("id"), structArr.getJSONObject(i).getString("name"), Utils.getImageID(this.getContext(), structArr.getJSONObject(i).getString("img")), structArr.getJSONObject(i).getString("parent"), structArr.getJSONObject(i).getJSONArray("standar"), i);
+                    StructureGridItem mGridItem = new StructureGridItem(structArr.getJSONObject(i).getString("id"), structArr.getJSONObject(i).getString("name"), Utils.getImageID(this.getContext(), structArr.getJSONObject(i).getString("img")), structArr.getJSONObject(i).getString("parent"), structArr.getJSONObject(i).getJSONArray("standar"), i, structArr.getJSONObject(i).getString("bgcolor"));
                     nonHeaderIdList.add(mGridItem);
                 }
             } catch (JSONException e) {

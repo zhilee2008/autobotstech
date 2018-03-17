@@ -6,6 +6,9 @@ import android.annotation.TargetApi;
 import android.app.Instrumentation;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -99,15 +103,14 @@ public class LecturehallListTraining4Fragment extends Fragment {
         titlebar.setText(R.string.trainingtitle);
 
 
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewlecturehall);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        mSearchView = (SearchView)view.findViewById(R.id.searchView);
+        mSearchView = (SearchView) view.findViewById(R.id.searchView);
 
         listContainer = (LinearLayout) view.findViewById(R.id.listcontainer);
-        mProgressView = (ProgressBar)view.findViewById(R.id.progressbar);
+        mProgressView = (ProgressBar) view.findViewById(R.id.progressbar);
         showProgress(true);
 
         mTask = new CheckLecturehallListTask(token);
@@ -124,9 +127,9 @@ public class LecturehallListTraining4Fragment extends Fragment {
             // 当搜索内容改变时触发该方法
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (!TextUtils.isEmpty(newText)){
+                if (!TextUtils.isEmpty(newText)) {
                     search(newText);
-                }else{
+                } else {
                     showProgress(true);
                     mTask = new CheckLecturehallListTask(token);
                     mTask.execute((Void) null);
@@ -141,17 +144,17 @@ public class LecturehallListTraining4Fragment extends Fragment {
         return view;
     }
 
-    public void search(String searchText){
+    public void search(String searchText) {
         searchText = searchText.trim();
-        if("".equals(searchText)){
+        if ("".equals(searchText)) {
             return;
         }
         List<RecyclerItem> searchList = new ArrayList<RecyclerItem>();
         searchList.addAll(lecturehallList);
         lecturehallList.clear();
-        for(int i=0;i<searchList.size();i++){
+        for (int i = 0; i < searchList.size(); i++) {
             RecyclerItem recyclerItem = searchList.get(i);
-            if(recyclerItem.getName().contains(searchText)){
+            if (recyclerItem.getName().contains(searchText)) {
                 lecturehallList.add(recyclerItem);
             }
         }
@@ -202,26 +205,28 @@ public class LecturehallListTraining4Fragment extends Fragment {
 
                             recyclerItem.setCreateTime(dateString);
                             String keyword = flowArr.getJSONObject(i).getString("keyword");
-                            recyclerItem.setKeyword("关键字："+keyword);
+                            recyclerItem.setKeyword("关键字：" + keyword);
                             recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-//                            boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
-//                            if(!hasPortrait){
-//                                recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-//                            }else{
-//                                String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
-//                                if("".equals(imageString)){
-//                                    recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-//                                }else{
-//                                    InputStream is = httpConnections.httpsGetPDFStream(imageString);
-//                                    bitmap = BitmapFactory.decodeStream(is);
-//                                    if(bitmap==null){
-//                                        recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-//                                    }else{
-//                                        Drawable drawable = new BitmapDrawable(bitmap);
-//                                        recyclerItem.setImage(drawable);
-//                                    }
-//                                }
-//                            }
+                            boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
+                            if (!hasPortrait) {
+                                recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                            } else {
+                                String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
+                                if ("".equals(imageString)) {
+                                    recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                } else {
+                                    InputStream is = httpConnections.httpsGetPDFStream(imageString);
+                                    bitmap = BitmapFactory.decodeStream(is);
+                                    if (bitmap == null) {
+                                        recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                    } else {
+                                        Drawable drawable = new BitmapDrawable(bitmap);
+                                        recyclerItem.setImage(drawable);
+                                    }
+                                }
+                            }
+                            String author = flowArr.getJSONObject(i).getJSONObject("createPerson").getString("name");
+                            recyclerItem.setAuthor(author);
                             lecturehallList.add(recyclerItem);
 
                         }

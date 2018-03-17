@@ -1,7 +1,6 @@
 package com.autobotstech.cyzk.activity;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,12 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.autobotstech.cyzk.R;
-import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
-import com.jude.rollviewpager.hintview.ColorPointHintView;
 
 
 public class CheckActivity extends Fragment {
@@ -33,7 +30,7 @@ public class CheckActivity extends Fragment {
 
         CheckActivityContainer.initFragment(R.id.checkmenucontainer, new CheckMenuActivity());
 
-        TextView reportmenu = (TextView)view.findViewById(R.id.reportmenu);
+        LinearLayout reportmenu = (LinearLayout) view.findViewById(R.id.reportmenu);
         reportmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {

@@ -1,12 +1,10 @@
 package com.autobotstech.cyzk.adapter;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
@@ -39,22 +37,22 @@ public class RecyclerLecturehallListAdapter extends RecyclerAdapter {
             public void onClick(View arg0) {
 
                 String filePath = mRecyclerList.get(holder.getAdapterPosition()).getFilePath();
-                if(filePath==null){
+                if (filePath == null) {
 //                    Toast.makeText(view.getContext(),"当先条目无内容",Toast.LENGTH_SHORT).show();
 //                    return;
                     Intent intent = new Intent(view.getContext(), EmptyActivity.class);
                     view.getContext().startActivity(intent);
-                }else{
-                    if(filePath.indexOf(".PDF")>=0
-                            || filePath.indexOf(".pdf")>=0
-                            || filePath.indexOf(".ppt")>=0
-                            || filePath.indexOf(".PPT")>=0
-                            || filePath.indexOf(".PPTX")>=0
-                            || filePath.indexOf(".pptx")>=0){
+                } else {
+                    if (filePath.indexOf(".PDF") >= 0
+                            || filePath.indexOf(".pdf") >= 0
+                            || filePath.indexOf(".ppt") >= 0
+                            || filePath.indexOf(".PPT") >= 0
+                            || filePath.indexOf(".PPTX") >= 0
+                            || filePath.indexOf(".pptx") >= 0) {
                         Intent intent = new Intent(view.getContext(), PreviewOfficeOnline.class);
                         intent.putExtra("documentURL", filePath);
                         view.getContext().startActivity(intent);
-                    }else{
+                    } else {
                         Intent intent = new Intent(view.getContext(), PreviewVideo.class);
                         intent.putExtra("documentURL", filePath);
                         view.getContext().startActivity(intent);

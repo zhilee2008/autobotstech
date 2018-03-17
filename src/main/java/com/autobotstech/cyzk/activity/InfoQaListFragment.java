@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
@@ -80,9 +79,9 @@ public class InfoQaListFragment extends Fragment {
         messageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-            Intent intent = new Intent();
-            intent.setClass(getContext(), InfoQaAdd.class);
-            getContext().startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(getContext(), InfoQaAdd.class);
+                getContext().startActivity(intent);
             }
         });
 
@@ -158,18 +157,18 @@ public class InfoQaListFragment extends Fragment {
 
                             recyclerItem.setCreateTime(dateString);
                             boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
-                            if(!hasPortrait){
+                            if (!hasPortrait) {
                                 recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-                            }else{
+                            } else {
                                 String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
-                                if("".equals(imageString)){
+                                if ("".equals(imageString)) {
                                     recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-                                }else{
+                                } else {
                                     InputStream is = httpConnections.httpsGetPDFStream(imageString);
                                     bitmap = BitmapFactory.decodeStream(is);
-                                    if(bitmap==null){
+                                    if (bitmap == null) {
                                         recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-                                    }else{
+                                    } else {
                                         Drawable drawable = new BitmapDrawable(bitmap);
                                         recyclerItem.setImage(drawable);
                                     }
@@ -178,6 +177,8 @@ public class InfoQaListFragment extends Fragment {
 
                             String author = flowArr.getJSONObject(i).getJSONObject("createPerson").getString("name");
                             recyclerItem.setAuthor(author);
+                            String questionStr = (flowArr.getJSONObject(i).getString("question")).length() < 20 ? flowArr.getJSONObject(i).getString("question") : flowArr.getJSONObject(i).getString("question").substring(0, 20) + "...";
+                            recyclerItem.setKeyword(questionStr);
 
                             checkFlowList.add(recyclerItem);
 

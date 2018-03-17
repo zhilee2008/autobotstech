@@ -1,40 +1,14 @@
 package com.autobotstech.cyzk.activity;
 
 import android.app.Instrumentation;
-import android.content.Intent;
-import android.graphics.Canvas;
-import android.net.Uri;
-import android.net.http.SslError;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.util.HttpConnections;
-import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnDrawListener;
-import com.github.barteksc.pdfviewer.listener.OnErrorListener;
-import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.listener.OnPageScrollListener;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.util.regex.Pattern;
 
 
 public class EmptyActivity extends AppCompatActivity {

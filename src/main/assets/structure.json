@@ -5,27 +5,32 @@
       "name": "普通客车",
       "img": "j1",
       "parent": "载客汽车",
+      "bgcolor": "#7FC898",
       "headerid": "structure_car",
       "standar": [
         {
           "id": "G1",
           "img": "g1",
-          "name": "大型 车长≥6000mm 或者乘坐人数≥20人"
+          "name": "大型",
+          "tag": "车长≥6000mm 或者乘坐人数≥20人"
         },
         {
           "id": "G2",
           "img": "g2",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G3",
           "img": "g3",
-          "name": "小型 车长<6000mm 且乘坐人数小于等于9人"
+          "name": "小型",
+          "tag": "车长<6000mm 且乘坐人数小于等于9人"
         },
         {
           "id": "G4",
           "img": "g4",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         }
       ]
     },
@@ -34,17 +39,20 @@
       "name": "双层客车",
       "img": "j2",
       "parent": "载客汽车",
+      "bgcolor": "#EDB95A",
       "headerid": "structure_car",
       "standar": [
         {
           "id": "G1",
           "img": "g1",
-          "name": "大型 车长≥6000mm 或者乘坐人数≥20人"
+          "name": "大型",
+          "tag": "车长≥6000mm 或者乘坐人数≥20人"
         },
         {
           "id": "G2",
           "img": "g2",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         }
       ]
     },
@@ -53,17 +61,19 @@
       "name": "卧铺客车",
       "img": "j3",
       "parent": "载客汽车",
+      "bgcolor": "#76C3F1",
       "headerid": "structure_car",
       "standar": [
         {
           "id": "G1",
           "img": "g1",
-          "name": "大型 车长≥6000mm 或者乘坐人数≥20人"
+          "name": "大型",
+          "tag": "车长≥6000mm 或者乘坐人数≥20人"
         },
         {
           "id": "G2",
           "img": "g2",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         }
       ]
     },
@@ -72,17 +82,20 @@
       "name": "铰接客车",
       "img": "j4",
       "parent": "载客汽车",
+      "bgcolor": "#EB9696",
       "headerid": "structure_car",
       "standar": [
         {
           "id": "G1",
           "img": "g1",
-          "name": "大型 车长≥6000mm 或者乘坐人数≥20人"
+          "name": "大型",
+          "tag": "车长≥6000mm 或者乘坐人数≥20人"
         },
         {
           "id": "G2",
           "img": "g2",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         }
       ]
     },
@@ -91,17 +104,20 @@
       "name": "轿车",
       "img": "j5",
       "parent": "载客汽车",
+      "bgcolor": "#80C3D3",
       "headerid": "structure_car",
       "standar": [
         {
           "id": "G3",
           "img": "g3",
-          "name": "小型 车长<6000mm 且乘坐人数小于等于9人"
+          "name": "小型",
+          "tag": "车长<6000mm 且乘坐人数小于等于9人"
         },
         {
           "id": "G4",
           "img": "g4",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         }
       ]
     },
@@ -110,17 +126,20 @@
       "name": "面包车",
       "img": "j6",
       "parent": "载客汽车",
+      "bgcolor": "#B0C47D",
       "headerid": "structure_car",
       "standar": [
         {
           "id": "G3",
           "img": "g3",
-          "name": "小型 车长<6000mm 且乘坐人数小于等于9人"
+          "name": "小型",
+          "tag": "车长<6000mm 且乘坐人数小于等于9人"
         },
         {
           "id": "G4",
           "img": "g4",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         }
       ]
     },
@@ -129,22 +148,26 @@
       "name": "专用校车",
       "img": "j7",
       "parent": "载客汽车",
+      "bgcolor": "#89B1EC",
       "headerid": "structure_car",
       "standar": [
         {
           "id": "G1",
           "img": "g1",
-          "name": "大型 车长≥6000mm 或者乘坐人数≥20人"
+          "name": "大型",
+          "tag": "车长≥6000mm 或者乘坐人数≥20人"
         },
         {
           "id": "G2",
           "img": "g2",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G3",
           "img": "g3",
-          "name": "小型 车长<6000mm 且乘坐人数小于等于9人"
+          "name": "小型",
+          "tag": "车长<6000mm 且乘坐人数小于等于9人"
         }
       ]
     },
@@ -153,22 +176,26 @@
       "name": "专用客车",
       "img": "j8",
       "parent": "载客汽车",
+      "bgcolor": "#EAB382",
       "headerid": "structure_car",
       "standar": [
         {
           "id": "G1",
           "img": "g1",
-          "name": "大型 车长≥6000mm 或者乘坐人数≥20人"
+          "name": "大型",
+          "tag": "车长≥6000mm 或者乘坐人数≥20人"
         },
         {
           "id": "G2",
           "img": "g2",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G3",
           "img": "g3",
-          "name": "小型 车长<6000mm 且乘坐人数小于等于9人"
+          "name": "小型",
+          "tag": "车长<6000mm 且乘坐人数小于等于9人"
         }
       ]
     },
@@ -177,27 +204,32 @@
       "name": "越野客车",
       "img": "j9",
       "parent": "载客汽车",
+      "bgcolor": "#AA9ED9",
       "headerid": "structure_car",
       "standar": [
         {
           "id": "G1",
           "img": "g1",
-          "name": "大型 车长≥6000mm 或者乘坐人数≥20人"
+          "name": "大型",
+          "tag": "车长≥6000mm 或者乘坐人数≥20人"
         },
         {
           "id": "G2",
           "img": "g2",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G3",
           "img": "g3",
-          "name": "小型 车长<6000mm 且乘坐人数小于等于9人"
+          "name": "小型",
+          "tag": "车长<6000mm 且乘坐人数小于等于9人"
         },
         {
           "id": "G4",
           "img": "g4",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         }
       ]
     },
@@ -206,32 +238,38 @@
       "name": "普通货车",
       "img": "j10",
       "parent": "载货汽车",
+      "bgcolor": "#EDB95A",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         },
         {
           "id": "G8",
           "img": "g8",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         },
         {
           "id": "G9",
           "img": "g9",
-          "name": "低速"
+          "name": "低速",
+          "tag": ""
         }
       ]
     },
@@ -240,32 +278,38 @@
       "name": "厢式货车",
       "img": "j11",
       "parent": "载货汽车",
+      "bgcolor": "#EB9696",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         },
         {
           "id": "G8",
           "img": "g8",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         },
         {
           "id": "G9",
           "img": "g9",
-          "name": "低速"
+          "name": "低速",
+          "tag": ""
         }
       ]
     },
@@ -274,32 +318,38 @@
       "name": "仓栅式货车",
       "img": "j12",
       "parent": "载货汽车",
+      "bgcolor": "#B0C47D",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         },
         {
           "id": "G8",
           "img": "g8",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         },
         {
           "id": "G9",
           "img": "g9",
-          "name": "低速"
+          "name": "低速",
+          "tag": ""
         }
       ]
     },
@@ -308,27 +358,32 @@
       "name": "封闭货车",
       "img": "j13",
       "parent": "载货汽车",
+      "bgcolor": "#80C3D3",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         },
         {
           "id": "G8",
           "img": "g8",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         }
       ]
     },
@@ -337,32 +392,38 @@
       "name": "罐式货车",
       "img": "j14",
       "parent": "载货汽车",
+      "bgcolor": "#AA9ED9",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         },
         {
           "id": "G8",
           "img": "g8",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         },
         {
           "id": "G9",
           "img": "g9",
-          "name": "低速"
+          "name": "低速",
+          "tag": ""
         }
       ]
     },
@@ -371,32 +432,38 @@
       "name": "平板货车",
       "img": "j15",
       "parent": "载货汽车",
+      "bgcolor": "#EAB382",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         },
         {
           "id": "G8",
           "img": "g8",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         },
         {
           "id": "G9",
           "img": "g9",
-          "name": "低速"
+          "name": "低速",
+          "tag": ""
         }
       ]
     },
@@ -405,17 +472,20 @@
       "name": "集装箱车",
       "img": "j16",
       "parent": "载货汽车",
+      "bgcolor": "#7FC898",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         }
       ]
     },
@@ -424,17 +494,20 @@
       "name": "车辆运输车",
       "img": "j17",
       "parent": "载货汽车",
+      "bgcolor": "#89B1EC",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         }
       ]
     },
@@ -443,32 +516,38 @@
       "name": "特殊结构",
       "img": "j18",
       "parent": "载货汽车",
+      "bgcolor": "#76C3F1",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         },
         {
           "id": "G8",
           "img": "g8",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         },
         {
           "id": "G9",
           "img": "g9",
-          "name": "低速"
+          "name": "低速",
+          "tag": ""
         }
       ]
     },
@@ -477,32 +556,38 @@
       "name": "自卸",
       "img": "j19",
       "parent": "载货汽车",
+      "bgcolor": "#EB9696",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         },
         {
           "id": "G8",
           "img": "g8",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         },
         {
           "id": "G9",
           "img": "g9",
-          "name": "低速"
+          "name": "低速",
+          "tag": ""
         }
       ]
     },
@@ -511,22 +596,26 @@
       "name": "半挂牵引车",
       "img": "j20",
       "parent": "载货汽车",
+      "bgcolor": "#EDB95A",
       "headerid": "structure_truck",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -535,6 +624,7 @@
       "name": "全挂牵引车",
       "img": "j21",
       "parent": "载货汽车",
+      "bgcolor": "#80C3D3",
       "headerid": "structure_truck",
       "standar": [
         {
@@ -545,12 +635,14 @@
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -559,27 +651,32 @@
       "name": "非载货专项作业车",
       "img": "j22",
       "parent": "专项作业车",
+      "bgcolor": "#7FC898",
       "headerid": "structure_specialjob",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         },
         {
           "id": "G8",
           "img": "g8",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         }
       ]
     },
@@ -588,6 +685,7 @@
       "name": "载货专项作业车",
       "img": "j23",
       "parent": "专项作业车",
+      "bgcolor": "#AA9ED9",
       "headerid": "structure_specialjob",
       "standar": [
         {
@@ -598,17 +696,20 @@
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         },
         {
           "id": "G8",
           "img": "g8",
-          "name": "微型 车长≤3500mm 且发动机气缸总排量小于等于1000mL"
+          "name": "微型",
+          "tag": "车长≤3500mm 且发动机气缸总排量小于等于1000mL"
         }
       ]
     },
@@ -617,22 +718,26 @@
       "name": "普通全挂车",
       "img": "j24",
       "parent": "全挂车",
+      "bgcolor": "#7FC898",
       "headerid": "structure_allhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -641,22 +746,26 @@
       "name": "厢式全挂车",
       "img": "j25",
       "parent": "全挂车",
+      "bgcolor": "#EDB95A",
       "headerid": "structure_allhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -665,22 +774,26 @@
       "name": "仓栅式全挂车",
       "img": "j26",
       "parent": "全挂车",
+      "bgcolor": "#76C3F1",
       "headerid": "structure_allhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -689,22 +802,26 @@
       "name": "罐式全挂车",
       "img": "j27",
       "parent": "全挂车",
+      "bgcolor": "#EB9696",
       "headerid": "structure_allhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -713,22 +830,26 @@
       "name": "平板全挂车",
       "img": "j28",
       "parent": "全挂车",
+      "bgcolor": "#80C3D3",
       "headerid": "structure_allhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -737,22 +858,26 @@
       "name": "集装箱全挂车",
       "img": "j29",
       "parent": "全挂车",
+      "bgcolor": "#B0C47D",
       "headerid": "structure_allhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -761,22 +886,26 @@
       "name": "自卸全挂车",
       "img": "j30",
       "parent": "全挂车",
+      "bgcolor": "#89B1EC",
       "headerid": "structure_allhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -785,17 +914,20 @@
       "name": "旅居全挂车",
       "img": "j31",
       "parent": "全挂车",
+      "bgcolor": "#EAB382",
       "headerid": "structure_allhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
@@ -809,17 +941,20 @@
       "name": "专项作业全挂车",
       "img": "j32",
       "parent": "全挂车",
+      "bgcolor": "#AA9ED9",
       "headerid": "structure_allhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
@@ -833,22 +968,26 @@
       "name": "普通半挂车",
       "img": "j33",
       "parent": "半挂车",
+      "bgcolor": "#EDB95A",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -857,22 +996,26 @@
       "name": "厢式半挂车",
       "img": "j34",
       "parent": "半挂车",
+      "bgcolor": "#EB9696",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -881,22 +1024,26 @@
       "name": "仓栅式半挂车",
       "img": "j35",
       "parent": "半挂车",
+      "bgcolor": "#B0C47D",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -905,22 +1052,26 @@
       "name": "罐式半挂车",
       "img": "j36",
       "parent": "半挂车",
+      "bgcolor": "#7FC898",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -929,22 +1080,26 @@
       "name": "平板半挂车",
       "img": "j37",
       "parent": "半挂车",
+      "bgcolor": "#80C3D3",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -953,22 +1108,26 @@
       "name": "集装箱半挂车",
       "img": "j38",
       "parent": "半挂车",
+      "bgcolor": "#AA9ED9",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -977,22 +1136,26 @@
       "name": "自卸半挂车",
       "img": "j39",
       "parent": "半挂车",
+      "bgcolor": "#EAB382",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1001,22 +1164,26 @@
       "name": "低平板半挂车",
       "img": "j40",
       "parent": "半挂车",
+      "bgcolor": "#89B1EC",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1025,22 +1192,26 @@
       "name": "车辆运输半挂车",
       "img": "j41",
       "parent": "半挂车",
+      "bgcolor": "#EDB95A",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1049,22 +1220,26 @@
       "name": "特殊结构半挂车",
       "img": "j42",
       "parent": "半挂车",
+      "bgcolor": "#B0C47D",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1073,22 +1248,26 @@
       "name": "旅居半挂车",
       "img": "j43",
       "parent": "半挂车",
+      "bgcolor": "#AA9ED9",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1097,22 +1276,26 @@
       "name": "专项作业半挂车",
       "img": "j44",
       "parent": "半挂车",
+      "bgcolor": "#76C3F1",
       "headerid": "structure_halfhang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1121,22 +1304,26 @@
       "name": "中置轴旅居挂车",
       "img": "j45",
       "parent": "中置轴挂车",
+      "bgcolor": "#7FC898",
       "headerid": "structure_middlehang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1145,22 +1332,26 @@
       "name": "中置轴车辆运输车挂车",
       "img": "j46",
       "parent": "中置轴挂车",
+      "bgcolor": "#EDB95A",
       "headerid": "structure_middlehang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1169,22 +1360,26 @@
       "name": "中置轴普通挂车",
       "img": "j47",
       "parent": "中置轴挂车",
+      "bgcolor": "#76C3F1",
       "headerid": "structure_middlehang",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1193,22 +1388,26 @@
       "name": "二轮摩托车",
       "img": "j48",
       "parent": "摩托车",
+      "bgcolor": "#AA9ED9",
       "headerid": "structure_motor",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1217,22 +1416,26 @@
       "name": "正三轮载客摩托车",
       "img": "j49",
       "parent": "摩托车",
+      "bgcolor": "#EAB382",
       "headerid": "structure_motor",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1241,22 +1444,26 @@
       "name": "正三轮载货摩托车",
       "img": "j50",
       "parent": "摩托车",
+      "bgcolor": "#80C3D3",
       "headerid": "structure_motor",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     },
@@ -1265,22 +1472,26 @@
       "name": "侧三轮摩托车",
       "img": "j51",
       "parent": "摩托车",
+      "bgcolor": "#89B1EC",
       "headerid": "structure_motor",
       "standar": [
         {
           "id": "G5",
           "img": "g5",
-          "name": "重型"
+          "name": "重型",
+          "tag": ""
         },
         {
           "id": "G6",
           "img": "g6",
-          "name": "中型 车长<6000mm 且乘坐人数为(10~19)人"
+          "name": "中型",
+          "tag": "车长<6000mm 且乘坐人数为(10~19)人"
         },
         {
           "id": "G7",
           "img": "g7",
-          "name": "轻型"
+          "name": "轻型",
+          "tag": ""
         }
       ]
     }

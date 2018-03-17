@@ -13,6 +13,8 @@ public class Constants {
 
     public static String LOGIN = "/users/login";
 
+    public static String PAGECOUNT = "?pagecount=1000";
+
     //?businessType=1&vehicleType=J2&carStandard=G1&useProperty=S1
     public static String CHECK_FLOW = "/inspects/querybycondition";
 
@@ -50,7 +52,7 @@ public class Constants {
 
     public static String EXPERIENCES_DETAIL = "/experiences/queryOneById/";
 
-    public static String TECHSUPPORTS = "/techsupports/queryAllByFenlei/faguibiaozhun?pagecount=1000";
+    public static String TECHSUPPORTS = "/techsupports/queryAllByFenlei/faguibiaozhun" + PAGECOUNT;
     public static String TECHSUPPORTS_XYCL = "/techsupports/queryAllByFenlei/xianyicheliang";
 
     public static String UPLOAD_IMAGE = "/users/upload";

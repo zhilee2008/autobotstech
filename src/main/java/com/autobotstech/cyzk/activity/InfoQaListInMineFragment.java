@@ -56,7 +56,7 @@ public class InfoQaListInMineFragment extends Fragment {
     RecyclerQaListAdapter recyclerAdapter;
     RecyclerView recyclerView;
     View view;
-    Bitmap bitmap=null;
+    Bitmap bitmap = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -168,18 +168,18 @@ public class InfoQaListInMineFragment extends Fragment {
 
                             recyclerItem.setCreateTime(dateString);
                             boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
-                            if(!hasPortrait){
+                            if (!hasPortrait) {
                                 recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-                            }else{
+                            } else {
                                 String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
-                                if("".equals(imageString)){
+                                if ("".equals(imageString)) {
                                     recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-                                }else{
+                                } else {
                                     InputStream is = httpConnections.httpsGetPDFStream(imageString);
                                     bitmap = BitmapFactory.decodeStream(is);
-                                    if(bitmap==null){
+                                    if (bitmap == null) {
                                         recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
-                                    }else{
+                                    } else {
                                         Drawable drawable = new BitmapDrawable(bitmap);
                                         recyclerItem.setImage(drawable);
                                     }
@@ -187,7 +187,8 @@ public class InfoQaListInMineFragment extends Fragment {
                             }
                             String author = flowArr.getJSONObject(i).getJSONObject("createPerson").getString("name");
                             recyclerItem.setAuthor(author);
-
+                            String questionStr = (flowArr.getJSONObject(i).getString("question")).length() < 20 ? flowArr.getJSONObject(i).getString("question") : flowArr.getJSONObject(i).getString("question").substring(0, 20) + "...";
+                            recyclerItem.setKeyword(questionStr);
                             checkFlowList.add(recyclerItem);
 
                         }

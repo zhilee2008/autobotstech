@@ -3,33 +3,19 @@ package com.autobotstech.cyzk.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.autobotstech.cyzk.BootBroadcastReceiver;
 import com.autobotstech.cyzk.R;
@@ -44,12 +30,8 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via mobile/password.
@@ -77,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     SharedPreferences sp;
     private String token;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         token = sp.getString("token", "");
         mobile = sp.getString("mobile", "");
         password = sp.getString("password", "");
+        name = sp.getString("name", "");
 
         JPushInterface.init(getApplicationContext());
         registerMessageReceiver();
@@ -102,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView = (EditText) findViewById(R.id.password);
 
         Button mMobileSignInButton = (Button) findViewById(R.id.mobile_sign_in_button);
-        mMobileSignInButton.setOnClickListener(new OnClickListener(){
+        mMobileSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 attemptLogin();
@@ -255,6 +239,7 @@ public class LoginActivity extends AppCompatActivity {
 //                            editor.putString("password", obj.getJSONObject("detail").getJSONObject("user").getString("password"));
                             editor.putString("mobile", mMobile);
                             editor.putString("password", mPassword);
+                            editor.putString("name", obj.getJSONObject("detail").getJSONObject("user").getString("name"));
                             editor.commit();
                         }
                     } catch (JSONException e) {
@@ -296,6 +281,7 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("token", "");
                 editor.putString("mobile", "");
                 editor.putString("password", "");
+                editor.putString("name", "");
                 editor.commit();
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

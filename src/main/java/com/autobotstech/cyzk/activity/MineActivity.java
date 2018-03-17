@@ -10,8 +10,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -26,7 +24,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,15 +31,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.adapter.RecyclerMessageListAdapter;
-import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
 import com.autobotstech.cyzk.util.ImageUtils.PermissionsActivity;
 import com.autobotstech.cyzk.util.ImageUtils.PermissionsChecker;
 import com.autobotstech.cyzk.util.Utils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,12 +48,6 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -70,6 +58,7 @@ public class MineActivity extends Fragment {
     SharedPreferences sp;
     private String token;
     private String mobile;
+    private String name;
 
 
     protected static final int CHOOSE_PICTURE = 0;
@@ -101,6 +90,7 @@ public class MineActivity extends Fragment {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         token = sp.getString("token", "");
         mobile = sp.getString("mobile", "");
+        name = sp.getString("name", "");
 
         View view = inflater.inflate(R.layout.mine_content, container, false);
         ViewGroup vg = (ViewGroup) container.getParent();
@@ -123,6 +113,7 @@ public class MineActivity extends Fragment {
                 editor.putString("token", "");
                 editor.putString("mobile", "");
                 editor.putString("password", "");
+                editor.putString("name", "");
                 editor.commit();
 
                 Intent intent = new Intent();
@@ -146,8 +137,11 @@ public class MineActivity extends Fragment {
             }
         });
 
-        TextView mtv = (TextView)view.findViewById(R.id.mobiletext);
+        TextView mtv = (TextView) view.findViewById(R.id.mobiletext);
         mtv.setText(mobile);
+
+        TextView nametv = (TextView) view.findViewById(R.id.minename);
+        nametv.setText(name);
 
         LinearLayout messageListActivity = (LinearLayout) view.findViewById(R.id.mymessage);
         messageListActivity.setOnClickListener(new View.OnClickListener() {
@@ -343,6 +337,7 @@ public class MineActivity extends Fragment {
 
         startPhotoZoom();
     }
+
     ////////////andoird 4.4之前
     private void handleImageBeforeKitKat(Intent intent) {
         imageUri = intent.getData();
@@ -389,7 +384,7 @@ public class MineActivity extends Fragment {
             switch (requestCode) {
                 case TAKE_PICTURE:
                     if (hasSdcard()) {
-                        isClickCamera=true;
+                        isClickCamera = true;
                         if (resultCode == RESULT_OK) {
                             startPhotoZoom();
                         }
@@ -437,12 +432,12 @@ public class MineActivity extends Fragment {
         protected String doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             JSONObject obj = new JSONObject();
-            String result="";
+            String result = "";
 
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
-                if(!"".equals(uploadImagePath)){
-                    obj = httpConnections.httpsUpload(Constants.URL_PREFIX + Constants.UPLOAD_IMAGE, uploadImagePath,"uploadfile.png", mToken);
+                if (!"".equals(uploadImagePath)) {
+                    obj = httpConnections.httpsUpload(Constants.URL_PREFIX + Constants.UPLOAD_IMAGE, uploadImagePath, "uploadfile.png", mToken);
                 }
                 result = obj.getString("result");
             } catch (CertificateException e) {
@@ -455,7 +450,7 @@ public class MineActivity extends Fragment {
                 e.printStackTrace();
             } catch (KeyManagementException e) {
                 e.printStackTrace();
-            }catch (JSONException e){
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
@@ -465,11 +460,11 @@ public class MineActivity extends Fragment {
         @Override
         protected void onPostExecute(final String result) {
             mUTask = null;
-            if("success".equals(result)){
-                Toast.makeText(getContext(),"上传头像成功",Toast.LENGTH_SHORT).show();
+            if ("success".equals(result)) {
+                Toast.makeText(getContext(), "上传头像成功", Toast.LENGTH_SHORT).show();
 
             } else {
-                Toast.makeText(getContext(),"上传头像失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "上传头像失败", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -501,7 +496,7 @@ public class MineActivity extends Fragment {
                 if (obj != null) {
                     String imageString = obj.getJSONObject("detail").getJSONObject("portrait").getString("small");
 
-                    if(!"".equals(imageString)){
+                    if (!"".equals(imageString)) {
                         InputStream is = httpConnections.httpsGetPDFStream(imageString);
                         imageBitMapFromServer = BitmapFactory.decodeStream(is);
                     }

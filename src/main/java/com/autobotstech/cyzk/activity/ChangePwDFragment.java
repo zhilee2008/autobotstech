@@ -16,20 +16,15 @@ import android.widget.Toast;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.adapter.RecyclerMessageListAdapter;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
-import com.autobotstech.cyzk.util.Utils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 
@@ -40,7 +35,7 @@ public class ChangePwDFragment extends Fragment {
     SharedPreferences sp;
     private String token;
     private ChangePWDTask mTask = null;
-    private String newpwdString="";
+    private String newpwdString = "";
 
     View view;
 
@@ -83,27 +78,27 @@ public class ChangePwDFragment extends Fragment {
             @Override
             public void onClick(View arg0) {
 
-                TextView oldpwd = (TextView)view.findViewById(R.id.oldpwd);
+                TextView oldpwd = (TextView) view.findViewById(R.id.oldpwd);
 
                 String oldpwdString = oldpwd.getText().toString().trim();
 
-                TextView newpwd = (TextView)view.findViewById(R.id.newpwd);
+                TextView newpwd = (TextView) view.findViewById(R.id.newpwd);
 
                 newpwdString = newpwd.getText().toString().trim();
 
-                TextView renewpwd = (TextView)view.findViewById(R.id.renewpwd);
+                TextView renewpwd = (TextView) view.findViewById(R.id.renewpwd);
 
                 String renewpwdString = renewpwd.getText().toString().trim();
 
                 String currentpwd = sp.getString("password", "");
 
-                if("".equals(newpwdString)||"".equals(renewpwdString)){
+                if ("".equals(newpwdString) || "".equals(renewpwdString)) {
                     Toast.makeText(getContext(), "新密码不能为空", Toast.LENGTH_SHORT).show();
-                } else if(!newpwdString.equals(renewpwdString)){
+                } else if (!newpwdString.equals(renewpwdString)) {
                     Toast.makeText(getContext(), "两次输入新密码不一致", Toast.LENGTH_SHORT).show();
-                }else if(!currentpwd.equals(oldpwdString)){
+                } else if (!currentpwd.equals(oldpwdString)) {
                     Toast.makeText(getContext(), "旧密码错误，请重新输入", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     mTask = new ChangePWDTask(token);
                     mTask.execute((Void) null);
                 }
@@ -135,7 +130,7 @@ public class ChangePwDFragment extends Fragment {
             try {
                 HttpConnections httpConnections = new HttpConnections(getContext());
 
-                obj = httpConnections.httpsPut(Constants.URL_PREFIX + Constants.CHANGE_PWD,newpwdString, mToken);
+                obj = httpConnections.httpsPut(Constants.URL_PREFIX + Constants.CHANGE_PWD, newpwdString, mToken);
 
             } catch (CertificateException e) {
                 e.printStackTrace();
@@ -157,7 +152,7 @@ public class ChangePwDFragment extends Fragment {
             mTask = null;
             if (result != null) {
                 try {
-                    if("success".equals(result.getString("result"))){
+                    if ("success".equals(result.getString("result"))) {
 //                        new Thread() {
 //                            public void run() {
 //                                try {
@@ -169,7 +164,7 @@ public class ChangePwDFragment extends Fragment {
 //                            }
 //                        }.start();
                         Toast.makeText(getContext(), "密码修改成功", Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else {
                         Toast.makeText(getContext(), "密码修改失败请联系管理员", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {

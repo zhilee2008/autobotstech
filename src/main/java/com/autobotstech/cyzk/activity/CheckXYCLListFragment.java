@@ -21,10 +21,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
-import com.autobotstech.cyzk.activity.fragment.BaseFragement;
 import com.autobotstech.cyzk.adapter.RecyclerDownloadListAdapter;
 import com.autobotstech.cyzk.model.RecyclerItem;
 import com.autobotstech.cyzk.util.Constants;
@@ -73,9 +73,9 @@ public class CheckXYCLListFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         appGlobals = (AppGlobals) getActivity().getApplication();
-        mSearchView = (SearchView)mView.findViewById(R.id.searchView);
+        mSearchView = (SearchView) mView.findViewById(R.id.searchView);
         listContainer = (LinearLayout) mView.findViewById(R.id.listcontainer);
-        mProgressView = (ProgressBar)mView.findViewById(R.id.progressbar);
+        mProgressView = (ProgressBar) mView.findViewById(R.id.progressbar);
 
         ViewGroup vg = (ViewGroup) container.getParent();
         Button backbutton = (Button) vg.findViewById(R.id.button_backward);
@@ -99,6 +99,9 @@ public class CheckXYCLListFragment extends Fragment {
         backbutton.setText(R.string.business);
         backbutton.setVisibility(View.VISIBLE);
 
+        TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
+        titlebar.setText(R.string.yjbg);
+
         showProgress(true);
         mTask = new DownloadListTask(token);
         mTask.execute((Void) null);
@@ -115,9 +118,9 @@ public class CheckXYCLListFragment extends Fragment {
             // 当搜索内容改变时触发该方法
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (!TextUtils.isEmpty(newText)){
+                if (!TextUtils.isEmpty(newText)) {
                     search(newText);
-                }else{
+                } else {
                     showProgress(true);
                     mTask = new DownloadListTask(token);
                     mTask.execute((Void) null);
@@ -130,17 +133,17 @@ public class CheckXYCLListFragment extends Fragment {
 
     }
 
-    public void search(String searchText){
+    public void search(String searchText) {
         searchText = searchText.trim();
-        if("".equals(searchText)){
+        if ("".equals(searchText)) {
             return;
         }
         List<RecyclerItem> searchList = new ArrayList<RecyclerItem>();
         searchList.addAll(downloadList);
         downloadList.clear();
-        for(int i=0;i<searchList.size();i++){
+        for (int i = 0; i < searchList.size(); i++) {
             RecyclerItem recyclerItem = searchList.get(i);
-            if(recyclerItem.getName().contains(searchText)){
+            if (recyclerItem.getName().contains(searchText)) {
                 downloadList.add(recyclerItem);
             }
         }
@@ -179,9 +182,9 @@ public class CheckXYCLListFragment extends Fragment {
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("originalFileName"));
                             recyclerItem.setFilePath(flowArr.getJSONObject(i).getString("file"));
-                            recyclerItem.setImage(getResources().getDrawable(R.drawable.document_128));
+                            recyclerItem.setImage(getResources().getDrawable(R.drawable.ic_pageview_black_24dp));
                             String keyword = flowArr.getJSONObject(i).getString("keyword");
-                            recyclerItem.setKeyword("关键字："+keyword);
+                            recyclerItem.setKeyword("关键字：" + keyword);
                             String createTimeString = flowArr.getJSONObject(i).getString("createTime");
                             Format f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                             Date date = null;

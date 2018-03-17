@@ -12,7 +12,6 @@ import com.autobotstech.cyzk.R;
 import com.autobotstech.cyzk.activity.fragment.BaseFragement;
 import com.autobotstech.cyzk.util.Constants;
 import com.autobotstech.cyzk.util.HttpConnections;
-import com.autobotstech.cyzk.util.MJavascriptInterface;
 import com.autobotstech.cyzk.util.MyWebViewClient;
 import com.autobotstech.cyzk.util.StringUtils;
 import com.autobotstech.cyzk.util.Utils;
@@ -46,7 +45,7 @@ public class CheckFlowImageFragment extends BaseFragement {
 
     @Override
     protected void initView() {
-        mContext=getContext();
+        mContext = getContext();
         sp = PreferenceManager.getDefaultSharedPreferences(mContext);
         token = sp.getString("token", "");
 

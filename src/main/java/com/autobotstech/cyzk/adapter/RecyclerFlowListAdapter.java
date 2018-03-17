@@ -29,6 +29,7 @@ public class RecyclerFlowListAdapter extends RecyclerAdapter {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_check_flow_list_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
 
+
         LinearLayout recycleritem = (LinearLayout) view.findViewById(R.id.recycleritemtag);
         recycleritem.setOnClickListener(new View.OnClickListener() {
             @Override

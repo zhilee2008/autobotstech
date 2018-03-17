@@ -1,6 +1,8 @@
 package com.autobotstech.cyzk.adapter.stickygridheaders;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
@@ -63,6 +66,10 @@ public class StickyGridAdapter extends BaseAdapter implements
         iv.setImageDrawable(hasHeaderIdList.get(position).getImage());
         TextView tv = (TextView) convertView.findViewById(R.id.stickyitemtext);
         tv.setText(hasHeaderIdList.get(position).getName());
+        LinearLayout lc = (LinearLayout) convertView.findViewById(R.id.stickyitemimagecontainer);
+//        lc.setBackgroundColor(Color.parseColor(hasHeaderIdList.get(position).getBgcolor()));
+        GradientDrawable drawable = (GradientDrawable) lc.getBackground();
+        drawable.setColor(Color.parseColor(hasHeaderIdList.get(position).getBgcolor()));
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
