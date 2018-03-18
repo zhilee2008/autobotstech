@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">查验智库</string>
-    <string name="app_versionName">1.1.11</string>
+    <string name="app_versionName">1.2.0</string>
 
     <string name="title_check">查验</string>
     <string name="titlebar_check">查验助手</string>
@@ -16,7 +16,7 @@
     <string name="title_info2">专家说说</string>
     <!--专家解读-->
     <string name="title_info3">执法判例</string>
-    <string name="title_auditorium">论坛</string>
+    <string name="title_auditorium">交流</string>
     <string name="titlebar_auditorium">交流空间</string>
     <!--培训对应业务大讲堂-->
     <string name="title_training">学习</string>
@@ -25,7 +25,7 @@
     <string name="changeportrait">修改头像</string>
     <string name="message">我的消息</string>
     <string name="myqa">我的问答</string>
-    <string name="messageList">消息列表</string>
+    <string name="messageList">消息</string>
     <string name="messageDetail">消息详情</string>
     <string name="title_huifu">回复</string>
     <string name="answer">评论: </string>

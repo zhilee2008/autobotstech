@@ -1,7 +1,11 @@
 package com.autobotstech.cyzk.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Instrumentation;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
@@ -31,6 +37,9 @@ public class CheckStandarActivity extends Fragment {
     private AppGlobals appGlobals;
     ReadResourceTask mTask = null;
     RecyclerView recyclerView;
+
+    LinearLayout listContainer;
+    private View mProgressView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,6 +74,10 @@ public class CheckStandarActivity extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewstandar);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        listContainer = (LinearLayout) view.findViewById(R.id.listcontainer);
+        mProgressView = (ProgressBar) view.findViewById(R.id.progressbar);
+        showProgress(true);
 //
 //        String standarStr = getArguments().getString("standar");
 //        try {
@@ -151,12 +164,49 @@ public class CheckStandarActivity extends Fragment {
             } else {
 
             }
+            showProgress(false);
         }
 
         @Override
         protected void onCancelled() {
             mTask = null;
-//            showProgress(false);
+            showProgress(false);
+        }
+    }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+            listContainer.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 

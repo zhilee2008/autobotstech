@@ -1,18 +1,28 @@
 package com.autobotstech.cyzk.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Instrumentation;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
@@ -51,6 +61,10 @@ public class MessageListFragment extends Fragment {
     RecyclerView recyclerView;
     View view;
 
+    LinearLayout listContainer;
+    private View mProgressView;
+    SearchView mSearchView = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -82,13 +96,66 @@ public class MessageListFragment extends Fragment {
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);
         titlebar.setText(R.string.messageList);
 
+        Button messageButton = (Button) vg.findViewById(R.id.button_message);
+        messageButton.setVisibility(View.INVISIBLE);
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewmessage);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        mSearchView = (SearchView) view.findViewById(R.id.searchView);
+
+        listContainer = (LinearLayout) view.findViewById(R.id.listcontainer);
+        mProgressView = (ProgressBar) view.findViewById(R.id.progressbar);
+        showProgress(true);
+
+
         mTask = new CheckMessageListTask(token);
         mTask.execute((Void) null);
+
+        // 设置搜索文本监听
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // 当点击搜索按钮时触发该方法
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            // 当搜索内容改变时触发该方法
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (!TextUtils.isEmpty(newText)) {
+                    search(newText);
+                } else {
+                    showProgress(true);
+                    mTask = new CheckMessageListTask(token);
+                    mTask.execute((Void) null);
+                }
+                return false;
+            }
+        });
+
+        mSearchView.clearFocus();
+        mSearchView.setFocusable(false);
+
         return view;
+    }
+
+    public void search(String searchText) {
+        searchText = searchText.trim();
+        if ("".equals(searchText)) {
+            return;
+        }
+        List<RecyclerItem> searchList = new ArrayList<RecyclerItem>();
+        searchList.addAll(messageList);
+        messageList.clear();
+        for (int i = 0; i < searchList.size(); i++) {
+            RecyclerItem recyclerItem = searchList.get(i);
+            if (recyclerItem.getName().contains(searchText)) {
+                messageList.add(recyclerItem);
+            }
+        }
+        recyclerAdapter.notifyDataSetChanged();
     }
 
 
@@ -169,12 +236,49 @@ public class MessageListFragment extends Fragment {
             } else {
 
             }
+            showProgress(false);
         }
 
         @Override
         protected void onCancelled() {
             mTask = null;
-//            showProgress(false);
+            showProgress(false);
+        }
+    }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            recyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
+            recyclerView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    recyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            recyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 

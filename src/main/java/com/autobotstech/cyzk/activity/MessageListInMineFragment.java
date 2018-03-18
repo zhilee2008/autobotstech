@@ -12,12 +12,15 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.autobotstech.cyzk.AppGlobals;
@@ -56,7 +59,9 @@ public class MessageListInMineFragment extends Fragment {
     RecyclerView recyclerView;
     View view;
 
+    LinearLayout listContainer;
     private View mProgressView;
+    SearchView mSearchView = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,12 +99,59 @@ public class MessageListInMineFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewmessage);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        mSearchView = (SearchView) view.findViewById(R.id.searchView);
+
+        listContainer = (LinearLayout) view.findViewById(R.id.listcontainer);
         mProgressView = (ProgressBar) view.findViewById(R.id.progressbar);
         showProgress(true);
 
         mTask = new CheckMessageListTask(token);
         mTask.execute((Void) null);
+
+        // 设置搜索文本监听
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // 当点击搜索按钮时触发该方法
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            // 当搜索内容改变时触发该方法
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (!TextUtils.isEmpty(newText)) {
+                    search(newText);
+                } else {
+                    showProgress(true);
+                    mTask = new CheckMessageListTask(token);
+                    mTask.execute((Void) null);
+                }
+                return false;
+            }
+        });
+
+        mSearchView.clearFocus();
+        mSearchView.setFocusable(false);
+
         return view;
+    }
+
+    public void search(String searchText) {
+        searchText = searchText.trim();
+        if ("".equals(searchText)) {
+            return;
+        }
+        List<RecyclerItem> searchList = new ArrayList<RecyclerItem>();
+        searchList.addAll(messageList);
+        messageList.clear();
+        for (int i = 0; i < searchList.size(); i++) {
+            RecyclerItem recyclerItem = searchList.get(i);
+            if (recyclerItem.getName().contains(searchText)) {
+                messageList.add(recyclerItem);
+            }
+        }
+        recyclerAdapter.notifyDataSetChanged();
     }
 
 
