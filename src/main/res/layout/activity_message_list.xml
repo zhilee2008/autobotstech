@@ -17,25 +17,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/searchbg"
-        android:orientation="vertical"
-        android:padding="10dp">
 
-        <SearchView
-            android:id="@+id/searchView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/keyword_border"
-            android:iconifiedByDefault="false"
-            android:queryHint="请输入搜索内容" />
-    </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewmessage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" />
+            android:background="@color/searchbg"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/keyword_border"
+                android:iconifiedByDefault="false"
+                android:queryHint="请输入搜索内容" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerviewmessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
     </LinearLayout>
 </LinearLayout>
