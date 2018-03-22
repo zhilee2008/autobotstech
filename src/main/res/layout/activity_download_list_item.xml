@@ -27,7 +27,9 @@
             android:elevation="8dp"
             android:gravity="center_vertical"
             android:paddingLeft="5dp"
-            android:textSize="16dp" />
+            android:textColor="@color/downloadtitle"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/previewbutton"
@@ -51,6 +53,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:gravity="center_vertical"
         android:orientation="vertical">
         <!--<TextView-->
@@ -66,7 +69,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:padding="5dp" />
 
         <TextView
             android:id="@+id/recycleritemkeyword"

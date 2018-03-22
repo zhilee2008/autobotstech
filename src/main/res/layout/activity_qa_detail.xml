@@ -30,6 +30,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -39,8 +41,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:gravity="center_vertical"
-                        android:textColor="@color/blue"
-                        android:paddingLeft="40dp" />
+                        android:paddingLeft="65dp"
+                        android:textColor="@color/blue" />
 
                     <TextView
                         android:id="@+id/recycleritemcreatetime"
@@ -93,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingLeft="50dp" />
+                        android:paddingLeft="65dp" />
 
                 </LinearLayout>
 
@@ -110,14 +112,14 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingBottom="8dp"
-                    android:paddingLeft="50dp"
+                    android:paddingLeft="65dp"
                     android:paddingTop="8dp">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:paddingRight="5dp"
-                        android:src="@drawable/ic_message_normal" />
+                        android:src="@drawable/messagecount" />
 
                     <TextView
                         android:id="@+id/answercount"

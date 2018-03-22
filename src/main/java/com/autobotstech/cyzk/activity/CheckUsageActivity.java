@@ -58,7 +58,7 @@ public class CheckUsageActivity extends Fragment {
 
             }
         });
-        backbutton.setText(R.string.title_check);
+        backbutton.setText(R.string.standar);
         backbutton.setVisibility(View.VISIBLE);
 
         TextView titlebar = (TextView) vg.findViewById(R.id.text_title);

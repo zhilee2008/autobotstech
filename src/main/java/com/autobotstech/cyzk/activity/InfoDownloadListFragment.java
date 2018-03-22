@@ -3,10 +3,12 @@ package com.autobotstech.cyzk.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -155,9 +157,12 @@ public class InfoDownloadListFragment extends BaseFragement {
                         for (int i = 0; i < flowArr.length(); i++) {
                             RecyclerItem recyclerItem = new RecyclerItem();
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
-                            recyclerItem.setName(flowArr.getJSONObject(i).getString("originalFileName"));
+//                            recyclerItem.setName(flowArr.getJSONObject(i).getString("originalFileName"));
+                            recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
                             recyclerItem.setFilePath(flowArr.getJSONObject(i).getString("file"));
-                            recyclerItem.setImage(getResources().getDrawable(R.drawable.ic_pageview_black_24dp));
+                            Activity activity = getActivity();
+                            recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.ic_pageview_black_24dp, null));
+//                                recyclerItem.setImage(getResources().getDrawable(R.drawable.ic_pageview_black_24dp));
                             String keyword = flowArr.getJSONObject(i).getString("keyword");
                             recyclerItem.setKeyword("关键字：" + keyword);
                             String createTimeString = flowArr.getJSONObject(i).getString("createTime");
@@ -226,7 +231,7 @@ public class InfoDownloadListFragment extends BaseFragement {
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            int shortAnimTime = AppGlobals.getContext().getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
             listContainer.animate().setDuration(shortAnimTime).alpha(

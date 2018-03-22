@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center_vertical"
-            android:textColor="@color/blue"
-            android:paddingLeft="40dp" />
+            android:paddingLeft="45dp"
+            android:textColor="@color/blue" />
 
         <TextView
             android:id="@+id/recycleritemcreatetime"
@@ -52,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:elevation="8dp"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -63,6 +64,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingBottom="8dp">

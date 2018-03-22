@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -139,6 +140,14 @@ public class MessageListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSearchView.clearFocus();
+        mSearchView.setFocusable(false);
+
+    }
+
     public void search(String searchText) {
         searchText = searchText.trim();
         if ("".equals(searchText)) {
@@ -199,7 +208,7 @@ public class MessageListFragment extends Fragment {
                             }
 
                             recyclerItem.setCreateTime(dateString);
-                            recyclerItem.setImage(getResources().getDrawable(R.drawable.message));
+                            recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.message, null));
                             messageList.add(recyclerItem);
 
                         }
@@ -253,7 +262,7 @@ public class MessageListFragment extends Fragment {
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            int shortAnimTime = AppGlobals.getContext().getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             recyclerView.setVisibility(show ? View.GONE : View.VISIBLE);
             recyclerView.animate().setDuration(shortAnimTime).alpha(

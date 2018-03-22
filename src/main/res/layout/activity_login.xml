@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:paddingBottom="20dp"
             android:paddingLeft="50dp"
             android:paddingRight="50dp">
 
@@ -43,12 +44,15 @@
                 android:id="@+id/mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input_login_border"
                 android:hint="@string/prompt_mobile"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textColorLink="@color/white"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
 
@@ -72,14 +76,17 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/input_login_border"
                 android:hint="@string/prompt_password"
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:inputType="textPassword"
                 android:maxLines="1"
+                android:paddingTop="15dp"
                 android:singleLine="true"
+                android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textColorLink="@color/white"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <Button
@@ -88,11 +95,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:background="@drawable/loginborder"
+            android:background="@drawable/loginborderwhite"
             android:paddingLeft="130dp"
             android:paddingRight="130dp"
             android:text="@string/action_sign_in"
-            android:textColor="@color/white"
+            android:textColor="@color/titleblue"
             android:textColorLink="@color/white"
             android:textSize="18sp" />
 

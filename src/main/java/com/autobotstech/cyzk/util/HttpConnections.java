@@ -2,6 +2,8 @@ package com.autobotstech.cyzk.util;
 
 import android.content.Context;
 
+import com.autobotstech.cyzk.AppGlobals;
+
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -39,7 +41,7 @@ public class HttpConnections {
 
     public HttpConnections(Context context) throws CertificateException, IOException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         CertificateFactory cf = CertificateFactory.getInstance(TYPE);
-        InputStream in = context.getAssets().open("android.crt");
+        InputStream in = AppGlobals.getContext().getAssets().open("android.crt");
         Certificate cartificate = cf.generateCertificate(in);
 
         KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());

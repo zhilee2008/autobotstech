@@ -3,6 +3,7 @@ package com.autobotstech.cyzk.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -124,7 +126,6 @@ public class InfoSpecialtopic4List extends BaseFragement {
         recyclerAdapter.notifyDataSetChanged();
     }
 
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_info_list;
@@ -133,6 +134,13 @@ public class InfoSpecialtopic4List extends BaseFragement {
     @Override
     protected void getDataFromServer() {
 
+    }
+
+    @Override
+    public void onResume() {
+        mSearchView.clearFocus();
+        mSearchView.setFocusable(false);
+        super.onResume();
     }
 
 
@@ -179,16 +187,16 @@ public class InfoSpecialtopic4List extends BaseFragement {
                             recyclerItem.setCreateTime(dateString);
                             boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
                             if (!hasPortrait) {
-                                recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                               recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                             } else {
                                 String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
                                 if ("".equals(imageString)) {
-                                    recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                   recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                                 } else {
                                     InputStream is = httpConnections.httpsGetPDFStream(imageString);
                                     bitmap = BitmapFactory.decodeStream(is);
                                     if (bitmap == null) {
-                                        recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                       recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                                     } else {
                                         Drawable drawable = new BitmapDrawable(bitmap);
                                         recyclerItem.setImage(drawable);
@@ -254,31 +262,34 @@ public class InfoSpecialtopic4List extends BaseFragement {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        Activity activity = getActivity();
+        if(activity != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+                int shortAnimTime = AppGlobals.getContext().getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
-            listContainer.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+                listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+                listContainer.animate().setDuration(shortAnimTime).alpha(
+                        show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+                    }
+                });
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                mProgressView.animate().setDuration(shortAnimTime).alpha(
+                        show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                    }
+                });
+            } else {
+                // The ViewPropertyAnimator APIs are not available, so simply show
+                // and hide the relevant UI components.
+                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
+            }
         }
     }
 }

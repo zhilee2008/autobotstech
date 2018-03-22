@@ -14,6 +14,8 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.ActivityCompat;
 
+import com.autobotstech.cyzk.AppGlobals;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -193,8 +195,8 @@ public class Utils {
 
 
     public static Drawable getImageID(Context context, String imageName) {
-        int resId = context.getResources().getIdentifier(imageName, "mipmap", context.getPackageName());
-        Drawable image = context.getResources().getDrawable(resId);
+        int resId = AppGlobals.getContext().getResources().getIdentifier(imageName, "mipmap", context.getPackageName());
+        Drawable image = AppGlobals.getContext().getResources().getDrawable(resId);
         return image;
     }
 

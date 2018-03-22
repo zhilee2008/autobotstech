@@ -38,7 +38,7 @@
     <string name="renewpwdtext">确认密码</string>
     <string name="renewpwd">请确认新密码</string>
 
-    <string name="trainingtitle">机动车查验业务培训</string>
+    <string name="trainingtitle">学习</string>
     <string name="trainingtitlecontaineer">学习园地</string>
 
     <string name="training11">好好学习</string>
@@ -214,8 +214,8 @@
     <string name="title_activity_login">登录</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_mobile">用户名</string>
-    <string name="prompt_password">密码</string>
+    <string name="prompt_mobile">请输入用户名</string>
+    <string name="prompt_password">请输入密码</string>
     <string name="action_sign_in">登录</string>
     <string name="action_sign_in_short">登录</string>
     <string name="error_invalid_mobile">用户名错误</string>

@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.autobotstech.cyzk.AppGlobals;
 import com.autobotstech.cyzk.R;
@@ -62,12 +62,12 @@ public class RecyclerDownloadListAdapter extends RecyclerAdapter {
 //            }
 //        });
 
-        ImageView previewbutton = (ImageView) view.findViewById(R.id.previewbutton);
+        LinearLayout previewbutton = (LinearLayout) view.findViewById(R.id.recycleritemtag);
 
         previewbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                String fileName = mRecyclerList.get(holder.getAdapterPosition()).getName();
+//                String fileName = mRecyclerList.get(holder.getAdapterPosition()).getName();
                 String filePath = mRecyclerList.get(holder.getAdapterPosition()).getFilePath();
                 Intent intent = new Intent(view.getContext(), PreviewOfficeOnline.class);
                 intent.putExtra("documentURL", filePath);

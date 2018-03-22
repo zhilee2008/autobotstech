@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -161,6 +162,14 @@ public class LecturehallListTraining3Fragment extends Fragment {
         recyclerAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSearchView.clearFocus();
+        mSearchView.setFocusable(false);
+
+    }
+
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
@@ -190,6 +199,7 @@ public class LecturehallListTraining3Fragment extends Fragment {
                         for (int i = 0; i < flowArr.length(); i++) {
                             RecyclerItem recyclerItem = new RecyclerItem();
                             recyclerItem.setId(flowArr.getJSONObject(i).getString("_id"));
+                            recyclerItem.setFilePath(flowArr.getJSONObject(i).getJSONArray("files").getJSONObject(0).getString("url"));
                             recyclerItem.setName(flowArr.getJSONObject(i).getString("title"));
                             String createTimeString = flowArr.getJSONObject(i).getString("createTime");
                             Format f = new SimpleDateFormat("yyyy-MM-dd");
@@ -206,19 +216,19 @@ public class LecturehallListTraining3Fragment extends Fragment {
                             recyclerItem.setCreateTime(dateString);
                             String keyword = flowArr.getJSONObject(i).getString("keyword");
                             recyclerItem.setKeyword("关键字：" + keyword);
-                            recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                           recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                             boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
                             if (!hasPortrait) {
-                                recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                               recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                             } else {
                                 String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
                                 if ("".equals(imageString)) {
-                                    recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                   recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                                 } else {
                                     InputStream is = httpConnections.httpsGetPDFStream(imageString);
                                     bitmap = BitmapFactory.decodeStream(is);
                                     if (bitmap == null) {
-                                        recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                       recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                                     } else {
                                         Drawable drawable = new BitmapDrawable(bitmap);
                                         recyclerItem.setImage(drawable);
@@ -280,7 +290,7 @@ public class LecturehallListTraining3Fragment extends Fragment {
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            int shortAnimTime = AppGlobals.getContext().getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
             listContainer.animate().setDuration(shortAnimTime).alpha(

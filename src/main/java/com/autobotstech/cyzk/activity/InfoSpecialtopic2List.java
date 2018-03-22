@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -174,16 +175,16 @@ public class InfoSpecialtopic2List extends BaseFragement {
                             recyclerItem.setCreateTime(dateString);
                             boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
                             if (!hasPortrait) {
-                                recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                               recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                             } else {
                                 String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
                                 if ("".equals(imageString)) {
-                                    recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                   recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                                 } else {
                                     InputStream is = httpConnections.httpsGetPDFStream(imageString);
                                     bitmap = BitmapFactory.decodeStream(is);
                                     if (bitmap == null) {
-                                        recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                       recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                                     } else {
                                         Drawable drawable = new BitmapDrawable(bitmap);
                                         recyclerItem.setImage(drawable);
@@ -249,7 +250,7 @@ public class InfoSpecialtopic2List extends BaseFragement {
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            int shortAnimTime = AppGlobals.getContext().getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             listContainer.setVisibility(show ? View.GONE : View.VISIBLE);
             listContainer.animate().setDuration(shortAnimTime).alpha(

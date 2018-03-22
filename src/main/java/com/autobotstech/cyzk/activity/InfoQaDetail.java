@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -66,6 +67,10 @@ public class InfoQaDetail extends AppCompatActivity {
     Bitmap bitmap = null;
     ImageView recycleritemauthorimage;
     Drawable qimage;
+    TextView recycleritemauthorname;
+    TextView recycleritemcreatetime;
+    String authorname="";
+    String createtime="";
 
 
     @SuppressLint("WrongViewCast")
@@ -89,6 +94,8 @@ public class InfoQaDetail extends AppCompatActivity {
         qContentView = (TextView) findViewById(R.id.qContentView);
         answerCountView = (TextView) findViewById(R.id.answercount);
         recycleritemauthorimage = (ImageView) findViewById(R.id.recycleritemauthorimage);
+        recycleritemauthorname= (TextView) findViewById(R.id.recycleritemauthor);
+        recycleritemcreatetime= (TextView) findViewById(R.id.recycleritemcreatetime);
 
         Button backbutton = (Button) findViewById(R.id.button_backward);
         backbutton.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +123,8 @@ public class InfoQaDetail extends AppCompatActivity {
 
         Button messageButton = (Button) findViewById(R.id.button_message);
         messageButton.setVisibility(View.VISIBLE);
-        Drawable drawable = getResources().getDrawable(R.drawable.ic_add_message);
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_add_message, null);
+//        Drawable drawable = getResources().getDrawable(R.drawable.ic_add_message);
         drawable.setBounds(0, 0, 100, 100);
         messageButton.setCompoundDrawables(null, null, drawable, null);
         messageButton.setOnClickListener(new View.OnClickListener() {
@@ -178,17 +186,33 @@ public class InfoQaDetail extends AppCompatActivity {
                 if (objq != null) {
                     objq = objq.getJSONObject("forum");
                     boolean hasPortrait = objq.getJSONObject("createPerson").has("portrait");
+                    authorname = objq.getJSONObject("createPerson").getString("name");
+                    String createTimeString = objq.getString("createTime");
+                    Format f = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = null;
+                    String dateString = "";
+                    try {
+                        date = (Date) f.parseObject(createTimeString);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        dateString = sdf.format(date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    createtime = dateString;
                     if (!hasPortrait) {
-                        qimage = getResources().getDrawable(R.drawable.default_personal);
+                        qimage = ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null);
+//                        qimage = getResources().getDrawable(R.drawable.default_personal);
                     } else {
                         String imageString = objq.getJSONObject("createPerson").getJSONObject("portrait").getString("small");
                         if ("".equals(imageString)) {
-                            qimage = getResources().getDrawable(R.drawable.default_personal);
+                            qimage = ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null);
+//                            qimage = getResources().getDrawable(R.drawable.default_personal);
                         } else {
                             InputStream is = httpConnections.httpsGetPDFStream(imageString);
                             bitmap = BitmapFactory.decodeStream(is);
                             if (bitmap == null) {
-                                qimage = getResources().getDrawable(R.drawable.default_personal);
+                                qimage = ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null);
+//                                qimage = getResources().getDrawable(R.drawable.default_personal);
                             } else {
                                 qimage = new BitmapDrawable(bitmap);
                             }
@@ -222,16 +246,16 @@ public class InfoQaDetail extends AppCompatActivity {
                             recyclerItem.setCreateTime(dateString);
                             boolean hasPortrait = flowArr.getJSONObject(i).getJSONObject("createPerson").has("portrait");
                             if (!hasPortrait) {
-                                recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                             } else {
                                 String imageString = flowArr.getJSONObject(i).getJSONObject("createPerson").getJSONObject("portrait").getString("small");
                                 if ("".equals(imageString)) {
-                                    recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                    recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                                 } else {
                                     InputStream is = httpConnections.httpsGetPDFStream(imageString);
                                     bitmap = BitmapFactory.decodeStream(is);
                                     if (bitmap == null) {
-                                        recyclerItem.setImage(getResources().getDrawable(R.drawable.default_personal));
+                                        recyclerItem.setImage(ResourcesCompat.getDrawable(AppGlobals.getContext().getResources(), R.drawable.default_personal, null));
                                     } else {
                                         Drawable drawable = new BitmapDrawable(bitmap);
                                         recyclerItem.setImage(drawable);
@@ -283,6 +307,8 @@ public class InfoQaDetail extends AppCompatActivity {
 
                     if (objq != null) {
                         recycleritemauthorimage.setImageDrawable(qimage);
+                        recycleritemauthorname.setText(authorname);
+                        recycleritemcreatetime.setText(createtime);
                         qTitleView.setText(objq.getString("title"));
                         qContentView.setText(objq.getString("question"));
 

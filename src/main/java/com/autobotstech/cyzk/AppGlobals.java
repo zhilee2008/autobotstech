@@ -1,12 +1,24 @@
 package com.autobotstech.cyzk;
 
 import android.app.Application;
+import android.content.Context;
 
 /**
  * Created by zhi on 02/07/2017.
  */
 
 public class AppGlobals extends Application {
+
+    private static Context context;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        context = getApplicationContext();
+    }
+    public static Context getContext(){
+        return context;
+    }
+
 
     public String businessType;
     public String vehicleType;
@@ -55,5 +67,7 @@ public class AppGlobals extends Application {
     public void setUseProperty(String useProperty) {
         this.useProperty = useProperty;
     }
+
+
 
 }
